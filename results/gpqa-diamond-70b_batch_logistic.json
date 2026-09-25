@@ -1,0 +1,14 @@
+{
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.56565656565656,
+  "Jaffe et al. (2015)": 57.57575757575758,
+  "Dawid-Skene": 56.48826428536573,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 60.60606060606061,
+  "Logistic Regression": 68.51063829787233,
+  "Naive Bayes": 58.35106382978723,
+  "Oracle Best Verifier": 58.131263659474776,
+  "_best_verifier": "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts"
+}

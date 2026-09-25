@@ -1,0 +1,12 @@
+{
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.075490251915525,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 53.722527378972664,
+  "Logistic Regression": 52.16304928367321,
+  "Naive Bayes": 51.327491786758905,
+  "Oracle Best Verifier": 53.49614374246527,
+  "_best_verifier": "gpt5.2-high_scores"
+}

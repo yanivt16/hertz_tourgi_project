@@ -1,0 +1,58 @@
+imo: 123 queries, 50-50 responses, 9 verifiers, Pass@1=0.532
+| Method | Ours | Paper |
+|---|---:|---:|
+| Pass@1 | 53.2 | 53.3 |
+| Majority Vote | 57.7 | 57.7 |
+| Naive Ensemble | 62.1 | 63.8 |
+| Dawid-Skene | 58.2 |  |
+| Jaffe et al. (2015) | 60.7 |  |
+| FUSE | 57.1 | 63.8 |
+| Oracle Best Verifier | 59.6 | 59.7 |
+| Logistic Regression | 57.9 | 60.2 |
+| Naive Bayes | 51.1 | 59.1 |
+| Pass@k | 85.4 |  |
+best verifier: gpt-oss-20b_scores  (2s)
+
+hle: 649 queries, 50-50 responses, 7 verifiers, Pass@1=0.514
+| Method | Ours | Paper |
+|---|---:|---:|
+| Pass@1 | 51.4 | 52.1 |
+| Naive Ensemble | 51.1 | 51.4 |
+| Dawid-Skene | 51.7 |  |
+| Jaffe et al. (2015) | 51.1 |  |
+| FUSE | 53.7 | 54.3 |
+| Oracle Best Verifier | 53.5 | 53.5 |
+| Logistic Regression | 52.2 | 53.4 |
+| Naive Bayes | 51.3 | 52.0 |
+| Pass@k | 100.0 |  |
+best verifier: gpt5.2-high_scores  (3s)
+
+imo: 123 queries, 50-50 responses, 9 verifiers, Pass@1=0.532
+| Method | Ours | Paper |
+|---|---:|---:|
+| Pass@1 | 53.2 | 53.3 |
+| Majority Vote | 57.7 | 57.7 |
+| Naive Ensemble | 62.1 | 63.8 |
+| Dawid-Skene | 58.2 |  |
+| Jaffe et al. (2015) | 60.7 |  |
+| FUSE | 62.1 | 63.8 |
+| Oracle Best Verifier | 59.6 | 59.7 |
+| Logistic Regression | 57.9 | 60.2 |
+| Naive Bayes | 51.1 | 59.1 |
+| Pass@k | 85.4 |  |
+best verifier: gpt-oss-20b_scores  (0s)
+
+hle: 649 queries, 50-50 responses, 7 verifiers, Pass@1=0.514
+| Method | Ours | Paper |
+|---|---:|---:|
+| Pass@1 | 51.4 | 52.1 |
+| Naive Ensemble | 51.1 | 51.4 |
+| Dawid-Skene | 51.7 |  |
+| Jaffe et al. (2015) | 51.1 |  |
+| FUSE | 52.2 | 54.3 |
+| Oracle Best Verifier | 53.5 | 53.5 |
+| Logistic Regression | 52.2 | 53.4 |
+| Naive Bayes | 51.3 | 52.0 |
+| Pass@k | 100.0 |  |
+best verifier: gpt5.2-high_scores  (1s)
+
