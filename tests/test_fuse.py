@@ -126,3 +126,14 @@ def test_batched_mode_returns_scores_per_query():
 
 def test_selection_accuracy_splits_ties():
     assert selection_accuracy(np.array([1, 1, 0]), np.array([1, 0, 1])) == pytest.approx(0.5)
+
+
+def test_standardized_tci_statistic_is_scale_free_and_zero_under_tci():
+    rng = np.random.default_rng(9)
+    V, _ = simulate_binary(100_000, np.full(6, 0.8), np.full(6, 0.75), prevalence=0.4, rng=rng)
+    m = moment_tensors(V)
+    assert tci_statistic(m.sigma, m.T, standardize=True) < 1e-2
+    scaled = moment_tensors(V * np.array([1, 2, 0.5, 3, 1, 1]))
+    assert tci_statistic(scaled.sigma, scaled.T, clip=1e-6, standardize=True) == pytest.approx(
+        tci_statistic(m.sigma, m.T, clip=1e-6, standardize=True), rel=1e-6
+    )

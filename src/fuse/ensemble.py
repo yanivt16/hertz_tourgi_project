@@ -53,6 +53,7 @@ class FUSE:
     n_sweeps: int = 3
     n_quantiles: int = 19
     tci_clip: float = 1e-3
+    tci_standardize: bool = False
     drop_below_random: bool = True
     refit_after_drop: bool = True
     predictor: Predictor = "logistic"
@@ -71,7 +72,13 @@ class FUSE:
             raise ValueError("impute missing scores before running FUSE")
         Vs = minmax_to_unit_interval(V) if rescale else V
 
-        thr = minimize_tci(Vs, n_sweeps=self.n_sweeps, n_quantiles=self.n_quantiles, clip=self.tci_clip)
+        thr = minimize_tci(
+            Vs,
+            n_sweeps=self.n_sweeps,
+            n_quantiles=self.n_quantiles,
+            clip=self.tci_clip,
+            standardize=self.tci_standardize,
+        )
         active = np.flatnonzero(thr.active)
         if active.size < 3:
             return self._fallback(Vs, "fewer than three non-constant verifiers")

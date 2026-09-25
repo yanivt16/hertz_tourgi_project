@@ -15,10 +15,20 @@ import numpy as np
 from .moments import moment_tensors
 
 
-def tci_statistic(sigma: np.ndarray, T: np.ndarray, clip: float = 1e-3) -> float:
+def tci_statistic(sigma: np.ndarray, T: np.ndarray, clip: float = 1e-3, standardize: bool = False) -> float:
     """Empirical S-hat of equation (4). The denominator is clipped to a small positive
-    number for stability, as in the paper's footnote 1."""
+    number for stability, as in the paper's footnote 1.
+
+    With standardize=True the moments are those of unit-variance columns. For a fixed j3
+    every ratio is then divided by sd_j3, so the statistic is still zero under TCI but a
+    threshold can no longer lower it just by making verifier j3 nearly constant, which
+    the raw statistic rewards.
+    """
     m = sigma.shape[0]
+    if standardize:
+        sd = np.sqrt(np.clip(np.diag(sigma), 1e-12, None))
+        sigma = sigma / np.outer(sd, sd)
+        T = T / (sd[:, None, None] * sd[None, :, None] * sd[None, None, :])
     denom = np.maximum(sigma, clip)
     total = 0.0
     for j3 in range(2, m):
@@ -96,6 +106,7 @@ def minimize_tci(
     n_sweeps: int = 3,
     n_quantiles: int = 19,
     clip: float = 1e-3,
+    standardize: bool = False,
 ) -> ThresholdResult:
     """Coordinate descent over per-verifier thresholds tau to minimise S-hat(g_tau(V))."""
     V = np.asarray(V, dtype=float)
@@ -115,7 +126,7 @@ def minimize_tci(
     cands = [candidates[j] for j in idx]
     tau_a = tau[idx].copy()
     state = _IncrementalMoments(binarize(Va, tau_a))
-    best = tci_statistic(state.sigma, state.T, clip)
+    best = tci_statistic(state.sigma, state.T, clip, standardize)
 
     for _ in range(n_sweeps):
         improved = False
@@ -125,7 +136,7 @@ def minimize_tci(
                     continue
                 col = np.where(Va[:, k] > t, 1.0, -1.0)
                 sigma, T, X, mu_k = state.column_update(k, col)
-                stat = tci_statistic(sigma, T, clip)
+                stat = tci_statistic(sigma, T, clip, standardize)
                 if stat < best - 1e-12:
                     best = stat
                     tau_a[k] = t

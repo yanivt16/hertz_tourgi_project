@@ -1,0 +1,14 @@
+{
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 86.72826014967879,
+  "Logistic Regression": 89.10688140556368,
+  "Naive Bayes": 87.09350670478048,
+  "Oracle Best Verifier": 83.58368103847937,
+  "_best_verifier": "QwenPRM_min_scores"
+}

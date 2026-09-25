@@ -17,8 +17,8 @@ ORDER = [
 ]
 
 
-def load(name: str, mode: str) -> dict:
-    path = RESULTS / f"{name}_{mode}_logistic.json"
+def load(name: str, mode: str, predictor: str = "logistic") -> dict:
+    path = RESULTS / f"{name}_{mode}_{predictor}.json"
     return json.loads(path.read_text()) if path.exists() else {}
 
 
@@ -28,16 +28,18 @@ def fmt(x) -> str:
 
 def main():
     rows = [
-        "| Benchmark | Pass@1 | Naive Ens. | Oracle Best Verifier | Logistic (5% labels) | FUSE query | FUSE batch | FUSE paper | Weaver paper | Pass@k |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| Benchmark | Pass@1 | Naive Ens. | Oracle Best Verifier | Logistic (5% labels) "
+        "| FUSE query | FUSE batch | FUSE batch + posterior | FUSE paper | Weaver paper | Pass@k |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for name in ORDER:
         q, b, p = load(name, "query"), load(name, "batch"), PAPER_RESULTS.get(name, {})
+        bp = load(name, "batch", "posterior")
         if not q:
             continue
         rows.append(
             f"| {name} | {fmt(q.get('Pass@1'))} | {fmt(q.get('Naive Ensemble'))} | {fmt(q.get('Oracle Best Verifier'))} "
-            f"| {fmt(q.get('Logistic Regression'))} | {fmt(q.get('FUSE'))} | {fmt(b.get('FUSE'))} "
+            f"| {fmt(q.get('Logistic Regression'))} | {fmt(q.get('FUSE'))} | {fmt(b.get('FUSE'))} | {fmt(bp.get('FUSE'))} "
             f"| {fmt(p.get('FUSE'))} | {fmt(p.get('Weaver'))} | {fmt(q.get('Pass@k'))} |"
         )
     out = "\n".join(rows) + "\n"

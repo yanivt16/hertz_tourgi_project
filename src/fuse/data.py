@@ -35,6 +35,26 @@ WEAVER_REPOS = {
 }
 WEAVER_BENCHMARKS = ["gpqa", "gpqa-diamond", "math500", "mmlu", "mmlu-pro"]
 
+# Paper Table 6: the verifiers used for each generator size. The datasets carry a few more
+# score columns (e.g. EurusPRMStage1_min for 8B, GRMLlama32 for 70B) that the paper excludes.
+_BOTH = [
+    "ArmorRM_scores", "EurusPRMStage1_max_scores", "EurusPRMStage2_min_scores", "GPM_scores",
+    "GRMGemma_scores", "GRM_scores", "InternLM2Reward7B_scores", "OffsetBias_scores",
+    "QRM_scores", "QwenPRM_avg_scores", "QwenPRM_min_scores", "Skyworks_scores", "URM_scores",
+]
+PAPER_VERIFIERS = {
+    "8b": _BOTH + ["EurusPRMStage1_avg_scores", "EurusPRMStage2_max_scores", "GRMLlama32_scores"],
+    "70b": _BOTH + [
+        "DecisionTreeReward27B_scores", "DecisionTreeReward8B_scores", "EurusPRMStage1_min_scores",
+        "EurusPRMStage2_avg_scores", "INFORM_scores", "InternLM2RewardModel_scores",
+        "LDLRewardGemma_scores", "QRMGemma_scores", "Qwen72B_scores", "QwenPRM_max_scores",
+        "SkyworksGemma_scores",
+        "DeepSeekLlama70B_verdicts", "DeepSeekQwen32B_verdicts", "Llama-3.3-70B-Instruct_verdicts",
+        "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts", "Mixtral-8x22B-Instruct-v0.1_verdicts",
+        "Qwen/Qwen2.5-72B-Instruct_verdicts", "SkyT1_verdicts", "WizardLM-2-8x22B_verdicts",
+    ],
+}
+
 
 @dataclass
 class Query:
@@ -130,7 +150,9 @@ def download_fuse(key: str, cache_dir: str | Path | None = None) -> Benchmark:
     return load_fuse_jsonl(path, name=key)
 
 
-def download_weaver(benchmark: str, size: str, include_verdicts: bool | None = None) -> Benchmark:
+def download_weaver(
+    benchmark: str, size: str, include_verdicts: bool | None = None, paper_verifiers: bool = True
+) -> Benchmark:
     """Read only the score and label columns from the auto-converted parquet shards, so the
     (very large) response text is never downloaded.
 
@@ -164,4 +186,7 @@ def download_weaver(benchmark: str, size: str, include_verdicts: bool | None = N
         rows.extend(pq.read_table(shard, columns=cols, filesystem=fs).to_pylist())
     if diamond:
         rows = [r for r in rows if r.get("type") == "diamond"]
-    return rows_to_benchmark(f"{benchmark}-{size}", rows, correct_key="answer_correct")
+    bench = rows_to_benchmark(f"{benchmark}-{size}", rows, correct_key="answer_correct")
+    if paper_verifiers:
+        bench = bench.filter_verifiers([v for v in bench.verifiers if v in PAPER_VERIFIERS[size]])
+    return bench

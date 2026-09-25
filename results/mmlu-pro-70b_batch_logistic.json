@@ -1,14 +1,14 @@
 {
   "Pass@1": 69.908,
   "Pass@k": 92.0,
-  "Naive Ensemble": 87.2,
-  "Jaffe et al. (2015)": 82.6,
-  "Dawid-Skene": 79.56302024831658,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
   "Majority Vote": 74.4,
   "Weaver": 90.2,
-  "FUSE": 90.0,
+  "FUSE": 91.60000000000001,
   "Logistic Regression": 92.0,
-  "Naive Bayes": 82.35789473684211,
+  "Naive Bayes": 81.97894736842105,
   "Oracle Best Verifier": 82.33967680868065,
   "_best_verifier": "WizardLM-2-8x22B_verdicts"
 }

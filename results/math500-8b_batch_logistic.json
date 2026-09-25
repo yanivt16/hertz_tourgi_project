@@ -1,14 +1,14 @@
 {
   "Pass@1": 49.89399999999999,
   "Pass@k": 99.2,
-  "Naive Ensemble": 73.8,
-  "Jaffe et al. (2015)": 64.13333333333333,
-  "Dawid-Skene": 62.77666666666667,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
   "Majority Vote": 69.6629816283114,
   "Weaver": 74.57236652236652,
-  "FUSE": 64.0,
-  "Logistic Regression": 91.20000000000002,
-  "Naive Bayes": 78.79438596491228,
+  "FUSE": 55.20751398225621,
+  "Logistic Regression": 89.93684210526315,
+  "Naive Bayes": 78.3698245614035,
   "Oracle Best Verifier": 82.81166666666667,
   "_best_verifier": "QwenPRM_min_scores"
 }

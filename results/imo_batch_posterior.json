@@ -1,0 +1,13 @@
+{
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 60.80709502447401,
+  "Logistic Regression": 57.94542842215256,
+  "Naive Bayes": 51.0835246086915,
+  "Oracle Best Verifier": 59.58222609538137,
+  "_best_verifier": "gpt-oss-20b_scores"
+}
