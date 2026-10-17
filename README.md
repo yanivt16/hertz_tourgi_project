@@ -141,6 +141,40 @@ The threshold 0.5 was fixed as the default before the grid ran.
 
 The next step is therefore choosing between variants per setting without labels, not a new default.
 
+### Choosing a variant per setting without labels
+
+`fuse.selection.select_variant` picks base, cluster@t and/or the majority-vote column from the
+score matrices alone. FUSE's model says verifiers interact only through the latent label, so
+the correlation matrix is rank one off the diagonal. For each threshold t the selector fits
+that rank-one factor on **cross-cluster** entries only and measures the *label share*
+R_t = (within-cluster correlation predicted by the label) / (observed within-cluster correlation).
+A block whose members agree because they are right has R ≈ 1. A block that agrees for another
+reason has R ≈ 0. It clusters at the smallest t with R_t < 0.5. MV is added when its row of the
+correlation matrix fits the rank-one model at least as well as the median verifier. The rule was
+committed before it was run on real data, and its constants were not tuned. The per-setting
+accuracies were already known when it was designed. `scripts/select_variants.py` writes
+[results/SELECTION.md](results/SELECTION.md).
+
+| Mode | Predictor | base | selected | best in hindsight | selected − base, without math500-8b |
+|---|---|---:|---:|---:|---:|
+| query | logistic | 66.1 | 66.6 | 68.4 | −0.1 |
+| query | posterior | 66.4 | 66.1 | 68.1 | −0.2 |
+| batch | logistic | 64.7 | 66.3 | 69.1 | −0.0 |
+| batch | posterior | 67.4 | 68.2 | 70.2 | −0.4 |
+
+- **It separates the case it was built for.** GPQA-70B and GPQA-Diamond-70B get R = 0.59–0.85
+  and stay on base in every configuration, so they lose nothing. MATH500-8B gets R@0.3 = 0.37
+  (per question) and 0.05 (batched) and is clustered in every configuration: +20 and +15 points
+  batched, +6 per question with the logistic predictor, but −2.5 with the posterior predictor.
+- **It beats base on average in three of four configurations (+0.5 to +1.6), but only because of
+  MATH500-8B.** Without that setting it is slightly worse than base everywhere (−0.0 to −0.4).
+  The wrong calls are clustering HLE per question (−2), MMLU-8B per question with the posterior
+  predictor (−3.4) and the batched 70B MATH/MMLU-Pro sets (up to −2.7). It also misses the large
+  batched gains on MMLU-8B (R = 1.4–1.5) and MMLU-Pro-8B (R ≥ 0.65).
+- **The MV test almost never passes** (at most 49% of IMO questions), so the selector never adds
+  MV and gives up its IMO gain of 4–5 points.
+- Best in hindsight is 2–3 points above the selector, so most of the available gain is still unclaimed.
+
 ## Choices the paper leaves open
 
 These are the likely sources of the remaining gaps, and each is configurable on `FUSE`:
