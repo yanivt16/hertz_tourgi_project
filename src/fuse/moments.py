@@ -58,20 +58,30 @@ def moment_tensors(V: np.ndarray) -> MomentTensors:
     return MomentTensors(mu=mu, sigma=sigma, T=T.reshape(m, m, m) / n)
 
 
-def rank_one_offdiagonal(S: np.ndarray, n_iter: int = 200, tol: float = 1e-10) -> np.ndarray:
+def rank_one_offdiagonal(
+    S: np.ndarray, n_iter: int = 200, tol: float = 1e-10, observed: np.ndarray | None = None
+) -> np.ndarray:
     """Fit u such that the off-diagonal entries of S match those of u u^T.
 
     Uses the iterative diagonal-completion scheme of Parisi et al. (2014): replace the
     diagonal with the current rank-one estimate and take the leading eigenpair again.
+    `observed` (symmetric bool mask) generalises the diagonal to any set of entries that
+    the fit should ignore; they are imputed the same way, starting from zero so that large
+    ignored entries cannot pull the first eigenvector toward themselves.
     """
     S = np.asarray(S, dtype=float)
     M = S.copy()
+    if observed is None:
+        missing = np.eye(len(S), dtype=bool)
+    else:
+        missing = ~np.asarray(observed, dtype=bool)
+        M[missing] = 0.0
     u = np.zeros(S.shape[0])
     for _ in range(n_iter):
         eigvals, eigvecs = np.linalg.eigh(M)
         lam = max(eigvals[-1], 0.0)
         u_new = np.sqrt(lam) * eigvecs[:, -1]
-        np.fill_diagonal(M, u_new**2)
+        M[missing] = np.outer(u_new, u_new)[missing]
         if np.max(np.abs(np.abs(u_new) - np.abs(u))) < tol:
             u = u_new
             break
