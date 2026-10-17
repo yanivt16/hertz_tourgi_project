@@ -1,0 +1,3618 @@
+{
+ "math500-8b|query|logistic|base": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 66.0
+ },
+ "math500-8b|query|logistic|cluster@0.3": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 72.32594797901612
+ },
+ "math500-8b|query|logistic|cluster@0.5": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 79.28402707796474
+ },
+ "math500-8b|query|logistic|cluster@0.7": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 73.19777777777777
+ },
+ "math500-8b|query|logistic|mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 69.19999999999999
+ },
+ "math500-8b|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 75.52896536250395
+ },
+ "math500-8b|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 78.47779967159278
+ },
+ "math500-8b|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 75.96111111111111
+ },
+ "math500-8b|query|posterior|base": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 70.00525276372026
+ },
+ "math500-8b|query|posterior|cluster@0.3": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 67.50192045199775
+ },
+ "math500-8b|query|posterior|cluster@0.5": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 73.82178344538175
+ },
+ "math500-8b|query|posterior|cluster@0.7": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 74.42662753547621
+ },
+ "math500-8b|query|posterior|mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 71.18612980622288
+ },
+ "math500-8b|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 69.3727067271788
+ },
+ "math500-8b|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 73.21143321417922
+ },
+ "math500-8b|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 76.81018073193265
+ },
+ "math500-8b|batch|logistic|base": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 55.20751398225621
+ },
+ "math500-8b|batch|logistic|cluster@0.3": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 75.08128901843878
+ },
+ "math500-8b|batch|logistic|cluster@0.5": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 70.6
+ },
+ "math500-8b|batch|logistic|cluster@0.7": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 64.0
+ },
+ "math500-8b|batch|logistic|mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 55.60718415160466
+ },
+ "math500-8b|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 76.43821081079383
+ },
+ "math500-8b|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 76.2
+ },
+ "math500-8b|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 70.19999999999999
+ },
+ "math500-8b|batch|posterior|base": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 60.24277777777777
+ },
+ "math500-8b|batch|posterior|cluster@0.3": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 75.08128901843878
+ },
+ "math500-8b|batch|posterior|cluster@0.5": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 67.87054778554779
+ },
+ "math500-8b|batch|posterior|cluster@0.7": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 65.09639229951787
+ },
+ "math500-8b|batch|posterior|mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 61.406666666666666
+ },
+ "math500-8b|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 76.43821081079383
+ },
+ "math500-8b|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 68.44834776334775
+ },
+ "math500-8b|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 49.89399999999999,
+  "Pass@k": 99.2,
+  "Naive Ensemble": 74.6,
+  "Jaffe et al. (2015)": 59.79271062271063,
+  "Dawid-Skene": 59.654377289377294,
+  "Majority Vote": 69.6629816283114,
+  "Weaver": 74.57236652236652,
+  "FUSE": 68.59737373737373
+ },
+ "gpqa-70b|query|logistic|base": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 60.526315789473685
+ },
+ "gpqa-70b|query|logistic|cluster@0.3": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 54.76193579925045
+ },
+ "gpqa-70b|query|logistic|cluster@0.5": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 57.961079168509514
+ },
+ "gpqa-70b|query|logistic|cluster@0.7": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 59.59752321981424
+ },
+ "gpqa-70b|query|logistic|mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 61.145510835913306
+ },
+ "gpqa-70b|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 54.25567595459236
+ },
+ "gpqa-70b|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 57.239646430654645
+ },
+ "gpqa-70b|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 61.45510835913313
+ },
+ "gpqa-70b|query|posterior|base": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 61.37770897832817
+ },
+ "gpqa-70b|query|posterior|cluster@0.3": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 53.02227010881316
+ },
+ "gpqa-70b|query|posterior|cluster@0.5": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 56.229531441059386
+ },
+ "gpqa-70b|query|posterior|cluster@0.7": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 60.419430930266834
+ },
+ "gpqa-70b|query|posterior|mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 61.99690402476781
+ },
+ "gpqa-70b|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 52.595921106757025
+ },
+ "gpqa-70b|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 56.18938985180583
+ },
+ "gpqa-70b|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 60.691321062838085
+ },
+ "gpqa-70b|batch|logistic|base": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 66.87306501547987
+ },
+ "gpqa-70b|batch|logistic|cluster@0.3": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 55.928792569659436
+ },
+ "gpqa-70b|batch|logistic|cluster@0.5": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 62.38390092879257
+ },
+ "gpqa-70b|batch|logistic|cluster@0.7": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 64.70588235294117
+ },
+ "gpqa-70b|batch|logistic|mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 62.22910216718266
+ },
+ "gpqa-70b|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 58.978328173374614
+ },
+ "gpqa-70b|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 58.04953560371517
+ },
+ "gpqa-70b|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 63.93188854489165
+ },
+ "gpqa-70b|batch|posterior|base": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 67.02270381836945
+ },
+ "gpqa-70b|batch|posterior|cluster@0.3": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 56.83125341357494
+ },
+ "gpqa-70b|batch|posterior|cluster@0.5": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 61.42156862745098
+ },
+ "gpqa-70b|batch|posterior|cluster@0.7": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 65.86687306501547
+ },
+ "gpqa-70b|batch|posterior|mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 63.5500515995872
+ },
+ "gpqa-70b|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 58.29861628197133
+ },
+ "gpqa-70b|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 58.58875128998968
+ },
+ "gpqa-70b|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 42.85294117647059,
+  "Pass@k": 80.95975232198143,
+  "Naive Ensemble": 59.907120743034056,
+  "Jaffe et al. (2015)": 59.87616099071208,
+  "Dawid-Skene": 58.77300336139769,
+  "Majority Vote": 55.04385964912281,
+  "Weaver": 43.443582001854956,
+  "FUSE": 64.5123839009288
+ },
+ "gpqa-diamond-70b|query|logistic|base": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 55.05050505050505
+ },
+ "gpqa-diamond-70b|query|logistic|cluster@0.3": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 52.550505050505045
+ },
+ "gpqa-diamond-70b|query|logistic|cluster@0.5": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 53.535353535353536
+ },
+ "gpqa-diamond-70b|query|logistic|cluster@0.7": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 54.04040404040404
+ },
+ "gpqa-diamond-70b|query|logistic|mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 56.060606060606055
+ },
+ "gpqa-diamond-70b|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 52.053872053872055
+ },
+ "gpqa-diamond-70b|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 53.28282828282829
+ },
+ "gpqa-diamond-70b|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 57.07070707070707
+ },
+ "gpqa-diamond-70b|query|posterior|base": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 55.80808080808081
+ },
+ "gpqa-diamond-70b|query|posterior|cluster@0.3": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 49.68142968142968
+ },
+ "gpqa-diamond-70b|query|posterior|cluster@0.5": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 49.64646464646464
+ },
+ "gpqa-diamond-70b|query|posterior|cluster@0.7": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 56.39730639730639
+ },
+ "gpqa-diamond-70b|query|posterior|mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 57.07070707070707
+ },
+ "gpqa-diamond-70b|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 48.24822297044519
+ },
+ "gpqa-diamond-70b|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 49.734780964727484
+ },
+ "gpqa-diamond-70b|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 55.769230769230774
+ },
+ "gpqa-diamond-70b|batch|logistic|base": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 59.59595959595959
+ },
+ "gpqa-diamond-70b|batch|logistic|cluster@0.3": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 55.05050505050505
+ },
+ "gpqa-diamond-70b|batch|logistic|cluster@0.5": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 60.60606060606061
+ },
+ "gpqa-diamond-70b|batch|logistic|cluster@0.7": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 61.111111111111114
+ },
+ "gpqa-diamond-70b|batch|logistic|mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 59.09090909090909
+ },
+ "gpqa-diamond-70b|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 54.04040404040404
+ },
+ "gpqa-diamond-70b|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 59.59595959595959
+ },
+ "gpqa-diamond-70b|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 59.09090909090909
+ },
+ "gpqa-diamond-70b|batch|posterior|base": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 64.35185185185185
+ },
+ "gpqa-diamond-70b|batch|posterior|cluster@0.3": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 49.546945759066965
+ },
+ "gpqa-diamond-70b|batch|posterior|cluster@0.5": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 56.9023569023569
+ },
+ "gpqa-diamond-70b|batch|posterior|cluster@0.7": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 61.61616161616161
+ },
+ "gpqa-diamond-70b|batch|posterior|mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 62.16329966329967
+ },
+ "gpqa-diamond-70b|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 49.721035137701804
+ },
+ "gpqa-diamond-70b|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 56.060606060606055
+ },
+ "gpqa-diamond-70b|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 42.338383838383834,
+  "Pass@k": 75.25252525252525,
+  "Naive Ensemble": 56.060606060606055,
+  "Jaffe et al. (2015)": 56.060606060606055,
+  "Dawid-Skene": 55.609440363228245,
+  "Majority Vote": 57.07070707070707,
+  "Weaver": 42.3444850851268,
+  "FUSE": 60.1010101010101
+ },
+ "math500-70b|query|logistic|base": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.2
+ },
+ "math500-70b|query|logistic|cluster@0.3": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 90.87898311503719
+ },
+ "math500-70b|query|logistic|cluster@0.5": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 90.45
+ },
+ "math500-70b|query|logistic|cluster@0.7": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.2
+ },
+ "math500-70b|query|logistic|mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 90.8
+ },
+ "math500-70b|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 90.82327175616545
+ },
+ "math500-70b|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.55
+ },
+ "math500-70b|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 90.60000000000001
+ },
+ "math500-70b|query|posterior|base": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.8
+ },
+ "math500-70b|query|posterior|cluster@0.3": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 90.40601240154017
+ },
+ "math500-70b|query|posterior|cluster@0.5": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.08233082706768
+ },
+ "math500-70b|query|posterior|cluster@0.7": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.55
+ },
+ "math500-70b|query|posterior|mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.60000000000001
+ },
+ "math500-70b|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 90.1370967579215
+ },
+ "math500-70b|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.16627619204752
+ },
+ "math500-70b|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.42747252747253
+ },
+ "math500-70b|batch|logistic|base": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 94.05333333333333
+ },
+ "math500-70b|batch|logistic|cluster@0.3": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 94.6
+ },
+ "math500-70b|batch|logistic|cluster@0.5": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 93.81666666666666
+ },
+ "math500-70b|batch|logistic|cluster@0.7": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 93.8
+ },
+ "math500-70b|batch|logistic|mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 93.79429913166754
+ },
+ "math500-70b|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 94.39999999999999
+ },
+ "math500-70b|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 93.60000000000001
+ },
+ "math500-70b|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 93.30000000000001
+ },
+ "math500-70b|batch|posterior|base": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.33333333333333
+ },
+ "math500-70b|batch|posterior|cluster@0.3": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 88.55126488531253
+ },
+ "math500-70b|batch|posterior|cluster@0.5": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 88.58386609348685
+ },
+ "math500-70b|batch|posterior|cluster@0.7": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 92.90873015873015
+ },
+ "math500-70b|batch|posterior|mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 91.43333333333332
+ },
+ "math500-70b|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 93.6708575691428
+ },
+ "math500-70b|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 88.46646412411118
+ },
+ "math500-70b|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 77.97,
+  "Pass@k": 98.6,
+  "Naive Ensemble": 92.4,
+  "Jaffe et al. (2015)": 86.76666666666667,
+  "Dawid-Skene": 84.33288716806912,
+  "Majority Vote": 82.27563209672671,
+  "Weaver": 93.47473684210527,
+  "FUSE": 92.72748015873016
+ },
+ "mmlu-70b|query|logistic|base": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 92.76773296244785
+ },
+ "mmlu-70b|query|logistic|cluster@0.3": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 91.77677329624478
+ },
+ "mmlu-70b|query|logistic|cluster@0.5": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.28188342901761
+ },
+ "mmlu-70b|query|logistic|cluster@0.7": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.7413073713491
+ },
+ "mmlu-70b|query|logistic|mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 92.90681502086231
+ },
+ "mmlu-70b|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 90.99275044464457
+ },
+ "mmlu-70b|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 94.0170314520655
+ },
+ "mmlu-70b|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.46314325452016
+ },
+ "mmlu-70b|query|posterior|base": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 92.90681502086231
+ },
+ "mmlu-70b|query|posterior|cluster@0.3": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 90.33088914758517
+ },
+ "mmlu-70b|query|posterior|cluster@0.5": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.41554427816592
+ },
+ "mmlu-70b|query|posterior|cluster@0.7": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.81084840055632
+ },
+ "mmlu-70b|query|posterior|mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 92.76773296244785
+ },
+ "mmlu-70b|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 89.96424769153299
+ },
+ "mmlu-70b|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 92.87818341529636
+ },
+ "mmlu-70b|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.44678065941258
+ },
+ "mmlu-70b|batch|logistic|base": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.7413073713491
+ },
+ "mmlu-70b|batch|logistic|cluster@0.3": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.04589707927677
+ },
+ "mmlu-70b|batch|logistic|cluster@0.5": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.3240611961057
+ },
+ "mmlu-70b|batch|logistic|cluster@0.7": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 94.29763560500696
+ },
+ "mmlu-70b|batch|logistic|mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.53268428372739
+ },
+ "mmlu-70b|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 92.90681502086231
+ },
+ "mmlu-70b|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 84.14464534075104
+ },
+ "mmlu-70b|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.42837273991655
+ },
+ "mmlu-70b|batch|posterior|base": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.94993045897078
+ },
+ "mmlu-70b|batch|posterior|cluster@0.3": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 90.47506446363059
+ },
+ "mmlu-70b|batch|posterior|cluster@0.5": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 93.39823829392675
+ },
+ "mmlu-70b|batch|posterior|cluster@0.7": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 94.13128255474652
+ },
+ "mmlu-70b|batch|posterior|mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 92.90681502086231
+ },
+ "mmlu-70b|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 90.18321382388056
+ },
+ "mmlu-70b|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 84.65740816493495
+ },
+ "mmlu-70b|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 82.60361613351878,
+  "Pass@k": 95.96662030598053,
+  "Naive Ensemble": 93.18497913769124,
+  "Jaffe et al. (2015)": 90.54242002781642,
+  "Dawid-Skene": 86.9969016093942,
+  "Majority Vote": 84.07510431154381,
+  "Weaver": 94.85396383866481,
+  "FUSE": 90.52137471634579
+ },
+ "mmlu-pro-70b|query|logistic|base": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 88.2
+ },
+ "mmlu-pro-70b|query|logistic|cluster@0.3": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 87.85690058479533
+ },
+ "mmlu-pro-70b|query|logistic|cluster@0.5": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 87.57999999999998
+ },
+ "mmlu-pro-70b|query|logistic|cluster@0.7": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 88.4
+ },
+ "mmlu-pro-70b|query|logistic|mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 87.8
+ },
+ "mmlu-pro-70b|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 86.92307992202728
+ },
+ "mmlu-pro-70b|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 87.57999999999998
+ },
+ "mmlu-pro-70b|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 88.4
+ },
+ "mmlu-pro-70b|query|posterior|base": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 88.2
+ },
+ "mmlu-pro-70b|query|posterior|cluster@0.3": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 87.08105948523442
+ },
+ "mmlu-pro-70b|query|posterior|cluster@0.5": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 87.33119658119658
+ },
+ "mmlu-pro-70b|query|posterior|cluster@0.7": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 89.47500000000001
+ },
+ "mmlu-pro-70b|query|posterior|mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 88.2
+ },
+ "mmlu-pro-70b|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 84.51855003205199
+ },
+ "mmlu-pro-70b|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 86.90017094017094
+ },
+ "mmlu-pro-70b|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 88.7
+ },
+ "mmlu-pro-70b|batch|logistic|base": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 91.60000000000001
+ },
+ "mmlu-pro-70b|batch|logistic|cluster@0.3": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 91.0
+ },
+ "mmlu-pro-70b|batch|logistic|cluster@0.5": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 91.0
+ },
+ "mmlu-pro-70b|batch|logistic|cluster@0.7": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 91.2
+ },
+ "mmlu-pro-70b|batch|logistic|mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 91.60000000000001
+ },
+ "mmlu-pro-70b|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 90.2
+ },
+ "mmlu-pro-70b|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 91.2
+ },
+ "mmlu-pro-70b|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 91.60000000000001
+ },
+ "mmlu-pro-70b|batch|posterior|base": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 90.4
+ },
+ "mmlu-pro-70b|batch|posterior|cluster@0.3": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 89.00333333333333
+ },
+ "mmlu-pro-70b|batch|posterior|cluster@0.5": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 89.72222222222221
+ },
+ "mmlu-pro-70b|batch|posterior|cluster@0.7": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 90.78333333333333
+ },
+ "mmlu-pro-70b|batch|posterior|mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 89.4
+ },
+ "mmlu-pro-70b|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 82.58709748744232
+ },
+ "mmlu-pro-70b|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 82.9711111111111
+ },
+ "mmlu-pro-70b|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 69.908,
+  "Pass@k": 92.0,
+  "Naive Ensemble": 87.0,
+  "Jaffe et al. (2015)": 82.8,
+  "Dawid-Skene": 79.71304948233738,
+  "Majority Vote": 74.4,
+  "Weaver": 90.2,
+  "FUSE": 90.0
+ },
+ "gpqa-8b|query|logistic|base": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 38.69969040247678
+ },
+ "gpqa-8b|query|logistic|cluster@0.3": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 37.68306836367123
+ },
+ "gpqa-8b|query|logistic|cluster@0.5": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 37.12788407184671
+ },
+ "gpqa-8b|query|logistic|cluster@0.7": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 38.63091905609583
+ },
+ "gpqa-8b|query|logistic|mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 38.54489164086687
+ },
+ "gpqa-8b|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 35.036755039656306
+ },
+ "gpqa-8b|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 37.12208919593731
+ },
+ "gpqa-8b|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 37.39668615984406
+ },
+ "gpqa-8b|query|posterior|base": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 38.37977296181631
+ },
+ "gpqa-8b|query|posterior|cluster@0.3": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 33.622698081033505
+ },
+ "gpqa-8b|query|posterior|cluster@0.5": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 36.18365952200324
+ },
+ "gpqa-8b|query|posterior|cluster@0.7": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 36.482252673239316
+ },
+ "gpqa-8b|query|posterior|mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 39.81564257533786
+ },
+ "gpqa-8b|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 35.455645295507104
+ },
+ "gpqa-8b|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 36.53858261373393
+ },
+ "gpqa-8b|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 38.74971387322186
+ },
+ "gpqa-8b|batch|logistic|base": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 37.925696594427244
+ },
+ "gpqa-8b|batch|logistic|cluster@0.3": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 36.9969040247678
+ },
+ "gpqa-8b|batch|logistic|cluster@0.5": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 33.026192814631294
+ },
+ "gpqa-8b|batch|logistic|cluster@0.7": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 34.52012383900929
+ },
+ "gpqa-8b|batch|logistic|mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 36.37770897832817
+ },
+ "gpqa-8b|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 36.06811145510836
+ },
+ "gpqa-8b|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 34.21052631578947
+ },
+ "gpqa-8b|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 37.306501547987615
+ },
+ "gpqa-8b|batch|posterior|base": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 37.288441692466456
+ },
+ "gpqa-8b|batch|posterior|cluster@0.3": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 36.12615949212502
+ },
+ "gpqa-8b|batch|posterior|cluster@0.5": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 33.026192814631294
+ },
+ "gpqa-8b|batch|posterior|cluster@0.7": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 37.22168624684927
+ },
+ "gpqa-8b|batch|posterior|mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 36.63570691434469
+ },
+ "gpqa-8b|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 36.22299668005425
+ },
+ "gpqa-8b|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 35.66037105588721
+ },
+ "gpqa-8b|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 28.3390092879257,
+  "Pass@k": 95.20123839009288,
+  "Naive Ensemble": 38.85448916408669,
+  "Jaffe et al. (2015)": 29.09123298442184,
+  "Dawid-Skene": 30.225913395041843,
+  "Majority Vote": 33.720330237358105,
+  "Weaver": 28.862594292547243,
+  "FUSE": 36.50318978196622
+ },
+ "gpqa-diamond-8b|query|logistic|base": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 40.909090909090914
+ },
+ "gpqa-diamond-8b|query|logistic|cluster@0.3": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 36.655708739993614
+ },
+ "gpqa-diamond-8b|query|logistic|cluster@0.5": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 41.581057932855444
+ },
+ "gpqa-diamond-8b|query|logistic|cluster@0.7": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 41.59003831417624
+ },
+ "gpqa-diamond-8b|query|logistic|mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 38.38383838383838
+ },
+ "gpqa-diamond-8b|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 36.48351241028253
+ },
+ "gpqa-diamond-8b|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 41.28787878787879
+ },
+ "gpqa-diamond-8b|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 40.735690235690235
+ },
+ "gpqa-diamond-8b|query|posterior|base": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 39.35185185185185
+ },
+ "gpqa-diamond-8b|query|posterior|cluster@0.3": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 32.54612781722283
+ },
+ "gpqa-diamond-8b|query|posterior|cluster@0.5": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 35.48797429579998
+ },
+ "gpqa-diamond-8b|query|posterior|cluster@0.7": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 38.39561996715188
+ },
+ "gpqa-diamond-8b|query|posterior|mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 38.97306397306397
+ },
+ "gpqa-diamond-8b|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 35.036716082572696
+ },
+ "gpqa-diamond-8b|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 38.48847304619419
+ },
+ "gpqa-diamond-8b|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 40.179347341390155
+ },
+ "gpqa-diamond-8b|batch|logistic|base": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 31.653748309464348
+ },
+ "gpqa-diamond-8b|batch|logistic|cluster@0.3": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 27.867835903575198
+ },
+ "gpqa-diamond-8b|batch|logistic|cluster@0.5": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 27.867835903575198
+ },
+ "gpqa-diamond-8b|batch|logistic|cluster@0.7": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 36.36363636363637
+ },
+ "gpqa-diamond-8b|batch|logistic|mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 32.08404911433678
+ },
+ "gpqa-diamond-8b|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 36.36363636363637
+ },
+ "gpqa-diamond-8b|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 36.36363636363637
+ },
+ "gpqa-diamond-8b|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 35.35353535353536
+ },
+ "gpqa-diamond-8b|batch|posterior|base": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 42.8713542349906
+ },
+ "gpqa-diamond-8b|batch|posterior|cluster@0.3": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 38.71388897395105
+ },
+ "gpqa-diamond-8b|batch|posterior|cluster@0.5": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 38.71388897395105
+ },
+ "gpqa-diamond-8b|batch|posterior|cluster@0.7": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 38.64416311177575
+ },
+ "gpqa-diamond-8b|batch|posterior|mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 44.62962962962963
+ },
+ "gpqa-diamond-8b|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 39.07452830889833
+ },
+ "gpqa-diamond-8b|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 39.07452830889833
+ },
+ "gpqa-diamond-8b|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 28.34343434343435,
+  "Pass@k": 94.94949494949495,
+  "Naive Ensemble": 40.909090909090914,
+  "Jaffe et al. (2015)": 30.28559403559403,
+  "Dawid-Skene": 31.606547554241686,
+  "Majority Vote": 36.53198653198653,
+  "Weaver": 29.734632975861047,
+  "FUSE": 37.72727272727273
+ },
+ "mmlu-8b|query|logistic|base": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 80.52851182197497
+ },
+ "mmlu-8b|query|logistic|cluster@0.3": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 80.63775883196551
+ },
+ "mmlu-8b|query|logistic|cluster@0.5": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 82.57459594083528
+ },
+ "mmlu-8b|query|logistic|cluster@0.7": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 81.23783031988874
+ },
+ "mmlu-8b|query|logistic|mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 83.17107093184978
+ },
+ "mmlu-8b|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 82.03004837157248
+ },
+ "mmlu-8b|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 83.20551029869529
+ },
+ "mmlu-8b|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 83.01971692710464
+ },
+ "mmlu-8b|query|posterior|base": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 82.26071382376836
+ },
+ "mmlu-8b|query|posterior|cluster@0.3": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 78.90365118934612
+ },
+ "mmlu-8b|query|posterior|cluster@0.5": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 82.23185860944405
+ },
+ "mmlu-8b|query|posterior|cluster@0.7": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 81.39158769501218
+ },
+ "mmlu-8b|query|posterior|mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 82.18648585999074
+ },
+ "mmlu-8b|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 80.3088966151886
+ },
+ "mmlu-8b|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 83.4897969439337
+ },
+ "mmlu-8b|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 83.44235482336678
+ },
+ "mmlu-8b|batch|logistic|base": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 70.5540743757785
+ },
+ "mmlu-8b|batch|logistic|cluster@0.3": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 84.00556328233658
+ },
+ "mmlu-8b|batch|logistic|cluster@0.5": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 79.83310152990263
+ },
+ "mmlu-8b|batch|logistic|cluster@0.7": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 71.66573458974797
+ },
+ "mmlu-8b|batch|logistic|mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 70.53811764868523
+ },
+ "mmlu-8b|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 79.97218358831711
+ },
+ "mmlu-8b|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 81.50208623087622
+ },
+ "mmlu-8b|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 78.44228094575799
+ },
+ "mmlu-8b|batch|posterior|base": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 86.72826014967879
+ },
+ "mmlu-8b|batch|posterior|cluster@0.3": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 83.38878558689733
+ },
+ "mmlu-8b|batch|posterior|cluster@0.5": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 79.8180542470217
+ },
+ "mmlu-8b|batch|posterior|cluster@0.7": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 79.96989379570863
+ },
+ "mmlu-8b|batch|posterior|mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 85.7836611696139
+ },
+ "mmlu-8b|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 77.14496250788156
+ },
+ "mmlu-8b|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 78.0572633108427
+ },
+ "mmlu-8b|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 64.13769123783032,
+  "Pass@k": 98.47009735744089,
+  "Naive Ensemble": 82.89290681502086,
+  "Jaffe et al. (2015)": 77.02419586286068,
+  "Dawid-Skene": 76.30085375912914,
+  "Majority Vote": 73.50486787204451,
+  "Weaver": 84.6874272054063,
+  "FUSE": 81.89151599443672
+ },
+ "mmlu-pro-8b|query|logistic|base": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 69.0
+ },
+ "mmlu-pro-8b|query|logistic|cluster@0.3": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 64.06140833406664
+ },
+ "mmlu-pro-8b|query|logistic|cluster@0.5": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 66.1025641025641
+ },
+ "mmlu-pro-8b|query|logistic|cluster@0.7": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 66.0
+ },
+ "mmlu-pro-8b|query|logistic|mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 69.35
+ },
+ "mmlu-pro-8b|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 65.6491642492022
+ },
+ "mmlu-pro-8b|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 67.60000000000001
+ },
+ "mmlu-pro-8b|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 67.4
+ },
+ "mmlu-pro-8b|query|posterior|base": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 68.85666666666667
+ },
+ "mmlu-pro-8b|query|posterior|cluster@0.3": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 64.73777119666002
+ },
+ "mmlu-pro-8b|query|posterior|cluster@0.5": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 66.89843465014516
+ },
+ "mmlu-pro-8b|query|posterior|cluster@0.7": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 69.08142857142857
+ },
+ "mmlu-pro-8b|query|posterior|mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 68.81666666666666
+ },
+ "mmlu-pro-8b|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 66.8951224154711
+ },
+ "mmlu-pro-8b|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 68.66705944600062
+ },
+ "mmlu-pro-8b|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 68.84738095238096
+ },
+ "mmlu-pro-8b|batch|logistic|base": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 60.33111808486994
+ },
+ "mmlu-pro-8b|batch|logistic|cluster@0.3": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 70.39999999999999
+ },
+ "mmlu-pro-8b|batch|logistic|cluster@0.5": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 69.0
+ },
+ "mmlu-pro-8b|batch|logistic|cluster@0.7": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 68.60000000000001
+ },
+ "mmlu-pro-8b|batch|logistic|mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 55.48092245107439
+ },
+ "mmlu-pro-8b|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 66.0789534974829
+ },
+ "mmlu-pro-8b|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 67.0
+ },
+ "mmlu-pro-8b|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 54.93069815042858
+ },
+ "mmlu-pro-8b|batch|posterior|base": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 61.46209075459076
+ },
+ "mmlu-pro-8b|batch|posterior|cluster@0.3": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 66.08329642579642
+ },
+ "mmlu-pro-8b|batch|posterior|cluster@0.5": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 63.64390397843184
+ },
+ "mmlu-pro-8b|batch|posterior|cluster@0.7": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 67.94818681318682
+ },
+ "mmlu-pro-8b|batch|posterior|mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 70.25721925413787
+ },
+ "mmlu-pro-8b|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 62.442175359040675
+ },
+ "mmlu-pro-8b|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 62.54256495781851
+ },
+ "mmlu-pro-8b|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 46.596,
+  "Pass@k": 96.8,
+  "Naive Ensemble": 68.60000000000001,
+  "Jaffe et al. (2015)": 62.11333333333333,
+  "Dawid-Skene": 57.98078787878788,
+  "Majority Vote": 59.9,
+  "Weaver": 68.70702981595605,
+  "FUSE": 71.12424242424242
+ },
+ "hle|query|logistic|base": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 53.43451031129458
+ },
+ "hle|query|logistic|cluster@0.3": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 51.34974194003258
+ },
+ "hle|query|logistic|cluster@0.5": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 51.825740844733694
+ },
+ "hle|query|logistic|cluster@0.7": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 51.695481499789096
+ },
+ "hle|query|posterior|base": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 52.429321520060945
+ },
+ "hle|query|posterior|cluster@0.3": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 50.849026254319206
+ },
+ "hle|query|posterior|cluster@0.5": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 52.17268476014213
+ },
+ "hle|query|posterior|cluster@0.7": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 51.74621900988725
+ },
+ "hle|batch|logistic|base": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 52.227478313676755
+ },
+ "hle|batch|logistic|cluster@0.3": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 52.372475243694126
+ },
+ "hle|batch|logistic|cluster@0.5": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 51.67534682934188
+ },
+ "hle|batch|logistic|cluster@0.7": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 51.67534682934188
+ },
+ "hle|batch|posterior|base": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 52.10804667308199
+ },
+ "hle|batch|posterior|cluster@0.3": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 53.94811780165815
+ },
+ "hle|batch|posterior|cluster@0.5": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 52.7098488434624
+ },
+ "hle|batch|posterior|cluster@0.7": {
+  "Pass@1": 51.40215716486903,
+  "Pass@k": 100.0,
+  "Naive Ensemble": 51.054015322120094,
+  "Jaffe et al. (2015)": 51.334630187480734,
+  "Dawid-Skene": 51.7364065231696,
+  "FUSE": 52.7098488434624
+ },
+ "imo|query|logistic|base": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 57.08137541756276
+ },
+ "imo|query|logistic|cluster@0.3": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 58.11027953545107
+ },
+ "imo|query|logistic|cluster@0.5": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 57.22748928809086
+ },
+ "imo|query|logistic|cluster@0.7": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 57.51434560517824
+ },
+ "imo|query|logistic|mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 61.36585915565722
+ },
+ "imo|query|logistic|cluster@0.3+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 56.73589756770342
+ },
+ "imo|query|logistic|cluster@0.5+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 61.896125242372676
+ },
+ "imo|query|logistic|cluster@0.7+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 62.82548349844441
+ },
+ "imo|query|posterior|base": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 55.68399590543388
+ },
+ "imo|query|posterior|cluster@0.3": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 58.9770894704968
+ },
+ "imo|query|posterior|cluster@0.5": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 60.11448525157225
+ },
+ "imo|query|posterior|cluster@0.7": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 59.37486611830368
+ },
+ "imo|query|posterior|mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 59.26427058758969
+ },
+ "imo|query|posterior|cluster@0.3+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 58.3260696470757
+ },
+ "imo|query|posterior|cluster@0.5+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 61.83232711414428
+ },
+ "imo|query|posterior|cluster@0.7+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 60.92366098623382
+ },
+ "imo|batch|logistic|base": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 62.1316600261814
+ },
+ "imo|batch|logistic|cluster@0.3": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 62.94466815626269
+ },
+ "imo|batch|logistic|cluster@0.5": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 62.1316600261814
+ },
+ "imo|batch|logistic|cluster@0.7": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 62.1316600261814
+ },
+ "imo|batch|logistic|mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 52.6829268292683
+ },
+ "imo|batch|logistic|cluster@0.3+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 60.97560975609756
+ },
+ "imo|batch|logistic|cluster@0.5+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 52.6829268292683
+ },
+ "imo|batch|logistic|cluster@0.7+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 52.6829268292683
+ },
+ "imo|batch|posterior|base": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 60.80709502447401
+ },
+ "imo|batch|posterior|cluster@0.3": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 59.093991140611415
+ },
+ "imo|batch|posterior|cluster@0.5": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 60.540972830023385
+ },
+ "imo|batch|posterior|cluster@0.7": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 60.540972830023385
+ },
+ "imo|batch|posterior|mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 61.422663817929234
+ },
+ "imo|batch|posterior|cluster@0.3+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 60.714082665302186
+ },
+ "imo|batch|posterior|cluster@0.5+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 62.13078295078096
+ },
+ "imo|batch|posterior|cluster@0.7+mv": {
+  "Pass@1": 53.235772357723576,
+  "Pass@k": 85.36585365853658,
+  "Naive Ensemble": 62.1316600261814,
+  "Jaffe et al. (2015)": 60.6804463798458,
+  "Dawid-Skene": 58.15600583927246,
+  "Majority Vote": 57.69671893147502,
+  "FUSE": 62.13078295078096
+ }
+}

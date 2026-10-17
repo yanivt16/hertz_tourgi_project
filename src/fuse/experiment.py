@@ -45,7 +45,26 @@ def _fuse_one(args):
     return FUSE(**config).fit_scores(V).scores
 
 
-def run_unsupervised(bench: Benchmark, fuse: FUSE, mode: str = "query", workers: int = 0) -> dict[str, float]:
+def has_answers(bench: Benchmark) -> bool:
+    return all(q.answers is not None and len(q.answers) == len(q.correct) for q in bench.queries)
+
+
+def with_majority_vote(mats: list[np.ndarray], bench: Benchmark) -> list[np.ndarray]:
+    """Append answer agreement (how many responses share each response's extracted answer)
+    as one more verifier column. It needs no model, and its errors come from the generator
+    rather than from any reward model, so it is plausibly independent of RM nuisance factors."""
+    return [
+        np.column_stack([V, bl.majority_vote_scores(q.answers)]) for V, q in zip(mats, bench.queries)
+    ]
+
+
+def run_unsupervised(
+    bench: Benchmark,
+    fuse: FUSE,
+    mode: str = "query",
+    workers: int = 0,
+    majority_vote_verifier: bool = False,
+) -> dict[str, float]:
     mats = [impute_missing(q.scores) for q in bench.queries]
     ys = [q.correct for q in bench.queries]
     out: dict[str, list[float]] = {
@@ -55,7 +74,7 @@ def run_unsupervised(bench: Benchmark, fuse: FUSE, mode: str = "query", workers:
         "Jaffe et al. (2015)": [selection_accuracy(bl.jaffe2015_scores(V), y) for V, y in zip(mats, ys)],
         "Dawid-Skene": [selection_accuracy(bl.dawid_skene_scores(V), y) for V, y in zip(mats, ys)],
     }
-    if all(q.answers is not None and len(q.answers) == len(q.correct) for q in bench.queries):
+    if has_answers(bench):
         out["Majority Vote"] = [
             selection_accuracy(bl.majority_vote_scores(q.answers), q.correct) for q in bench.queries
         ]
@@ -66,6 +85,11 @@ def run_unsupervised(bench: Benchmark, fuse: FUSE, mode: str = "query", workers:
         out["Weaver"] = [
             selection_accuracy(np.nan_to_num(q.weaver_scores, nan=-np.inf), q.correct) for q in bench.queries
         ]
+
+    if majority_vote_verifier:
+        if not has_answers(bench):
+            raise ValueError(f"{bench.name} has no extracted answers for a majority-vote verifier")
+        mats = with_majority_vote(mats, bench)
 
     if mode == "batch":
         scores, _ = fuse_batched(mats, fuse)

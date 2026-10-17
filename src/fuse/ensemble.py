@@ -16,6 +16,7 @@ from typing import Literal
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 
+from .clustering import cluster_verifiers
 from .moments import MoMEstimate, mom_estimate
 from .posterior import averaged_triplet_posterior
 from .preprocess import minmax_to_unit_interval
@@ -28,7 +29,7 @@ Predictor = Literal["logistic", "posterior"]
 class FUSEResult:
     scores: np.ndarray  # predicted probability of correctness per response, (N,)
     posterior: np.ndarray | None  # p-hat per response, (N,)
-    kept: np.ndarray  # indices of verifiers used for the posterior
+    kept: np.ndarray  # columns used for the posterior (cluster indices if clustered)
     tau: np.ndarray | None
     estimate: MoMEstimate | None
     tci: float | None
@@ -47,7 +48,9 @@ class FUSE:
     coordinate descent over thresholds, `drop_below_random` implements the balanced-accuracy
     dropping heuristic, and `predictor` chooses between the paper's default logistic
     regression fitted to pseudo-labels ("logistic") and the parameter-free rule of ranking by
-    p-hat directly ("posterior").
+    p-hat directly ("posterior"). `cluster_threshold`, when set, is not in the paper: it
+    averages blocks of verifiers whose |Spearman correlation| exceeds it into one
+    meta-verifier before thresholding (see `clustering.py`).
     """
 
     n_sweeps: int = 3
@@ -59,6 +62,7 @@ class FUSE:
     predictor: Predictor = "logistic"
     logistic_C: float = 1.0
     max_triplets: int = 20000
+    cluster_threshold: float | None = None
     seed: int = 0
 
     def fit_scores(self, V: np.ndarray, rescale: bool = True) -> FUSEResult:
@@ -71,9 +75,15 @@ class FUSE:
         if np.isnan(V).any():
             raise ValueError("impute missing scores before running FUSE")
         Vs = minmax_to_unit_interval(V) if rescale else V
+        info: dict = {}
+        Vm = Vs
+        if self.cluster_threshold is not None:
+            clusters = cluster_verifiers(Vs, self.cluster_threshold)
+            Vm = clusters.collapse(Vs)
+            info["clusters"] = clusters.groups
 
         thr = minimize_tci(
-            Vs,
+            Vm,
             n_sweeps=self.n_sweeps,
             n_quantiles=self.n_quantiles,
             clip=self.tci_clip,
@@ -83,7 +93,7 @@ class FUSE:
         if active.size < 3:
             return self._fallback(Vs, "fewer than three non-constant verifiers")
 
-        Vt = binarize(Vs[:, active], thr.tau[active])
+        Vt = binarize(Vm[:, active], thr.tau[active])
         est = mom_estimate(Vt)
         kept = np.arange(active.size)
         if self.drop_below_random:
@@ -105,6 +115,7 @@ class FUSE:
             tau=thr.tau,
             estimate=est,
             tci=thr.statistic,
+            info=info,
         )
 
     def _predict(self, Vs: np.ndarray, post: np.ndarray) -> np.ndarray:

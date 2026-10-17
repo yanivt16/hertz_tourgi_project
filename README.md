@@ -102,6 +102,45 @@ a scale-free TCI statistic (`tci_standardize=True`; it stops the threshold searc
 logistic regularisation (`logistic_C=0.1`), global instead of per-question rescaling in
 batched mode, and deciding verifier drops from the pooled matrix.
 
+## Extensions beyond the paper: verifier clustering and a majority-vote verifier
+
+Two label-free additions aimed at the MATH500-8B failure, both off by default:
+
+- **Verifier clustering** (`FUSE(cluster_threshold=t)`, `src/fuse/clustering.py`): average-linkage
+  clustering on 1 − |Spearman correlation|; each cluster is averaged (sign-aligned) into one
+  meta-verifier before the threshold search, so a correlated block gets one vote in the
+  moment estimate. The logistic predictor still sees every original verifier.
+- **Majority-vote verifier** (`run_unsupervised(..., majority_vote_verifier=True)`): answer
+  agreement appended as one more verifier column. HLE has no extracted answers, so it is skipped there.
+
+`scripts/run_variants.py` runs every combination (thresholds 0.3/0.5/0.7, both modes, both
+predictors) and `scripts/summarize_variants.py` writes [results/VARIANTS.md](results/VARIANTS.md).
+The threshold 0.5 was fixed as the default before the grid ran.
+
+**Result: clustering fixes the failure it targets but is not a better default.**
+
+| Setting (per-question, logistic) | base | cluster@0.5 | cluster@0.5 + MV | FUSE paper |
+|---|---:|---:|---:|---:|
+| math500-8b | 66.0 | **79.3** | 78.5 | 83.9 |
+| mmlu-8b | 80.5 | 82.6 | 83.2 | 84.9 |
+| imo | 57.1 | 57.2 | **61.9** | 63.8 |
+| gpqa-70b | 60.5 | 58.0 | 57.2 | 66.8 |
+| gpqa-diamond-70b | 55.1 | 53.5 | 53.3 | 64.4 |
+| mean of 11 settings with answers | 67.3 | 67.9 | 68.5 | |
+
+- MATH500-8B gains 13 points (per-question) and up to 20 (batched, threshold 0.3: 55.2 → 75.1).
+  Batched MMLU-8B and MMLU-Pro-8B gain up to 13 and 10 points.
+- GPQA-70B/Diamond-70B lose 2–10 points depending on configuration. The 70B sets include
+  eight LM-judge verdicts that agree with each other *because they are right*. Correlation
+  alone cannot tell that block apart from one that shares a nuisance factor, so clustering
+  collapses informative judges as well as junk.
+- The majority-vote verifier helps IMO (+4–5) and slightly helps the 8B settings. Elsewhere it is roughly neutral.
+- Averaged over settings, no variant beats the base by more than about 2 points in any
+  mode/predictor combination, and some lose up to 3.6. Batched + logistic gains most
+  (64.7 → 66.3 over all 12 at threshold 0.5).
+
+The next step is therefore choosing between variants per setting without labels, not a new default.
+
 ## Choices the paper leaves open
 
 These are the likely sources of the remaining gaps, and each is configurable on `FUSE`:

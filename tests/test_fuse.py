@@ -137,3 +137,45 @@ def test_standardized_tci_statistic_is_scale_free_and_zero_under_tci():
     assert tci_statistic(scaled.sigma, scaled.T, clip=1e-6, standardize=True) == pytest.approx(
         tci_statistic(m.sigma, m.T, clip=1e-6, standardize=True), rel=1e-6
     )
+
+
+def test_clustering_merges_a_correlated_block_and_keeps_independent_verifiers_apart():
+    from fuse.clustering import cluster_verifiers
+
+    rng = np.random.default_rng(10)
+    n = 5000
+    y = rng.random(n) < 0.4
+    nuisance = rng.normal(size=n)
+    good = [np.where(y, 1.5, 0.0) + rng.normal(size=n) for _ in range(3)]
+    junk = [nuisance + 0.3 * rng.normal(size=n) for _ in range(5)]
+    junk[2] = -junk[2]  # a reversed copy still belongs to the block
+    clusters = cluster_verifiers(np.column_stack(good + junk), threshold=0.5)
+    sets = sorted(sorted(g.tolist()) for g in clusters.groups)
+    assert sets == [[0], [1], [2], [3, 4, 5, 6, 7]]
+    assert clusters.signs[5] == -clusters.signs[3]
+
+
+def test_clustering_rescues_fuse_from_a_correlated_junk_block():
+    """Nine near-random verifiers driven by one shared factor outvote three good,
+    independent ones in the rank-one moment fit; collapsing the block restores them."""
+    rng = np.random.default_rng(11)
+    plain, clustered = [], []
+    for _ in range(20):
+        n = 100
+        y = rng.random(n) < 0.3
+        nuisance = rng.normal(size=n)
+        good = [np.where(y, 1.5, 0.0) + rng.normal(size=n) for _ in range(3)]
+        junk = [nuisance + 0.15 * y + 0.5 * rng.normal(size=n) for _ in range(9)]
+        V = np.column_stack(good + junk)
+        plain.append(selection_accuracy(FUSE().fit_scores(V).scores, y))
+        clustered.append(selection_accuracy(FUSE(cluster_threshold=0.5).fit_scores(V).scores, y))
+    assert np.mean(clustered) > np.mean(plain) + 0.1
+
+
+def test_majority_vote_verifier_appends_answer_agreement():
+    from fuse.data import Benchmark, Query
+    from fuse.experiment import with_majority_vote
+
+    q = Query("q", np.zeros((4, 2)), np.array([1, 1, 0, 0], bool), answers=["a", "a", "b", None])
+    out = with_majority_vote([q.scores], Benchmark("t", ["v1", "v2"], [q]))
+    np.testing.assert_array_equal(out[0][:, -1], [2, 2, 1, -1])
