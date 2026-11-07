@@ -1,0 +1,185 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.2cm,top=2.6cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% Edit these two macros to match the program's header.
+\newcommand{\schoolname}{Efi Arazi School of Computer Science \quad Machine Learning and Data Science M.Sc. Program}
+\newcommand{\proposalname}{MLDS Project Proposal}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\footnotesize\schoolname}
+\fancyfoot[R]{\footnotesize\proposalname\quad Page \thepage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlist{itemsep=0.2em,topsep=0.3em,leftmargin=1.4em}
+\newcommand{\RQ}[1]{\par\medskip\noindent\textbf{Research question:} #1\par\medskip}
+\newcommand{\E}{\mathbb{E}}
+
+\begin{document}
+
+{\Large\bfseries \proposalname\par}
+\vspace{0.2em}
+{\large\bfseries When Does a Label-Free Verifier Ensemble Pick the Wrong Signal?\\
+Correlated Weak Verifiers and Shared Nuisance Factors in Best-of-$N$ Selection\par}
+\vspace{0.6em}
+
+\textbf{Date:} November 2026\\
+\textbf{Mentors:} TBD
+
+\section*{Background}
+
+Best-of-$N$ selection asks a language model for $N$ candidate answers and lets a set of
+imperfect \emph{verifiers} (LLM judges, reward models, process reward models) choose
+among them. Combining many weak verifiers has been shown to close much of the gap
+between a model's first answer and its best-of-$N$ ceiling~\cite{weaver}, but the
+combination step normally needs labelled questions to learn verifier weights. FUSE
+\cite{fuse} removes the labels: it treats each binarised verifier as a noisy classifier,
+estimates every verifier's sensitivity and specificity by the method of moments of
+Jaffe et al.~\cite{jaffe}, and ranks responses by the resulting posterior. The practical
+appeal is large, since no one has to label anything, and so is the risk: a label-free
+method has no signal telling it when its own assumptions have broken.
+
+\textbf{Preliminaries.} For a question, let $Y_i\in\{0,1\}$ be the unobserved correctness
+of response $i=1,\dots,N$ and $V_{ij}\in\{0,1\}$ the binarised output of verifier
+$j=1,\dots,m$. The moment estimator assumes that verifiers are conditionally independent
+given $Y$. Then the off-diagonal covariance of $V$ is exactly rank one,
+$\Sigma_{jk}=\lambda_j\lambda_k$ for $j\neq k$, where $\lambda_j\propto
+(\psi_j+\eta_j-1)$ is the informativeness of verifier $j$ (its sensitivity $\psi_j$ plus
+specificity $\eta_j$ minus one), and $\lambda$ is identifiable up to
+sign from any three verifiers. The assumption can fail in the way that matters. Suppose
+a nuisance factor $U_i$ (response length, formatting, a shared backbone model, a shared
+training set) drives a block $B$ of verifiers and is unrelated to $Y$. Then
+$\Sigma_{jk}$ is large for $j,k\in B$, the block's rank-one fit is excellent, and a
+label-free method cannot distinguish the factor $U$ from the factor $Y$: the only thing
+it sees is a strong shared signal. Which factor it labels ``correct'' depends on how large
+the block is, not on which factor is true.
+
+\textbf{Pilot evidence.} A from-scratch reimplementation of FUSE and its Best-of-$N$
+experiments on the authors' released data (12 settings) reproduces the paper to within
+1.5--2 points on most of them. On MATH500 with 8B-generated candidates it does not: the
+best configuration reaches 66.0\% against the paper's 83.9\%. Nine of the 16 reward models
+are near-random (selection accuracy about 54\% against a 50\% single-sample baseline) but
+mutually correlated at $|\rho|\approx 0.5$, while the two strongest verifiers are weakly
+correlated with everything. The rank-one fit locks onto the correlated block and, estimated
+on all questions at once, ranks it best and the two strongest verifiers worst. Averaging
+correlated blocks into one meta-verifier recovers MATH500-8B to 79.3\% but costs
+GPQA-70B 2--10 points, because the correlated LM judges there are informative. Correlation
+among verifiers is therefore ambiguous: shared signal and shared noise look the same.
+
+\begin{center}\small
+\begin{tabular}{lrrr}\toprule
+Setting (query mode) & FUSE (ours) & + clustering & Paper \\\midrule
+MATH500-8B & 66.0 & 79.3 & 83.9 \\
+GPQA-70B & 60.5 & 58.0 & 66.8 \\
+MMLU-8B & 80.5 & 82.6 & 84.9 \\\bottomrule
+\end{tabular}\\[0.2em]
+\textit{Table 1. Pilot results from the reimplementation: one correlated-block failure and its cost.}
+\end{center}
+
+\textbf{Core: when it fails, whether we can tell, and what repairs it.} The core has
+five movements, in three tiers: (a)--(c) are mandatory, (d) and (e) secondary,
+and (f) exploratory.
+\begin{enumerate}[label=\alph*)]
+\item \textbf{Theory.} Model the verifier covariance as a sum of two low-rank terms,
+$\Sigma_{\text{off}}=\lambda\lambda^\top+\mu\mu^\top$ ($\mu$ the loading on $U$, supported on
+$B$). Derive when the best rank-one fit aligns with $\mu$ rather than $\lambda$ as a
+function of block size $|B|$, within-block loading, and the informative verifiers'
+strength, and state the identifiability limit: a second factor of equal size cannot be
+resolved from second moments alone.
+\item \textbf{Controlled simulation with known ground truth.} Generate verifier matrices
+from the two-factor model with planted $B$, sweeping $|B|$ and $\mu$, and compare FUSE,
+Jaffe et al., Dawid--Skene, the naive ensemble and majority vote on selection accuracy,
+reported with a matched arm in which $\mu=0$ so that no remedy is rewarded merely for
+being conservative.
+\item \textbf{A label-free failure detector.} A statistic that fires when the data look
+two-factor rather than one-factor: the spectral gap of the verifier correlation matrix
+after removing the leading component, and a triplet conditional-independence test. It is
+evaluated as a detector, by its false-alarm rate on settings where FUSE is fine and its
+detection rate on settings where it fails, in simulation and on real data. The question
+is not whether it explains the failure but whether it would have warned the user.
+\item \textbf{Nuisance audit on real data.} On the 12 released settings, measure how much
+of the inter-verifier correlation is explained by observable covariates (response length,
+presence of a final answer, answer format, generator identity) and whether partialling
+them out restores the one-factor structure.
+\item \textbf{Remedy comparison under one protocol.} Verifier clustering, nuisance
+residualisation, an explicit rank-two model, and abstention to the naive ensemble when
+the detector fires; each judged on both the failing settings and the settings where
+correlated verifiers are informative.
+\item \textbf{Exploratory: identifying the correct factor.} Whether a handful of labelled
+questions (1--5\%) suffice to decide which of two factors is correctness. Reported as an
+open problem, not a result.
+\end{enumerate}
+
+\textbf{Evaluation discipline.} The aim is a statement about a method, so the ways to
+overstate it are addressed directly.
+\emph{Tuning on the test settings.} Remedy hyperparameters (clustering threshold, detector
+cutoff) are fixed on the simulation arm before any real-data run, and every real setting
+is reported, not the best cell per benchmark.
+\emph{Label leakage into a label-free method.} The detector and every remedy are computed
+without labels; labels enter only in scoring, and splits are by question.
+\emph{Selection among many configurations.} With two modes, two predictors and several
+thresholds, differences of 1--2 points are within noise, so selection accuracy is reported
+with paired bootstrap intervals over questions and compared with the naive ensemble as an
+explicit floor.
+\emph{Confounding.} The nuisance audit is observational; a covariate that explains
+correlation is evidence, not proof, of a mechanism.
+\emph{Size and power.} A remedy that repairs MATH500-8B but harms GPQA-70B is judged
+against both, using accuracy change per setting rather than the mean alone.
+
+\section*{Objectives \& Deliverables}
+
+\textbf{Objectives}
+\begin{itemize}
+\item Formalise the two-factor failure of moment-based label-free ensembling and state
+when it is, and is not, identifiable.
+\item Build a simulation framework with planted nuisance blocks and known ground truth,
+including a matched null arm.
+\item Design and validate a label-free detector of the failure, and quantify its false-alarm
+and detection rates. This is the project's central contribution.
+\item Compare the available remedies head-to-head on size and power, on simulated and
+released data.
+\item Audit the 12 released settings for the nuisance factors behind the failure.
+\end{itemize}
+
+\textbf{Deliverables}
+\begin{itemize}
+\item A tested Python library extending the existing FUSE reimplementation with the
+detector, the remedies, and the simulator.
+\item A benchmark table over all 12 settings and the simulation grid, with paired
+bootstrap intervals.
+\item An instructional notebook that reproduces the MATH500-8B failure in one sitting.
+\item A final report stating, falsifiably, when label-free ensembling can be trusted, which
+remedy is safe to ship, and where the problem remains open.
+\end{itemize}
+
+\section*{Requirements}
+
+Probability and statistics at the level of an advanced statistics course; Python; some
+familiarity with language-model evaluation. Expected workload is 1--2 days a week for an
+academic year.
+
+\section*{Resources}
+
+Data: the verifier score matrices released with FUSE (HLE, IMO Shortlist) and the Weaver
+datasets, used as they are; no model needs to be run. Everything runs on a laptop. The
+starting code base (FUSE reimplementation, baselines, results for all 12 settings) is
+available to the student. Academic project; any developed IP will be addressed when such
+occurs.
+
+\begin{thebibliography}{9}\small
+\bibitem{fuse} Lee, Ma, Zhao, et al. Fully Unsupervised Score Ensembling (FUSE). arXiv:2604.18547.
+\bibitem{weaver} Saad-Falcon, J., et al. (2025). Shrinking the Generation-Verification Gap with Weak Verifiers (Weaver).
+\bibitem{jaffe} Jaffe, A., Nadler, B., Kluger, Y. (2015). Estimating the accuracies of multiple classifiers without labeled data. AISTATS.
+\bibitem{ds} Dawid, A. P., Skene, A. M. (1979). Maximum likelihood estimation of observer error-rates using the EM algorithm. J. Royal Statistical Society C 28(1), 20--28.
+\bibitem{parisi} Parisi, F., Strino, F., Nadler, B., Kluger, Y. (2014). Ranking and combining multiple predictors without labeled data. PNAS 111(4), 1253--1258.
+\bibitem{lightman} Lightman, H., et al. (2023). Let's Verify Step by Step. arXiv:2305.20050.
+\end{thebibliography}
+
+\end{document}
