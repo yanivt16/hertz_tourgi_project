@@ -1,5 +1,5 @@
 \documentclass[10pt]{article}
-\usepackage[a4paper,margin=2cm,top=2.4cm,bottom=2cm]{geometry}
+\usepackage[a4paper,margin=2cm,top=2.3cm,bottom=1.7cm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{fancyhdr}
 \usepackage{enumitem}
@@ -38,18 +38,20 @@ and Training on the Result\par}
 \section*{Background}
 
 Supervised models are only as good as their labels, and labels from a single expert are
-slow, costly, and still imperfect. A common alternative is to collect several cheaper
+costly, hard to scale, and still imperfect. A common alternative is to collect several cheaper
 annotations per item and combine them. The standard
 default is naive majority vote, which treats all annotators as equally reliable; it is the
 baseline this project aims to beat. Dawid--Skene \cite{ds} learns each annotator's reliability by EM but can be
 unstable when each item has few annotations. FUSE (Fully Unsupervised Score Ensembling)
-\cite{fuse} takes a different route: it treats each annotator as a noisy binary classifier,
-estimates its sensitivity and specificity by the method of moments of Jaffe et
+\cite{fuse} takes a different route: it binarises each annotator's score at a threshold chosen
+without labels, treats each annotator as a noisy binary classifier, estimates its sensitivity and specificity by the method of moments of Jaffe et
 al.~\cite{jaffe} from the agreement structure among annotators alone, and outputs a
-posterior probability per item, with no labels at all. FUSE was designed and evaluated for
-ranking language-model answers using LLM judges as the ``annotators.'' Whether it helps
-when the annotators are people, and whether the labels it produces train a better model
-than one expert's labels, is open. This project asks both.
+posterior probability per item, with no labels at all. The paper designs and evaluates FUSE for choosing among language-model answers, with LLM
+judges and reward models as the annotators, and only suggests ranking expert human labelers as a possible use \cite[Sec.~5]{fuse}. It reports no human-annotator experiment, handles
+binary labels only, imputes missing scores as zero, and uses its pseudo-labels only to fit
+its own selection rule. Whether FUSE helps when the annotators are people, and whether a
+model trained on its labels beats one trained on a single expert's labels, is therefore
+open. This project asks both.
 
 \textbf{Preliminaries.} Item $i$ has an unobserved label $y_i\in\{1,\dots,K\}$; annotator
 $j$ labels a subset of items, giving $A_{ij}$ or a missing entry. In the binary case, annotator
@@ -58,9 +60,8 @@ $y$ the off-diagonal covariance of $A$ is rank one with entries $\lambda_j\lambd
 $\lambda_j\propto\psi_j+\eta_j-1$, so each $\lambda_j$ is identifiable from any three
 annotators. Multi-class tasks are handled one-vs-rest. FUSE's posterior $p_i$ is used as a
 hard label ($\arg\max$) or as a soft training target. A ``single expert'' means one
-annotator's label on every training item. Human annotators may violate conditional
-independence, since they share guidelines, biases and class priors, so independence is a
-risk to be measured, not assumed.
+annotator's label on every training item. Human annotators may violate conditional independence, since they share guidelines, biases and class
+priors, so independence is a risk to be measured, not assumed.
 
 \begin{figure}[H]
 \centering
@@ -86,29 +87,27 @@ risk to be measured, not assumed.
 \draw[->,dashed] (L.north)--(L.north |- G.south);
 \end{tikzpicture}
 \caption{Study design. Light grey boxes belong to Stage 1, dark grey to Stage 2. Stage 1
-asks whether FUSE's aggregated labels are closer to gold than those of standard
-aggregators; Stage 2 compares a model trained on those labels with one trained on a single
-annotator's labels, on a test split no aggregator touched.}
+asks whether FUSE's aggregated labels are closer to gold than naive majority vote; Stage 2
+compares a model trained on those labels with one trained on a single annotator's labels, on a
+test split no aggregator touched.}
 \end{figure}
 
 \textbf{Stage 1 (until the midterm presentation): does FUSE improve the aggregation
 decision on human labels?}
 \begin{enumerate}[label=\alph*)]
-\item \textbf{Data.} Four to six public datasets with several human annotations per item
-and a curated gold label: binary (textual entailment, Snow et al.~\cite{snow}; relevance
+\item \textbf{Data.} Two to three public datasets with several human annotations per item
+and a curated gold label, chosen from binary (textual entailment, Snow et al.~\cite{snow}; relevance
 and sentiment sets from the Zheng et al.\ benchmark~\cite{zheng}) and multi-class
 (CIFAR-10H~\cite{c10h}; LabelMe~\cite{labelme}). Gold labels are hidden from every method
 and used only for scoring.
 \item \textbf{Implementation.} Implement FUSE from the paper and extend it to what human
-data needs: missing entries (pairwise-complete moments with a minimum-overlap rule),
-multi-class, and calibrated posteriors. Unit-test on simulated annotators with known
+data needs: missing entries (the paper imputes missing scores as zero; we use pairwise-complete moments
+with a minimum-overlap rule), multi-class (the paper is binary only), and calibrated
+posteriors. Unit-test on simulated annotators with known
 $\psi_j,\eta_j$.
 \item \textbf{Aggregation benchmark} (mandatory). FUSE against naive majority vote (the
-standard practice and the main baseline to beat), Dawid--Skene and Jaffe et al., on accuracy and log loss against gold. Annotations per item $k$ are
+standard practice and the main baseline to beat), Dawid--Skene and Jaffe et al.~\cite{jaffe,jaffe16} (baselines in the FUSE paper), on accuracy and log loss against gold. Annotations per item $k$ are
 subsampled to trace accuracy as a function of annotation budget.
-\item \textbf{Stress tests} (secondary). Simulated and subsampled annotator groups with
-shared bias, spammers and adversarial minorities, to find where the method degrades, and
-whether a label-free check can flag it.
 \end{enumerate}
 
 \textbf{Midterm criterion, fixed in advance.} On a dataset, Stage 1 succeeds if FUSE's
@@ -161,18 +160,19 @@ cost ratio at which the answer flips.
 
 \section*{Requirements \& Resources}
 
-Advanced statistics, Python and a deep-learning framework; about 1--2 days a week for an
+Advanced statistics, Python and a deep-learning framework; about half a day a week for an
 academic year. Public datasets only; Stage 1 runs on a laptop, Stage 2 on a single GPU.
 Academic project; any IP will be addressed when such occurs.
 
 \begin{thebibliography}{9}\footnotesize\setlength{\itemsep}{0pt}
-\bibitem{fuse} Lee, Ma, Zhao, et al. Fully Unsupervised Score Ensembling (FUSE). arXiv:2604.18547.
+\bibitem{fuse} Lee, J., Ma, V., Zhao, S., Nair, Y., Spector, A., Cohen, R., Cand\`es, E. J. (2026). FUSE: Ensembling Verifiers with Zero Labeled Data. arXiv:2604.18547.
 \bibitem{jaffe} Jaffe, A., Nadler, B., Kluger, Y. (2015). Estimating the accuracies of multiple classifiers without labeled data. AISTATS.
 \bibitem{ds} Dawid, A. P., Skene, A. M. (1979). Maximum likelihood estimation of observer error-rates using the EM algorithm. J. Roy. Stat. Soc. C 28(1), 20--28.
 \bibitem{snow} Snow, R., O'Connor, B., Jurafsky, D., Ng, A. Y. (2008). Cheap and fast---but is it good? Evaluating non-expert annotations for natural language tasks. EMNLP.
 \bibitem{zheng} Zheng, Y., Li, G., Li, Y., Shan, C., Cheng, R. (2017). Truth inference in crowdsourcing: Is the problem solved? PVLDB 10(5).
 \bibitem{c10h} Peterson, J. C., Battleday, R. M., Griffiths, T. L., Russakovsky, O. (2019). Human uncertainty makes classification more robust. ICCV.
 \bibitem{labelme} Rodrigues, F., Pereira, F. C. (2018). Deep learning from crowds. AAAI.
+\bibitem{jaffe16} Jaffe, A., Fetaya, E., Nadler, B., Jiang, T., Kluger, Y. (2016). Unsupervised ensemble learning with dependent classifiers. AISTATS.
 \end{thebibliography}
 
 \end{document}
