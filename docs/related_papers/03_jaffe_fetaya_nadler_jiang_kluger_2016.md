@@ -1,5 +1,7 @@
 # Unsupervised ensemble learning with dependent classifiers
 
+**Full text:** https://proceedings.mlr.press/v51/jaffe16.pdf
+
 **Jaffe, A., Fetaya, E., Nadler, B., Jiang, T., Kluger, Y. (2016).** AISTATS 2016 (Cadiz), PMLR vol. 51, pp. 351–360.
 Link: https://proceedings.mlr.press/v51/jaffe16.html
 

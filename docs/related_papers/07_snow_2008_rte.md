@@ -1,5 +1,7 @@
 # Cheap and fast — but is it good? Evaluating non-expert annotations for natural language tasks
 
+**Full text:** https://aclanthology.org/D08-1027.pdf
+
 **Snow, R., O'Connor, B., Jurafsky, D., Ng, A. Y. (2008).** EMNLP 2008, pp. 254–263, Honolulu. ACL Anthology D08-1027.
 Link: https://aclanthology.org/D08-1027/
 

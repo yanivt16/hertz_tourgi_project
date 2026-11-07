@@ -1,5 +1,7 @@
 # Estimating the accuracies of multiple classifiers without labeled data
 
+**Full text:** https://arxiv.org/pdf/1407.7644 · https://proceedings.mlr.press/v38/jaffe15.pdf
+
 **Jaffe, A., Nadler, B., Kluger, Y. (2015).** AISTATS 2015, PMLR vol. 38, pp. 407–415.
 Links: https://proceedings.mlr.press/v38/jaffe15.html · arXiv:1407.7644 (v2, 30 Oct 2014): https://arxiv.org/abs/1407.7644
 

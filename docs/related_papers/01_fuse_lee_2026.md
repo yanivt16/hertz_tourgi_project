@@ -1,11 +1,13 @@
 # FUSE: Ensembling Verifiers with Zero Labeled Data
 
+**Full text:** [PDF in this repo](pdf/fuse_lee_2026_arxiv-2604.18547.pdf) (arXiv licence: CC BY 4.0) · https://arxiv.org/pdf/2604.18547
+
 **Lee, J., Ma, V., Zhao, S., Nair, Y., Spector, A., Cohen, R., Candès, E. J. (2026).**
 arXiv:2604.18547 [stat.ML], v1, submitted 20 Apr 2026. Stanford University (Cohen: Google).
 Link: https://arxiv.org/abs/2604.18547 · Full text: https://arxiv.org/html/2604.18547 · Data: https://huggingface.co/FUSE-verifiers
 
 - **Cited in the proposal as [1].** Dr. Regev Cohen (our mentor) is a co-author.
-- **Read status:** the full HTML text was read by a subagent in two passes and summarised here. The numbers below were transcribed from that summary. The headline numbers for the Weaver benchmarks, HLE and IMO agree with the "FUSE paper" column of this repo's README (a check against an independent copy of the same tables). We have not read the PDF or the supplementary material.
+- **Read status:** the full HTML text was read by a subagent in two passes and summarised here. The numbers below were transcribed from that summary. The headline numbers for the Weaver benchmarks, HLE and IMO agree with the "FUSE paper" column of this repo's README (a check against an independent copy of the same tables). A copy of the PDF is kept in `pdf/` (the arXiv page states CC BY 4.0). The supplementary material was not read.
 - **No code released.** App. G: "We will open-source a detailed version of our experimental pipeline." Raw HLE and IMO verifier data are public.
 
 ## What it does

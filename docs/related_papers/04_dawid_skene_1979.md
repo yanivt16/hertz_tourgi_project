@@ -1,5 +1,7 @@
 # Maximum likelihood estimation of observer error-rates using the EM algorithm
 
+**Full text:** https://doi.org/10.2307/2346806 (paywalled at JSTOR; this DOI is from memory and could not be checked because the page sits behind an access challenge)
+
 **Dawid, A. P., Skene, A. M. (1979).** Journal of the Royal Statistical Society, Series C (Applied Statistics) 28(1), 20–28.
 
 - **Cited in the proposal as [3].**

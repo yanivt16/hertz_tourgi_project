@@ -1,5 +1,7 @@
 # Human uncertainty makes classification more robust (CIFAR-10H)
 
+**Full text:** https://arxiv.org/pdf/1908.07086
+
 **Peterson, J. C., Battleday, R. M., Griffiths, T. L., Russakovsky, O. (2019).** ICCV 2019. arXiv:1908.07086.
 Links: https://arxiv.org/abs/1908.07086 · Data: https://github.com/jcpeterson/cifar-10h
 
