@@ -17,6 +17,7 @@ their data, and this repo runs on it directly.
 | Extensions: verifier clustering and majority-vote verifier | Table: [results/VARIANTS.md](results/VARIANTS.md) · raw: [results/variants_sweep.json](results/variants_sweep.json), [results/variants.log](results/variants.log) · script: [scripts/run_variants.py](scripts/run_variants.py) · write-up: [Extensions](#extensions-beyond-the-paper-verifier-clustering-and-a-majority-vote-verifier) |
 | Label-free choice between those variants per setting | Table: [results/SELECTION.md](results/SELECTION.md) · raw: [results/selection.json](results/selection.json) · code: [src/fuse/selection.py](src/fuse/selection.py), [scripts/select_variants.py](scripts/select_variants.py) · write-up: [Choosing a variant](#choosing-a-variant-per-setting-without-labels) |
 | FUSE on DICES (human safety raters as verifiers) | Tables: [results/DICES.md](results/DICES.md) · raw: [results/dices350.json](results/dices350.json), [results/dices.log](results/dices.log) · code: [src/fuse/dices.py](src/fuse/dices.py), [scripts/run_dices.py](scripts/run_dices.py) · write-up: [DICES](#dices-human-safety-raters-as-verifiers) |
+| DICES error overlap: do the methods miss the same conversations? | Tables: [results/DICES_ERRORS.md](results/DICES_ERRORS.md) · raw (incl. the missed conversation ids): [results/dices350_errors.json](results/dices350_errors.json) · script: [scripts/dices_error_overlap.py](scripts/dices_error_overlap.py) |
 | DICES dataset explainer page | [claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD](https://claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD) (private until shared from the page's Share menu) |
 
 ## What FUSE does
@@ -243,6 +244,17 @@ including AUC and the oracle best single rater, are in [results/DICES.md](result
   not a robust improvement.
 - Logistic regression with 5–10% of labels (18–35 conversations) is no better than the
   label-free methods: 123 features is too many for that few labels.
+
+**The methods make the same mistakes** ([results/DICES_ERRORS.md](results/DICES_ERRORS.md),
+`scripts/dices_error_overlap.py`). On the 123-rater view, majority vote, the naive mean and
+both FUSE predictors agree on 99–100% of conversations. All six label-free methods rank the
+conversations almost identically (AUC 78–79) and differ mainly in how many they call unsafe.
+89 conversations are wrong under all six. 31 expert-unsafe conversations are missed by all
+nine methods, including the three that use labels: only 11–26% of raters flag them, and they
+cluster in gender/sexuality bias (10 of 22) and personal information (5 of 7). No subset of
+raters sees them. A rater's flag rate on them correlates 0.94 with the same rater's rate on
+expert-safe conversations, and raters flag them less often than expert-safe ones (17% vs 23%),
+in every demographic group. Better aggregation of these ratings cannot recover them.
 
 ## Choices the paper leaves open
 

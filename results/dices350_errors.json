@@ -1,0 +1,488 @@
+{
+  "performance": [
+    {
+      "method": "Majority vote",
+      "Accuracy": 65.1,
+      "AUC": 79.0,
+      "Predicted unsafe %": 22.6,
+      "Missed unsafe (FN)": 109,
+      "False alarm (FP)": 13
+    },
+    {
+      "method": "Naive ensemble (mean > 0)",
+      "Accuracy": 65.1,
+      "AUC": 79.0,
+      "Predicted unsafe %": 22.6,
+      "Missed unsafe (FN)": 109,
+      "False alarm (FP)": 13
+    },
+    {
+      "method": "Dawid-Skene",
+      "Accuracy": 68.6,
+      "AUC": 79.1,
+      "Predicted unsafe %": 33.4,
+      "Missed unsafe (FN)": 84,
+      "False alarm (FP)": 26
+    },
+    {
+      "method": "Jaffe et al. (2015), sign of the LLR",
+      "Accuracy": 62.3,
+      "AUC": 78.2,
+      "Predicted unsafe %": 15.1,
+      "Missed unsafe (FN)": 127,
+      "False alarm (FP)": 5
+    },
+    {
+      "method": "FUSE (logistic)",
+      "Accuracy": 65.1,
+      "AUC": 79.3,
+      "Predicted unsafe %": 22.6,
+      "Missed unsafe (FN)": 109,
+      "False alarm (FP)": 13
+    },
+    {
+      "method": "FUSE (posterior)",
+      "Accuracy": 65.1,
+      "AUC": 79.0,
+      "Predicted unsafe %": 22.6,
+      "Missed unsafe (FN)": 109,
+      "False alarm (FP)": 13
+    },
+    {
+      "method": "Best single rater (uses labels)",
+      "Accuracy": 68.0,
+      "AUC": 72.3,
+      "Predicted unsafe %": 37.4,
+      "Missed unsafe (FN)": 78,
+      "False alarm (FP)": 34
+    },
+    {
+      "method": "Logistic regression, 10% labels, cross-fitted (uses labels)",
+      "Accuracy": 72.9,
+      "AUC": 80.1,
+      "Predicted unsafe %": 46.9,
+      "Missed unsafe (FN)": 53,
+      "False alarm (FP)": 42
+    },
+    {
+      "method": "Crowd share, gold-tuned threshold (uses labels)",
+      "Accuracy": 72.0,
+      "AUC": 79.0,
+      "Predicted unsafe %": 55.1,
+      "Missed unsafe (FN)": 40,
+      "False alarm (FP)": 58
+    }
+  ],
+  "jaccard": {
+    "MV": {
+      "MV": 100,
+      "Naive": 100,
+      "DS": 72,
+      "Jaffe": 81,
+      "FUSE-L": 98,
+      "FUSE-P": 97,
+      "BestRater": 50,
+      "LR10": 44,
+      "CrowdOpt": 32
+    },
+    "Naive": {
+      "MV": 100,
+      "Naive": 100,
+      "DS": 72,
+      "Jaffe": 81,
+      "FUSE-L": 98,
+      "FUSE-P": 97,
+      "BestRater": 50,
+      "LR10": 44,
+      "CrowdOpt": 32
+    },
+    "DS": {
+      "MV": 72,
+      "Naive": 72,
+      "DS": 100,
+      "Jaffe": 58,
+      "FUSE-L": 72,
+      "FUSE-P": 72,
+      "BestRater": 53,
+      "LR10": 61,
+      "CrowdOpt": 46
+    },
+    "Jaffe": {
+      "MV": 81,
+      "Naive": 81,
+      "DS": 58,
+      "Jaffe": 100,
+      "FUSE-L": 81,
+      "FUSE-P": 81,
+      "BestRater": 45,
+      "LR10": 34,
+      "CrowdOpt": 24
+    },
+    "FUSE-L": {
+      "MV": 98,
+      "Naive": 98,
+      "DS": 72,
+      "Jaffe": 81,
+      "FUSE-L": 100,
+      "FUSE-P": 98,
+      "BestRater": 50,
+      "LR10": 44,
+      "CrowdOpt": 32
+    },
+    "FUSE-P": {
+      "MV": 97,
+      "Naive": 97,
+      "DS": 72,
+      "Jaffe": 81,
+      "FUSE-L": 98,
+      "FUSE-P": 100,
+      "BestRater": 49,
+      "LR10": 44,
+      "CrowdOpt": 32
+    },
+    "BestRater": {
+      "MV": 50,
+      "Naive": 50,
+      "DS": 53,
+      "Jaffe": 45,
+      "FUSE-L": 50,
+      "FUSE-P": 49,
+      "BestRater": 100,
+      "LR10": 42,
+      "CrowdOpt": 41
+    },
+    "LR10": {
+      "MV": 44,
+      "Naive": 44,
+      "DS": 61,
+      "Jaffe": 34,
+      "FUSE-L": 44,
+      "FUSE-P": 44,
+      "BestRater": 42,
+      "LR10": 100,
+      "CrowdOpt": 62
+    },
+    "CrowdOpt": {
+      "MV": 32,
+      "Naive": 32,
+      "DS": 46,
+      "Jaffe": 24,
+      "FUSE-L": 32,
+      "FUSE-P": 32,
+      "BestRater": 41,
+      "LR10": 62,
+      "CrowdOpt": 100
+    }
+  },
+  "agreement": {
+    "MV": {
+      "MV": 100,
+      "Naive": 100,
+      "DS": 89,
+      "Jaffe": 93,
+      "FUSE-L": 99,
+      "FUSE-P": 99,
+      "BestRater": 78,
+      "LR10": 76,
+      "CrowdOpt": 67
+    },
+    "Naive": {
+      "MV": 100,
+      "Naive": 100,
+      "DS": 89,
+      "Jaffe": 93,
+      "FUSE-L": 99,
+      "FUSE-P": 99,
+      "BestRater": 78,
+      "LR10": 76,
+      "CrowdOpt": 67
+    },
+    "DS": {
+      "MV": 89,
+      "Naive": 89,
+      "DS": 100,
+      "Jaffe": 82,
+      "FUSE-L": 89,
+      "FUSE-P": 89,
+      "BestRater": 81,
+      "LR10": 86,
+      "CrowdOpt": 78
+    },
+    "Jaffe": {
+      "MV": 93,
+      "Naive": 93,
+      "DS": 82,
+      "Jaffe": 100,
+      "FUSE-L": 93,
+      "FUSE-P": 93,
+      "BestRater": 74,
+      "LR10": 68,
+      "CrowdOpt": 60
+    },
+    "FUSE-L": {
+      "MV": 99,
+      "Naive": 99,
+      "DS": 89,
+      "Jaffe": 93,
+      "FUSE-L": 100,
+      "FUSE-P": 99,
+      "BestRater": 78,
+      "LR10": 76,
+      "CrowdOpt": 67
+    },
+    "FUSE-P": {
+      "MV": 99,
+      "Naive": 99,
+      "DS": 89,
+      "Jaffe": 93,
+      "FUSE-L": 99,
+      "FUSE-P": 100,
+      "BestRater": 77,
+      "LR10": 76,
+      "CrowdOpt": 67
+    },
+    "BestRater": {
+      "MV": 78,
+      "Naive": 78,
+      "DS": 81,
+      "Jaffe": 74,
+      "FUSE-L": 78,
+      "FUSE-P": 77,
+      "BestRater": 100,
+      "LR10": 76,
+      "CrowdOpt": 75
+    },
+    "LR10": {
+      "MV": 76,
+      "Naive": 76,
+      "DS": 86,
+      "Jaffe": 68,
+      "FUSE-L": 76,
+      "FUSE-P": 76,
+      "BestRater": 76,
+      "LR10": 100,
+      "CrowdOpt": 87
+    },
+    "CrowdOpt": {
+      "MV": 67,
+      "Naive": 67,
+      "DS": 78,
+      "Jaffe": 60,
+      "FUSE-L": 67,
+      "FUSE-P": 67,
+      "BestRater": 75,
+      "LR10": 87,
+      "CrowdOpt": 100
+    }
+  },
+  "methods_wrong_histogram": {
+    "0": 151,
+    "1": 35,
+    "2": 24,
+    "3": 14,
+    "4": 5,
+    "5": 19,
+    "6": 13,
+    "7": 28,
+    "8": 28,
+    "9": 33
+  },
+  "facts": {
+    "label_free_wrong_by_all_6": 89,
+    "label_free_right_by_all_6": 197,
+    "label_free_split": 64,
+    "wrong_by_all_9": 33,
+    "wrong_by_all_9_expert_unsafe": 31,
+    "hard_crowd_share_range": [
+      0.106,
+      0.26
+    ],
+    "other_expert_unsafe_mean_share": 0.515,
+    "expert_safe_all_methods_unsafe_shares": [
+      0.772,
+      0.654
+    ],
+    "corr_rater_rate_hard_vs_safe": 0.94,
+    "split_half_corr_hard": 0.85,
+    "raters_flag_hard_10pts_more_than_safe": 1,
+    "mean_rater_rate_hard": 17.2,
+    "mean_rater_rate_safe": 23.0
+  },
+  "by_reason": [
+    {
+      "reason": "Bias: inherited attributes",
+      "n": 47,
+      "missed": 7,
+      "share missed by all": "15%"
+    },
+    {
+      "reason": "Policy: polarizing topics",
+      "n": 27,
+      "missed": 3,
+      "share missed by all": "11%"
+    },
+    {
+      "reason": "Harmful advice",
+      "n": 25,
+      "missed": 0,
+      "share missed by all": "0%"
+    },
+    {
+      "reason": "Bias: gender and sexuality",
+      "n": 22,
+      "missed": 10,
+      "share missed by all": "45%"
+    },
+    {
+      "reason": "Dangerous content",
+      "n": 12,
+      "missed": 0,
+      "share missed by all": "0%"
+    },
+    {
+      "reason": "Misinformation",
+      "n": 11,
+      "missed": 0,
+      "share missed by all": "0%"
+    },
+    {
+      "reason": "Other",
+      "n": 10,
+      "missed": 2,
+      "share missed by all": "20%"
+    },
+    {
+      "reason": "Political affiliation",
+      "n": 9,
+      "missed": 1,
+      "share missed by all": "11%"
+    },
+    {
+      "reason": "Personal information",
+      "n": 7,
+      "missed": 5,
+      "share missed by all": "71%"
+    },
+    {
+      "reason": "Bias: status",
+      "n": 6,
+      "missed": 2,
+      "share missed by all": "33%"
+    }
+  ],
+  "strict_raters": [
+    {
+      "raters": 10,
+      "hard caught": "25/31",
+      "accuracy": 62.9,
+      "predicted unsafe %": 83.0
+    },
+    {
+      "raters": 20,
+      "hard caught": "13/31",
+      "accuracy": 67.7,
+      "predicted unsafe %": 69.0
+    },
+    {
+      "raters": 30,
+      "hard caught": "6/31",
+      "accuracy": 70.6,
+      "predicted unsafe %": 59.0
+    }
+  ],
+  "demographics": [
+    {
+      "attribute": "rater_gender",
+      "group": "Man",
+      "says unsafe on hard set %": 15.2,
+      "says unsafe on expert-safe %": 20.7
+    },
+    {
+      "attribute": "rater_gender",
+      "group": "Woman",
+      "says unsafe on hard set %": 19.1,
+      "says unsafe on expert-safe %": 25.2
+    },
+    {
+      "attribute": "rater_race",
+      "group": "Asian/Asian subcontinent",
+      "says unsafe on hard set %": 23.7,
+      "says unsafe on expert-safe %": 26.5
+    },
+    {
+      "attribute": "rater_race",
+      "group": "Black/African American",
+      "says unsafe on hard set %": 13.0,
+      "says unsafe on expert-safe %": 19.2
+    },
+    {
+      "attribute": "rater_race",
+      "group": "LatinX, Latino, Hispanic or Spanish Origin",
+      "says unsafe on hard set %": 16.0,
+      "says unsafe on expert-safe %": 24.6
+    },
+    {
+      "attribute": "rater_race",
+      "group": "Multiracial",
+      "says unsafe on hard set %": 24.0,
+      "says unsafe on expert-safe %": 27.7
+    },
+    {
+      "attribute": "rater_race",
+      "group": "White",
+      "says unsafe on hard set %": 12.9,
+      "says unsafe on expert-safe %": 19.8
+    },
+    {
+      "attribute": "rater_age",
+      "group": "gen x+",
+      "says unsafe on hard set %": 19.1,
+      "says unsafe on expert-safe %": 26.2
+    },
+    {
+      "attribute": "rater_age",
+      "group": "gen z",
+      "says unsafe on hard set %": 16.2,
+      "says unsafe on expert-safe %": 22.5
+    },
+    {
+      "attribute": "rater_age",
+      "group": "millenial",
+      "says unsafe on hard set %": 17.1,
+      "says unsafe on expert-safe %": 20.8
+    }
+  ],
+  "hard_item_ids": [
+    6,
+    19,
+    27,
+    28,
+    51,
+    66,
+    90,
+    96,
+    128,
+    149,
+    151,
+    157,
+    159,
+    180,
+    181,
+    184,
+    187,
+    188,
+    191,
+    193,
+    214,
+    218,
+    237,
+    270,
+    296,
+    307,
+    310,
+    313,
+    324,
+    344,
+    346
+  ]
+}
