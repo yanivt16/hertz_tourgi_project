@@ -174,6 +174,9 @@ accuracies were already known when it was designed. `scripts/select_variants.py`
 - **The MV test almost never passes** (at most 49% of IMO questions), so the selector never adds
   MV and gives up its IMO gain of 4–5 points.
 - Best in hindsight is 2–3 points above the selector, so most of the available gain is still unclaimed.
+- A natural next step is deciding per cluster rather than per setting: collapse only the blocks
+  whose own label share is low and keep the rest as separate verifiers. That is a new variant, not
+  in the grid, so it has not been evaluated.
 
 ## Choices the paper leaves open
 
