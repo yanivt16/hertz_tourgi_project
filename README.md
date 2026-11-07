@@ -8,6 +8,18 @@ The authors have not released code (the paper says the pipeline "will be open-so
 Everything here is built from the paper's equations and appendices. They did release
 their data, and this repo runs on it directly.
 
+## Deliverables
+
+| Deliverable | Where |
+|---|---|
+| FUSE implementation | [src/fuse/](src/fuse/) (usage under [Usage](#usage)), tests in [tests/test_fuse.py](tests/test_fuse.py) |
+| Paper reproduction, 12 Best-of-N settings | Table: [results/SUMMARY.md](results/SUMMARY.md) · every method per setting: [results/all_runs.log](results/all_runs.log) · raw numbers: `results/<setting>_<mode>_<predictor>.json` · script: [scripts/run_experiment.py](scripts/run_experiment.py) · write-up: [Results](#results) |
+| Extensions: verifier clustering and majority-vote verifier | Table: [results/VARIANTS.md](results/VARIANTS.md) · raw: [results/variants_sweep.json](results/variants_sweep.json), [results/variants.log](results/variants.log) · script: [scripts/run_variants.py](scripts/run_variants.py) · write-up: [Extensions](#extensions-beyond-the-paper-verifier-clustering-and-a-majority-vote-verifier) |
+| Label-free choice between those variants per setting | Table: [results/SELECTION.md](results/SELECTION.md) · raw: [results/selection.json](results/selection.json) · code: [src/fuse/selection.py](src/fuse/selection.py), [scripts/select_variants.py](scripts/select_variants.py) · write-up: [Choosing a variant](#choosing-a-variant-per-setting-without-labels) |
+| FUSE on DICES (human safety raters as verifiers) | Tables: [results/DICES.md](results/DICES.md) · raw: [results/dices350.json](results/dices350.json), [results/dices.log](results/dices.log) · code: [src/fuse/dices.py](src/fuse/dices.py), [scripts/run_dices.py](scripts/run_dices.py) · write-up: [DICES](#dices-human-safety-raters-as-verifiers) |
+| DICES error overlap: do the methods miss the same conversations? | Tables: [results/DICES_ERRORS.md](results/DICES_ERRORS.md) · raw (incl. the missed conversation ids): [results/dices350_errors.json](results/dices350_errors.json) · script: [scripts/dices_error_overlap.py](scripts/dices_error_overlap.py) |
+| DICES dataset explainer page | [claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD](https://claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD) (private until shared from the page's Share menu) |
+
 ## What FUSE does
 
 Given N candidate responses to a question and m imperfect verifiers (LLM judges, reward
@@ -140,6 +152,109 @@ The threshold 0.5 was fixed as the default before the grid ran.
   (64.7 → 66.3 over all 12 at threshold 0.5).
 
 The next step is therefore choosing between variants per setting without labels, not a new default.
+
+### Choosing a variant per setting without labels
+
+`fuse.selection.select_variant` picks base, cluster@t and/or the majority-vote column from the
+score matrices alone. FUSE's model says verifiers interact only through the latent label, so
+the correlation matrix is rank one off the diagonal. For each threshold t the selector fits
+that rank-one factor on **cross-cluster** entries only and measures the *label share*
+R_t = (within-cluster correlation predicted by the label) / (observed within-cluster correlation).
+A block whose members agree because they are right has R ≈ 1. A block that agrees for another
+reason has R ≈ 0. It clusters at the smallest t with R_t < 0.5. MV is added when its row of the
+correlation matrix fits the rank-one model at least as well as the median verifier. The rule was
+committed before it was run on real data, and its constants were not tuned. The per-setting
+accuracies were already known when it was designed. `scripts/select_variants.py` writes
+[results/SELECTION.md](results/SELECTION.md).
+
+| Mode | Predictor | base | selected | best in hindsight | selected − base, without math500-8b |
+|---|---|---:|---:|---:|---:|
+| query | logistic | 66.1 | 66.6 | 68.4 | −0.1 |
+| query | posterior | 66.4 | 66.1 | 68.1 | −0.2 |
+| batch | logistic | 64.7 | 66.3 | 69.1 | −0.0 |
+| batch | posterior | 67.4 | 68.2 | 70.2 | −0.4 |
+
+- **It separates the case it was built for.** GPQA-70B and GPQA-Diamond-70B get R = 0.59–0.85
+  and stay on base in every configuration, so they lose nothing. MATH500-8B gets R@0.3 = 0.37
+  (per question) and 0.05 (batched) and is clustered in every configuration: +20 and +15 points
+  batched, +6 per question with the logistic predictor, but −2.5 with the posterior predictor.
+- **It beats base on average in three of four configurations (+0.5 to +1.6), but only because of
+  MATH500-8B.** Without that setting it is slightly worse than base everywhere (−0.0 to −0.4).
+  The wrong calls are clustering HLE per question (−2), MMLU-8B per question with the posterior
+  predictor (−3.4) and the batched 70B MATH/MMLU-Pro sets (up to −2.7). It also misses the large
+  batched gains on MMLU-8B (R = 1.4–1.5) and MMLU-Pro-8B (R ≥ 0.65).
+- **The MV test almost never passes** (at most 49% of IMO questions), so the selector never adds
+  MV and gives up its IMO gain of 4–5 points.
+- Best in hindsight is 2–3 points above the selector, so most of the available gain is still unclaimed.
+- A natural next step is deciding per cluster rather than per setting: collapse only the blocks
+  whose own label share is low and keep the rest as separate verifiers. That is a new variant, not
+  in the grid, so it has not been evaluated.
+
+## DICES: human safety raters as verifiers
+
+[DICES](https://github.com/google-research-datasets/dices-dataset) (Aroyo et al., 2023)
+has 350 adversarial chatbot conversations, each rated by all 123 crowd raters for whether
+the final response is unsafe, plus an expert gold label (`safety_gold`, 175 unsafe / 175 safe).
+This is FUSE's setting with humans instead of reward models: conversations are items,
+raters are verifiers, the gold label is hidden. There is no Best-of-N, so FUSE runs once on
+the full 350 × m matrix and is scored as a binary classifier (threshold 0.5 on its output).
+DICES-990 has no gold label, so it cannot be scored.
+
+```bash
+.venv/bin/pip install -e ".[data]"
+.venv/bin/python scripts/run_dices.py      # ~1 min, writes results/DICES.md and results/dices350.json
+```
+
+Three views of the same ratings (`src/fuse/dices.py`): **per rater** (`Q_overall`
+Yes/Unsure/No → 1/0/−1), **per rater, granular** (number of the 17 specific harm reasons
+marked Yes), and **per demographic group** (share of the group's raters saying Yes).
+
+Accuracy (%) against the expert label; the last column is the paired difference from
+majority vote with a bootstrap 95% interval.
+
+| View | Majority vote | Dawid–Skene | FUSE logistic | FUSE posterior | FUSE − MV | Logistic, 10% labels | Crowd share, gold-tuned threshold |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 123 raters | 65.1 | 68.6 | 65.1 | 65.1 | +0.0 [−0.9, +0.9] | 67.6 | 72.0 |
+| 104 raters (DICES quality filter) | 66.0 | 69.4 | 66.6 | 66.3 | +0.6 [−0.9, +2.3] | 67.1 | 71.4 |
+| 123 raters, granular | 65.1 | 57.4 | **50.0** | **50.0** | −15.1 [−20.0, −10.6] | 67.6 | 72.0 |
+| same, `tci_standardize=True` | 65.1 | 57.4 | 64.9 | 65.4 | +0.3 [−0.6, +1.4] | 67.6 | 72.0 |
+| 10 race × gender groups | 65.1 | 68.0 | 70.0 | **70.9** | +5.7 [+0.6, +10.9] | 68.0 | 72.0 |
+| 30 race × gender × age groups | 65.1 | 66.3 | 64.0 | 64.0 | −1.1 [−2.6, +0.0] | 66.5 | 72.0 |
+
+AUC is 76–79 for every working method, including plain majority vote (79.0). Full tables,
+including AUC and the oracle best single rater, are in [results/DICES.md](results/DICES.md).
+
+- **The crowd caps every label-free method.** Even with the threshold tuned on the gold labels,
+  the share of raters saying "unsafe" reaches only 72.0%. Individual raters range from 46 to 72 AUC
+  (median 62). Crowd and experts disagree on what is unsafe: raters call 23–33% of
+  conversations unsafe, the experts 50%. A label-free method can only recover the crowd's
+  latent class, and FUSE estimates its prevalence at 0.33, which matches the crowd, not the experts.
+- **Per rater, FUSE reduces to majority vote** (identical predictions, ±0.9 CI). With 123
+  roughly exchangeable raters the posterior is dominated by the vote count. Dawid–Skene is
+  3.4 points better, only because it calls more conversations unsafe (33% vs 23%). FUSE's
+  drop-below-random step removed 1 rater, and only 1 of the 19 raters DICES removes for quality.
+- **Granular counts break FUSE** through the failure noted under "Things tried" above: the TCI search pushes
+  thresholds to near-constant splits, the moment estimate puts prevalence at 1.5%, and every
+  conversation is called safe. The scale-free statistic (`tci_standardize=True`) fixes it and
+  brings it back to majority vote.
+- **10 demographic groups is the only view where FUSE beats majority vote** (+5.7 points,
+  CI excludes 0), close to the 72.0 ceiling. Its prevalence estimate came out 0.48, so it
+  thresholds lower than majority vote does. With 30 finer groups the estimate falls back to
+  0.26 and the gain disappears, so treat the 10-group result as one favourable configuration,
+  not a robust improvement.
+- Logistic regression with 5–10% of labels (18–35 conversations) is no better than the
+  label-free methods: 123 features is too many for that few labels.
+
+**The methods make the same mistakes** ([results/DICES_ERRORS.md](results/DICES_ERRORS.md),
+`scripts/dices_error_overlap.py`). On the 123-rater view, majority vote, the naive mean and
+both FUSE predictors agree on 99–100% of conversations. All six label-free methods rank the
+conversations almost identically (AUC 78–79) and differ mainly in how many they call unsafe.
+89 conversations are wrong under all six. 31 expert-unsafe conversations are missed by all
+nine methods, including the three that use labels: only 11–26% of raters flag them, and they
+cluster in gender/sexuality bias (10 of 22) and personal information (5 of 7). No subset of
+raters sees them. A rater's flag rate on them correlates 0.94 with the same rater's rate on
+expert-safe conversations, and raters flag them less often than expert-safe ones (17% vs 23%),
+in every demographic group. Better aggregation of these ratings cannot recover them.
 
 ## Choices the paper leaves open
 

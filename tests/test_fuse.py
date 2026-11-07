@@ -179,3 +179,96 @@ def test_majority_vote_verifier_appends_answer_agreement():
     q = Query("q", np.zeros((4, 2)), np.array([1, 1, 0, 0], bool), answers=["a", "a", "b", None])
     out = with_majority_vote([q.scores], Benchmark("t", ["v1", "v2"], [q]))
     np.testing.assert_array_equal(out[0][:, -1], [2, 2, 1, -1])
+
+
+def _scores_with_block(n, rng, nuisance):
+    """Three conditionally independent verifiers plus a correlated block of four.
+
+    nuisance=True: the block shares a factor unrelated to correctness and barely sees the label.
+    nuisance=False: the block is correlated only because every member is accurate.
+    """
+    y = rng.random(n) < 0.5
+    s = np.where(y, 1.0, -1.0)
+    good = [0.8 * s + rng.normal(size=n) for _ in range(3)]
+    z = rng.normal(size=n)
+    if nuisance:
+        block = [0.1 * s + 1.5 * z + 0.5 * rng.normal(size=n) for _ in range(4)]
+    else:
+        block = [2.0 * s + rng.normal(size=n) for _ in range(4)]
+    return np.column_stack(good + block), y
+
+
+@pytest.mark.parametrize("nuisance", [True, False])
+def test_select_variant_collapses_nuisance_blocks_but_not_informative_ones(nuisance):
+    from fuse.selection import label_share, select_variant
+
+    rng = np.random.default_rng(7)
+    mats = [_scores_with_block(200, rng, nuisance)[0] for _ in range(20)]
+    sel = select_variant(mats)
+    if nuisance:
+        assert sel.cluster_threshold is not None
+        assert sel.variant.startswith("cluster@")
+        assert label_share(np.vstack(mats), 0.5) < 0.2
+    else:
+        assert sel.cluster_threshold is None
+        assert sel.variant == "base"
+        assert label_share(np.vstack(mats), 0.5) > 0.8
+
+
+def test_select_variant_adds_majority_vote_only_when_it_fits_the_label_model():
+    from fuse.selection import select_variant
+
+    rng = np.random.default_rng(8)
+    mats, informative, noise = [], [], []
+    for _ in range(20):
+        V, y = _scores_with_block(200, rng, nuisance=False)
+        mats.append(V)
+        informative.append(np.where(y, 1.0, -1.0) + 0.5 * rng.normal(size=len(y)))
+        noise.append(rng.normal(size=len(y)))
+    assert select_variant(mats, informative).majority_vote
+    assert not select_variant(mats, noise).majority_vote
+    assert select_variant(mats, informative).variant == "mv"
+
+
+def test_rank_one_fit_ignores_masked_entries():
+    from fuse.moments import rank_one_offdiagonal
+
+    u = np.array([0.9, 0.8, 0.7, 0.6, 0.5])
+    S = np.outer(u, u)
+    S[0, 1] = S[1, 0] = 0.99  # corrupted entry, excluded from the fit
+    observed = ~np.eye(5, dtype=bool)
+    observed[0, 1] = observed[1, 0] = False
+    np.testing.assert_allclose(np.abs(rank_one_offdiagonal(S, observed=observed)), u, atol=1e-6)
+
+
+
+def test_dices_build_and_dawid_skene_on_synthetic_ratings():
+    import pandas as pd
+
+    from fuse import dices
+
+    rng = np.random.default_rng(0)
+    n_items, n_raters = 120, 15
+    y = rng.random(n_items) < 0.5
+    rows = []
+    for i in range(n_items):
+        for r in range(n_raters):
+            if (i + r) % 4 == 0:  # some (item, rater) pairs are never rated
+                continue
+            unsafe = y[i] if rng.random() < 0.8 else not y[i]
+            rows.append({
+                "item_id": i, "rater_id": str(r), "rater_race": "A" if r % 2 else "B",
+                "rater_gender": "Man" if r % 3 else "Woman", "Q_overall": "Yes" if unsafe else "No",
+                "safety_gold": "Yes" if y[i] else "No",
+            })
+    df = pd.DataFrame(rows)
+    df.attrs["variant"] = "test"
+    m = dices.build(df, view="overall")
+    assert m.V.shape == (n_items, n_raters) and np.isnan(m.V).any()
+    assert set(np.unique(m.V[~np.isnan(m.V)])) == {-1.0, 1.0}
+    q = dices.dawid_skene(m.V)
+    assert ((q > 0.5) == y).mean() > 0.95
+    res = dices.evaluate(m, label_fracs=(0.1,), seeds=2)
+    assert res["methods"]["FUSE (logistic)"]["Accuracy"] > 90
+    g = dices.build(df, view="groups")
+    assert g.V.shape == (n_items, 4)
