@@ -20,6 +20,7 @@ their data, and this repo runs on it directly.
 | DICES error overlap: do the methods miss the same conversations? | Tables: [results/DICES_ERRORS.md](results/DICES_ERRORS.md) · raw (incl. the missed conversation ids): [results/dices350_errors.json](results/dices350_errors.json) · script: [scripts/dices_error_overlap.py](scripts/dices_error_overlap.py) |
 | LLM safety label for DICES: prompt development on DICES-350, held-out test, labels for all of DICES-990 | Write-up: [results/DICES_LLM_LABELS.md](results/DICES_LLM_LABELS.md) · labels and run metadata: [results/llm_labels/](results/llm_labels/) · prompts: [scripts/dices_prompts/](scripts/dices_prompts/) · script: [scripts/label_dices_llm.py](scripts/label_dices_llm.py) |
 | FUSE on DICES-990 against the LLM label (missing ratings) | Tables: [results/DICES990.md](results/DICES990.md) · raw: [results/dices990.json](results/dices990.json), [results/dices990.log](results/dices990.log) · script: [scripts/run_dices990.py](scripts/run_dices990.py) · write-up: [DICES-990](#dices-990-against-an-llm-safety-label) |
+| FUSE on DICES-990 block by block (conversations grouped by shared raters) | Tables: [results/DICES990_BLOCKS.md](results/DICES990_BLOCKS.md) · raw (incl. each conversation's block): [results/dices990_blocks.json](results/dices990_blocks.json) · script: [scripts/dices990_blocks.py](scripts/dices990_blocks.py) |
 | DICES dataset explainer page | [claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD](https://claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD) (private until shared from the page's Share menu) |
 
 ## What FUSE does
@@ -300,6 +301,28 @@ vote with a paired bootstrap 95% interval. Full tables: [results/DICES990.md](re
   4.0–4.9 against the experts and 2.6–2.9 against the LLM label), while every label-free method agrees
   more with the LLM label (77–81%) than with the experts (65–72%). The LLM label sits between
   the crowd and the experts.
+
+**Running FUSE block by block fixes the missing-data problem** ([results/DICES990_BLOCKS.md](results/DICES990_BLOCKS.md),
+`scripts/dices990_blocks.py`). DICES-990 was collected in batches, so conversations can be
+grouped by shared raters: average-linkage clustering of their rater sets (Jaccard) gives 5
+blocks of 159–330 conversations, the largest split in which every block keeps at least 100.
+In each block, 41–56 "core" raters rated at least 90% of its conversations, so the block's
+matrix is under 1% empty instead of 58%. Each block is fitted separately; every method in a
+block, majority vote included, sees the same raters; predictions are pooled over all 990.
+
+| Pooled over 990, agreement with the LLM label | Whole sparse matrix | Blocks, core raters | Blocks: − majority vote (95% CI) |
+|---|---:|---:|---|
+| Majority vote | 71.4 | 70.5 | |
+| Dawid–Skene | 77.5 | 76.3 | +5.8 [+2.8, +8.7] |
+| FUSE logistic | 71.0 | 74.4 | +3.9 [+2.1, +5.8] |
+| FUSE posterior | 70.9 | **75.6** | **+5.1 [+3.1, +7.1]** |
+
+- FUSE beats majority vote in all 5 blocks (+1.3 to +6.7; significant in 3) and is level with
+  Dawid–Skene (FUSE posterior − Dawid–Skene: −0.7 [−3.0, +1.5]), which was 6 points ahead on the
+  sparse matrix.
+- The number of blocks barely matters: with 3 or 4 blocks FUSE posterior gains +5.3 and +4.9.
+- Density is what helps, not the split: the same blocks with all their raters (21–37% empty
+  inside the block) give FUSE only +0.5 to +1.8.
 
 ## Choices the paper leaves open
 
