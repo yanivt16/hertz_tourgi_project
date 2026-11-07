@@ -33,14 +33,15 @@
 and Training on the Result\par}
 \vspace{0.4em}
 
-\textbf{Date:} November 2026 \qquad \textbf{Mentors:} TBD
+\textbf{Date:} November 2026 \qquad \textbf{Mentor:} Dr.\ Regev Cohen
 
 \section*{Background}
 
 Supervised models are only as good as their labels, and labels from a single expert are
 slow, costly, and still imperfect. A common alternative is to collect several cheaper
-annotations per item and combine them. Majority vote treats all annotators as equally
-reliable; Dawid--Skene \cite{ds} learns each annotator's reliability by EM but can be
+annotations per item and combine them. The standard
+default is naive majority vote, which treats all annotators as equally reliable; it is the
+baseline this project aims to beat. Dawid--Skene \cite{ds} learns each annotator's reliability by EM but can be
 unstable when each item has few annotations. FUSE (Fully Unsupervised Score Ensembling)
 \cite{fuse} takes a different route: it treats each annotator as a noisy binary classifier,
 estimates its sensitivity and specificity by the method of moments of Jaffe et
@@ -73,13 +74,16 @@ risk to be measured, not assumed.
 \node[st2] (S) at (3.2,-1.8) {Single annotator\\(random / best /\\expert)};
 \node[st2] (M2) at (9.6,-1.8) {Model trained on\\one expert};
 \node[st2] (T) at (13.4,-0.9) {Held-out test split,\\gold labels};
-\node[st1,dashed,text width=5.2cm] (G) at (6.4,1.75) {Stage 1: accuracy against gold, versus majority vote, Dawid--Skene, Jaffe};
+\node[st1,dashed,text width=3.1cm,minimum height=0.8cm] (MV) at (3.2,1.75) {Naive majority vote\\(standard practice)};
+\node[st1,dashed,text width=3.4cm] (G) at (7.2,1.75) {Stage 1: accuracy against gold; FUSE must beat majority vote};
 \draw[->] (A)--(F); \draw[->] (F)--(L); \draw[->] (L)--(M1);
 \draw[->] (A.south) |- (S.west);
 \draw[->] (S)--(M2);
 \draw[->] (M1.east)--++(0.35,0) |- ([yshift=0.12cm]T.west);
 \draw[->] (M2.east)--++(0.35,0) |- ([yshift=-0.12cm]T.west);
-\draw[->,dashed] (L)--(G);
+\draw[->,dashed] (A.north) |- (MV.west);
+\draw[->,dashed] (MV.east)--(G.west);
+\draw[->,dashed] (L.north)--(L.north |- G.south);
 \end{tikzpicture}
 \caption{Study design. Light grey boxes belong to Stage 1, dark grey to Stage 2. Stage 1
 asks whether FUSE's aggregated labels are closer to gold than those of standard
@@ -99,8 +103,8 @@ and used only for scoring.
 data needs: missing entries (pairwise-complete moments with a minimum-overlap rule),
 multi-class, and calibrated posteriors. Unit-test on simulated annotators with known
 $\psi_j,\eta_j$.
-\item \textbf{Aggregation benchmark} (mandatory). FUSE against majority vote, Dawid--Skene
-and Jaffe et al., on accuracy and log loss against gold. Annotations per item $k$ are
+\item \textbf{Aggregation benchmark} (mandatory). FUSE against naive majority vote (the
+standard practice and the main baseline to beat), Dawid--Skene and Jaffe et al., on accuracy and log loss against gold. Annotations per item $k$ are
 subsampled to trace accuracy as a function of annotation budget.
 \item \textbf{Stress tests} (secondary). Simulated and subsampled annotator groups with
 shared bias, spammers and adversarial minorities, to find where the method degrades, and
@@ -119,7 +123,7 @@ trained with identical architecture, optimiser and budget on labels from six arm
 \item a single annotator, in three versions: a random annotator; the best annotator chosen
 by gold agreement (an optimistic bound for ``one expert''); the dataset's own expert where
 one exists;
-\item majority vote;
+\item naive majority vote (the standard practice);
 \item Dawid--Skene;
 \item FUSE hard labels;
 \item FUSE soft labels;
