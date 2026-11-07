@@ -179,3 +179,35 @@ def test_majority_vote_verifier_appends_answer_agreement():
     q = Query("q", np.zeros((4, 2)), np.array([1, 1, 0, 0], bool), answers=["a", "a", "b", None])
     out = with_majority_vote([q.scores], Benchmark("t", ["v1", "v2"], [q]))
     np.testing.assert_array_equal(out[0][:, -1], [2, 2, 1, -1])
+
+
+def test_dices_build_and_dawid_skene_on_synthetic_ratings():
+    import pandas as pd
+
+    from fuse import dices
+
+    rng = np.random.default_rng(0)
+    n_items, n_raters = 120, 15
+    y = rng.random(n_items) < 0.5
+    rows = []
+    for i in range(n_items):
+        for r in range(n_raters):
+            if (i + r) % 4 == 0:  # some (item, rater) pairs are never rated
+                continue
+            unsafe = y[i] if rng.random() < 0.8 else not y[i]
+            rows.append({
+                "item_id": i, "rater_id": str(r), "rater_race": "A" if r % 2 else "B",
+                "rater_gender": "Man" if r % 3 else "Woman", "Q_overall": "Yes" if unsafe else "No",
+                "safety_gold": "Yes" if y[i] else "No",
+            })
+    df = pd.DataFrame(rows)
+    df.attrs["variant"] = "test"
+    m = dices.build(df, view="overall")
+    assert m.V.shape == (n_items, n_raters) and np.isnan(m.V).any()
+    assert set(np.unique(m.V[~np.isnan(m.V)])) == {-1.0, 1.0}
+    q = dices.dawid_skene(m.V)
+    assert ((q > 0.5) == y).mean() > 0.95
+    res = dices.evaluate(m, label_fracs=(0.1,), seeds=2)
+    assert res["methods"]["FUSE (logistic)"]["Accuracy"] > 90
+    g = dices.build(df, view="groups")
+    assert g.V.shape == (n_items, 4)

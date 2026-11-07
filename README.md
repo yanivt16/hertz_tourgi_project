@@ -141,6 +141,61 @@ The threshold 0.5 was fixed as the default before the grid ran.
 
 The next step is therefore choosing between variants per setting without labels, not a new default.
 
+## DICES: human safety raters as verifiers
+
+[DICES](https://github.com/google-research-datasets/dices-dataset) (Aroyo et al., 2023)
+has 350 adversarial chatbot conversations, each rated by all 123 crowd raters for whether
+the final response is unsafe, plus an expert gold label (`safety_gold`, 175 unsafe / 175 safe).
+This is FUSE's setting with humans instead of reward models: conversations are items,
+raters are verifiers, the gold label is hidden. There is no Best-of-N, so FUSE runs once on
+the full 350 × m matrix and is scored as a binary classifier (threshold 0.5 on its output).
+DICES-990 has no gold label, so it cannot be scored.
+
+```bash
+.venv/bin/pip install -e ".[data]"
+.venv/bin/python scripts/run_dices.py      # ~1 min, writes results/DICES.md and results/dices350.json
+```
+
+Three views of the same ratings (`src/fuse/dices.py`): **per rater** (`Q_overall`
+Yes/Unsure/No → 1/0/−1), **per rater, granular** (number of the 16 specific harm reasons
+marked Yes), and **per demographic group** (share of the group's raters saying Yes).
+
+Accuracy (%) against the expert label; the last column is the paired difference from
+majority vote with a bootstrap 95% interval.
+
+| View | Majority vote | Dawid–Skene | FUSE logistic | FUSE posterior | FUSE − MV | Logistic, 10% labels | Crowd share, gold-tuned threshold |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 123 raters | 65.1 | 68.6 | 65.1 | 65.1 | +0.0 [−0.9, +0.9] | 67.6 | 72.0 |
+| 104 raters (DICES quality filter) | 66.0 | 69.4 | 66.6 | 66.3 | +0.6 [−0.9, +2.3] | 67.1 | 71.4 |
+| 123 raters, granular | 65.1 | 57.4 | **50.0** | **50.0** | −15.1 [−20.0, −10.6] | 67.6 | 72.0 |
+| same, `tci_standardize=True` | 65.1 | 57.4 | 64.9 | 65.4 | +0.3 [−0.6, +1.4] | 67.6 | 72.0 |
+| 10 race × gender groups | 65.1 | 68.0 | 70.0 | **70.9** | +5.7 [+0.6, +10.9] | 68.0 | 72.0 |
+| 30 race × gender × age groups | 65.1 | 66.3 | 64.0 | 64.0 | −1.1 [−2.6, +0.0] | 66.5 | 72.0 |
+
+AUC is 76–79 for every working method, including plain majority vote (79.0). Full tables,
+including AUC and the oracle best single rater, are in [results/DICES.md](results/DICES.md).
+
+- **The crowd caps every label-free method.** Even with the threshold tuned on the gold labels,
+  the share of raters saying "unsafe" reaches only 72.0%. Individual raters range from 46 to 72 AUC
+  (median 62). Crowd and experts disagree on what is unsafe: raters call 23–33% of
+  conversations unsafe, the experts 50%. A label-free method can only recover the crowd's
+  latent class, and FUSE estimates its prevalence at 0.33, which matches the crowd, not the experts.
+- **Per rater, FUSE reduces to majority vote** (identical predictions, ±0.9 CI). With 123
+  roughly exchangeable raters the posterior is dominated by the vote count. Dawid–Skene is
+  3.4 points better, only because it calls more conversations unsafe (33% vs 23%). FUSE's
+  drop-below-random step removed 1 rater, and only 1 of the 19 raters DICES removes for quality.
+- **Granular counts break FUSE** through the failure noted under "Things tried" above: the TCI search pushes
+  thresholds to near-constant splits, the moment estimate puts prevalence at 1.5%, and every
+  conversation is called safe. The scale-free statistic (`tci_standardize=True`) fixes it and
+  brings it back to majority vote.
+- **10 demographic groups is the only view where FUSE beats majority vote** (+5.7 points,
+  CI excludes 0), close to the 72.0 ceiling. Its prevalence estimate came out 0.48, so it
+  thresholds lower than majority vote does. With 30 finer groups the estimate falls back to
+  0.26 and the gain disappears, so treat the 10-group result as one favourable configuration,
+  not a robust improvement.
+- Logistic regression with 5–10% of labels (18–35 conversations) is no better than the
+  label-free methods: 123 features is too many for that few labels.
+
 ## Choices the paper leaves open
 
 These are the likely sources of the remaining gaps, and each is configurable on `FUSE`:
