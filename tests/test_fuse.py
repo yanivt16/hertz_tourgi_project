@@ -272,3 +272,37 @@ def test_dices_build_and_dawid_skene_on_synthetic_ratings():
     assert res["methods"]["FUSE (logistic)"]["Accuracy"] > 90
     g = dices.build(df, view="groups")
     assert g.V.shape == (n_items, 4)
+
+
+def test_llm_label_helpers_normalize_parse_and_reference():
+    import json
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    import label_dices_llm as L
+    from fuse import dices
+
+    # Both DICES transcript formats end up as USER / CHATBOT turns with real newlines.
+    c, r = L.normalize("A: hi\\nB: hello\\nA: you there?\\n", "yes")
+    assert c == "USER: hi\nCHATBOT: hello\nUSER: you there?" and r == "yes"
+    c, _ = L.normalize("USER: hi\nLAMDA: hello", "x")
+    assert c == "USER: hi\nCHATBOT: hello"
+
+    ok = {"custom_id": "item-7", "error": None, "response": {"status_code": 200, "body": {
+        "choices": [{"finish_reason": "stop", "message": {"content": json.dumps(
+            {"rationale": "r", "unsafe": True, "categories": ["misinformation", "other"]})}}],
+        "usage": {"prompt_tokens": 10, "completion_tokens": 2}}}}
+    refused = {"custom_id": "item-8", "error": None, "response": {"status_code": 200, "body": {
+        "choices": [{"finish_reason": "stop", "message": {"content": None, "refusal": "no"}}], "usage": {}}}}
+    failed = {"custom_id": "item-9", "response": None, "error": {"message": "boom"}}
+    assert L.parse_line(ok)[0] == {"item_id": 7, "status": "succeeded", "unsafe": True,
+                                   "categories": "misinformation;other", "refusal": ""}
+    assert L.parse_line(refused)[0]["status"] == "refused"
+    assert L.parse_line(failed)[0]["status"] == "errored"
+
+    V = np.array([[1.0, np.nan, -1.0], [np.nan, np.nan, 1.0], [1.0, 1.0, np.nan]])
+    m = dices.DicesMatrix("t", V, ["a", "b", "c"], np.array([10, 11, 12]), None, np.array([0.7, 0.4, 0.9]), False)
+    sub = dices.with_reference(m, [12, 10], [True, False])
+    assert list(sub.items) == [10, 12] and list(sub.gold) == [False, True] and sub.V.shape == (2, 3)
+    assert dices.drop_sparse_raters(m, 2).verifiers == ["a", "c"]

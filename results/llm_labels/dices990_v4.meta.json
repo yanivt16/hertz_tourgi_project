@@ -1,0 +1,27 @@
+{
+  "batch_id": null,
+  "mode": "direct (standard price)",
+  "split": "990",
+  "subset": "all",
+  "offset": 0,
+  "n": 990,
+  "model": "gpt-6.1-terra",
+  "prompt": "v4",
+  "reasoning_effort": "low",
+  "created": "2026-11-07 22:23:29",
+  "direct_requests": 990,
+  "usage": {
+    "prompt_tokens": 2441462,
+    "completion_tokens": 85838,
+    "reasoning_tokens": 40914,
+    "cached_tokens": 2313927
+  },
+  "status_counts": {
+    "succeeded": 990
+  },
+  "cost_usd": 2.8707,
+  "prices_per_mtok": {
+    "input": 1.0,
+    "output": 5.0
+  }
+}

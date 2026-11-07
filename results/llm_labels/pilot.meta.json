@@ -1,0 +1,23 @@
+{
+  "batch_id": "batch_6aef7d4d10388190b86010460fae8a34",
+  "split": "350",
+  "subset": "dev",
+  "n": 20,
+  "model": "gpt-6.1-terra",
+  "reasoning_effort": "low",
+  "created": "2026-11-07 21:34:37",
+  "usage": {
+    "prompt_tokens": 15775,
+    "completion_tokens": 1245,
+    "reasoning_tokens": 421,
+    "cached_tokens": 0
+  },
+  "status_counts": {
+    "succeeded": 20
+  },
+  "cost_usd": 0.011,
+  "prices_per_mtok": {
+    "input": 0.5,
+    "output": 2.5
+  }
+}

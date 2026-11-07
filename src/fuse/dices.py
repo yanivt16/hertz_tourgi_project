@@ -88,11 +88,24 @@ def _granular_columns(df) -> list[str]:
     ]
 
 
-def build(df, view: str = "overall", drop_removed: bool = False, groups=("rater_race", "rater_gender")) -> DicesMatrix:
+def build(
+    df,
+    view: str = "overall",
+    drop_removed: bool = False,
+    groups=("rater_race", "rater_gender"),
+    min_group_raters: int | None = None,
+) -> DicesMatrix:
+    """`min_group_raters` (groups view only) drops raters whose demographic group has fewer
+    raters than this; DICES-990 has single-rater groups that would otherwise be one sparse
+    verifier each."""
     variant = df.attrs.get("variant", "350")
     if drop_removed:
         df = df[~df.rater_id.isin(REMOVED_RATERS.get(variant, []))]
     df = df.copy()
+    if view == "groups" and min_group_raters:
+        key = df[list(groups)].astype(str).agg("/".join, axis=1)
+        size = df.assign(_g=key).groupby("_g").rater_id.nunique()
+        df = df[key.map(size).to_numpy() >= min_group_raters]
     df["_yes"] = df.Q_overall.map({"Yes": 1.0, "Unsure": 0.5, "No": 0.0})
     items = np.sort(df.item_id.unique())
     majority = df.groupby("item_id")["_yes"].mean().reindex(items).to_numpy()
@@ -128,6 +141,35 @@ def build(df, view: str = "overall", drop_removed: bool = False, groups=("rater_
         gold=gold,
         majority=majority,
         rescale=rescale,
+    )
+
+
+def with_reference(m: DicesMatrix, item_ids, labels, name: str | None = None) -> DicesMatrix:
+    """Restrict a matrix to the items that have a reference label and attach that label as
+    `gold` (e.g. an LLM label on DICES-990, which has no expert verdict)."""
+    ref = dict(zip(item_ids, labels))
+    keep = np.array([i in ref for i in m.items])
+    return DicesMatrix(
+        name=name or m.name,
+        V=m.V[keep],
+        verifiers=m.verifiers,
+        items=m.items[keep],
+        gold=np.array([bool(ref[i]) for i in m.items[keep]]),
+        majority=m.majority[keep],
+        rescale=m.rescale,
+    )
+
+
+def drop_sparse_raters(m: DicesMatrix, min_items: int) -> DicesMatrix:
+    keep = (~np.isnan(m.V)).sum(0) >= min_items
+    return DicesMatrix(
+        name=f"{m.name}-min{min_items}",
+        V=m.V[:, keep],
+        verifiers=[v for v, k in zip(m.verifiers, keep) if k],
+        items=m.items,
+        gold=m.gold,
+        majority=m.majority,
+        rescale=m.rescale,
     )
 
 
