@@ -1,5 +1,7 @@
 # Shrinking the generation-verification gap with weak verifiers (Weaver)
 
+**Full text:** https://arxiv.org/pdf/2506.18203
+
 **Saad-Falcon, J., Buchanan, E. K., Chen, M. F., Huang, T., McLaughlin, B., Bhathal, T., Zhu, S., Athiwaratkun, B., Sala, F., Linderman, S., Mirhoseini, A., Ré, C., et al. (2025).** arXiv:2506.18203.
 Link: https://arxiv.org/abs/2506.18203 · Code: https://github.com/HazyResearch/scaling-verification
 

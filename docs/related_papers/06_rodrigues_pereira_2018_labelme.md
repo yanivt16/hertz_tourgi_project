@@ -1,5 +1,7 @@
 # Deep learning from crowds (LabelMe crowd dataset)
 
+**Full text:** https://arxiv.org/pdf/1709.01779
+
 **Rodrigues, F., Pereira, F. C. (2018).** AAAI 2018. arXiv:1709.01779 (v2, 25 Dec 2017).
 Links: https://arxiv.org/abs/1709.01779 · Code and data: http://www.fprodrigues.com/ , https://fprodrigues.com/software/crowdlayer/
 
