@@ -18,6 +18,8 @@ their data, and this repo runs on it directly.
 | Label-free choice between those variants per setting | Table: [results/SELECTION.md](results/SELECTION.md) · raw: [results/selection.json](results/selection.json) · code: [src/fuse/selection.py](src/fuse/selection.py), [scripts/select_variants.py](scripts/select_variants.py) · write-up: [Choosing a variant](#choosing-a-variant-per-setting-without-labels) |
 | FUSE on DICES (human safety raters as verifiers) | Tables: [results/DICES.md](results/DICES.md) · raw: [results/dices350.json](results/dices350.json), [results/dices.log](results/dices.log) · code: [src/fuse/dices.py](src/fuse/dices.py), [scripts/run_dices.py](scripts/run_dices.py) · write-up: [DICES](#dices-human-safety-raters-as-verifiers) |
 | DICES error overlap: do the methods miss the same conversations? | Tables: [results/DICES_ERRORS.md](results/DICES_ERRORS.md) · raw (incl. the missed conversation ids): [results/dices350_errors.json](results/dices350_errors.json) · script: [scripts/dices_error_overlap.py](scripts/dices_error_overlap.py) |
+| LLM safety label for DICES: prompt development on DICES-350, held-out test, labels for all of DICES-990 | Write-up: [results/DICES_LLM_LABELS.md](results/DICES_LLM_LABELS.md) · labels and run metadata: [results/llm_labels/](results/llm_labels/) · prompts: [scripts/dices_prompts/](scripts/dices_prompts/) · script: [scripts/label_dices_llm.py](scripts/label_dices_llm.py) |
+| FUSE on DICES-990 against the LLM label (missing ratings) | Tables: [results/DICES990.md](results/DICES990.md) · raw: [results/dices990.json](results/dices990.json), [results/dices990.log](results/dices990.log) · script: [scripts/run_dices990.py](scripts/run_dices990.py) · write-up: [DICES-990](#dices-990-against-an-llm-safety-label) |
 | DICES dataset explainer page | [claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD](https://claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD) (private until shared from the page's Share menu) |
 
 ## What FUSE does
@@ -198,7 +200,8 @@ the final response is unsafe, plus an expert gold label (`safety_gold`, 175 unsa
 This is FUSE's setting with humans instead of reward models: conversations are items,
 raters are verifiers, the gold label is hidden. There is no Best-of-N, so FUSE runs once on
 the full 350 × m matrix and is scored as a binary classifier (threshold 0.5 on its output).
-DICES-990 has no gold label, so it cannot be scored.
+DICES-990 has no gold label; it is scored against an LLM label instead (see
+[DICES-990 against an LLM safety label](#dices-990-against-an-llm-safety-label) below).
 
 ```bash
 .venv/bin/pip install -e ".[data]"
@@ -255,6 +258,48 @@ cluster in gender/sexuality bias (10 of 22) and personal information (5 of 7). N
 raters sees them. A rater's flag rate on them correlates 0.94 with the same rater's rate on
 expert-safe conversations, and raters flag them less often than expert-safe ones (17% vs 23%),
 in every demographic group. Better aggregation of these ratings cannot recover them.
+
+### DICES-990 against an LLM safety label
+
+DICES-990 (990 conversations, 172 raters, 58% of the rater × conversation matrix empty) has no
+expert verdict. We labelled it with `gpt-6.1-terra` and a written safety policy, after
+developing the policy on half of DICES-350 and checking it once on the other half
+([results/DICES_LLM_LABELS.md](results/DICES_LLM_LABELS.md)). The final prompt (v4) agrees with
+the DICES-350 experts on **69.9%** of the 176 held-out conversations, against 65.3% for the
+crowd majority (+4.5, 95% interval −2.8 to +11.9). It calls 40.8% of DICES-990 unsafe, the
+crowd majority 15.7%.
+
+```bash
+.venv/bin/pip install -e ".[data,llm]"     # OPENAI_API_KEY in an untracked .env
+.venv/bin/python scripts/label_dices_llm.py run --split 990 --prompt v4 --name dices990_v4 --direct
+.venv/bin/python scripts/run_dices990.py --labels dices990_v4 --labels350 dev_v4 test_v4
+```
+
+Agreement (%) with the LLM label on DICES-990; the last column is FUSE (logistic) minus majority
+vote with a paired bootstrap 95% interval. Full tables: [results/DICES990.md](results/DICES990.md).
+
+| Verifiers | Missing | Majority vote | Dawid–Skene | FUSE logistic | FUSE posterior | FUSE − MV | Crowd share, threshold tuned on the label |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 172 raters, missing imputed as 0 | 58% | 71.4 | **77.5** | 71.0 | 70.9 | −0.4 [−2.1, +1.4] | 77.6 |
+| 157 raters with ≥ 50 ratings | 54% | 71.4 | **77.6** | 71.5 | 71.3 | +0.1 [−1.7, +1.9] | 77.6 |
+| 4 locale × gender groups | 0% | 71.7 | 74.3 | 73.0 | 72.4 | +1.3 [−2.5, +5.1] | 77.6 |
+| 6 locale × age groups | 0% | 71.4 | 74.8 | 74.5 | 73.3 | +3.1 [−0.5, +6.9] | 77.6 |
+| 7 locale × race groups | 0% | 71.4 | 74.0 | **77.5** | 74.9 | **+6.1 [+2.9, +9.2]** | 77.6 |
+
+- **On sparse individual raters FUSE is majority vote again**, and imputing the 58% missing
+  ratings as 0 does not help it: its prevalence estimate (17%) follows the crowd. Dawid–Skene,
+  which skips missing ratings instead of imputing them, gains 6 points. Missing data is where
+  FUSE needs the pairwise-complete moments planned in the proposal.
+- **On demographic groups, which have no missing entries, FUSE beats majority vote**, most on
+  locale × race (+6.1, CI excludes 0), where it reaches the label-tuned crowd threshold (77.6).
+  This repeats the DICES-350 pattern: FUSE helps with a few aggregated verifiers and does
+  nothing with many interchangeable raters.
+- **The LLM label shifts the level, not the ranking.** On DICES-350 the same runs scored
+  against the experts and against the LLM label order the methods the same way (per rater
+  FUSE = majority vote under both; on race × gender groups FUSE ahead of majority vote by
+  4.0–4.9 against the experts and 2.6–2.9 against the LLM label), while every label-free method agrees
+  more with the LLM label (77–81%) than with the experts (65–72%). The LLM label sits between
+  the crowd and the experts.
 
 ## Choices the paper leaves open
 
