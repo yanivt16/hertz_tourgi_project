@@ -157,7 +157,7 @@ DICES-990 has no gold label, so it cannot be scored.
 ```
 
 Three views of the same ratings (`src/fuse/dices.py`): **per rater** (`Q_overall`
-Yes/Unsure/No → 1/0/−1), **per rater, granular** (number of the 16 specific harm reasons
+Yes/Unsure/No → 1/0/−1), **per rater, granular** (number of the 17 specific harm reasons
 marked Yes), and **per demographic group** (share of the group's raters saying Yes).
 
 Accuracy (%) against the expert label; the last column is the paired difference from
