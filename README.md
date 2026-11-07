@@ -21,6 +21,7 @@ their data, and this repo runs on it directly.
 | LLM safety label for DICES: prompt development on DICES-350, held-out test, labels for all of DICES-990 | Write-up: [results/DICES_LLM_LABELS.md](results/DICES_LLM_LABELS.md) · labels and run metadata: [results/llm_labels/](results/llm_labels/) · prompts: [scripts/dices_prompts/](scripts/dices_prompts/) · script: [scripts/label_dices_llm.py](scripts/label_dices_llm.py) |
 | FUSE on DICES-990 against the LLM label (missing ratings) | Tables: [results/DICES990.md](results/DICES990.md) · raw: [results/dices990.json](results/dices990.json), [results/dices990.log](results/dices990.log) · script: [scripts/run_dices990.py](scripts/run_dices990.py) · write-up: [DICES-990](#dices-990-against-an-llm-safety-label) |
 | FUSE on DICES-990 block by block (conversations grouped by shared raters) | Tables: [results/DICES990_BLOCKS.md](results/DICES990_BLOCKS.md) · raw (incl. each conversation's block): [results/dices990_blocks.json](results/dices990_blocks.json) · script: [scripts/dices990_blocks.py](scripts/dices990_blocks.py) |
+| Daily summary of the human-annotator work (7 Nov 2026): DICES, LLM label, block-by-block FUSE, scope decision, advisor message | [docs/daily_summaries/2026-11-07.md](docs/daily_summaries/2026-11-07.md) |
 | DICES dataset explainer page | [claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD](https://claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD) (private until shared from the page's Share menu) |
 
 ## What FUSE does
