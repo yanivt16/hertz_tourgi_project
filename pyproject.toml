@@ -14,7 +14,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-data = ["huggingface_hub>=0.23", "fsspec", "pyarrow>=15"]
+data = ["huggingface_hub>=0.23", "fsspec", "pyarrow>=15", "pandas>=2"]
 dev = ["pytest>=8"]
 
 [tool.setuptools.packages.find]
