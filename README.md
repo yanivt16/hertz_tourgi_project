@@ -8,6 +8,16 @@ The authors have not released code (the paper says the pipeline "will be open-so
 Everything here is built from the paper's equations and appendices. They did release
 their data, and this repo runs on it directly.
 
+## Deliverables
+
+| Deliverable | Where |
+|---|---|
+| FUSE implementation | [src/fuse/](src/fuse/) (usage under [Usage](#usage)), tests in [tests/test_fuse.py](tests/test_fuse.py) |
+| Paper reproduction, 12 Best-of-N settings | Table: [results/SUMMARY.md](results/SUMMARY.md) · every method per setting: [results/all_runs.log](results/all_runs.log) · raw numbers: `results/<setting>_<mode>_<predictor>.json` · script: [scripts/run_experiment.py](scripts/run_experiment.py) · write-up: [Results](#results) |
+| Extensions: verifier clustering and majority-vote verifier | Table: [results/VARIANTS.md](results/VARIANTS.md) · raw: [results/variants_sweep.json](results/variants_sweep.json), [results/variants.log](results/variants.log) · script: [scripts/run_variants.py](scripts/run_variants.py) · write-up: [Extensions](#extensions-beyond-the-paper-verifier-clustering-and-a-majority-vote-verifier) |
+| FUSE on DICES (human safety raters as verifiers) | Tables: [results/DICES.md](results/DICES.md) · raw: [results/dices350.json](results/dices350.json), [results/dices.log](results/dices.log) · code: [src/fuse/dices.py](src/fuse/dices.py), [scripts/run_dices.py](scripts/run_dices.py) · write-up: [DICES](#dices-human-safety-raters-as-verifiers) |
+| DICES dataset explainer page | [claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD](https://claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD) (private until shared from the page's Share menu) |
+
 ## What FUSE does
 
 Given N candidate responses to a question and m imperfect verifiers (LLM judges, reward
