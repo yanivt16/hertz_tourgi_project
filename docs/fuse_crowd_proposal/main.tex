@@ -4,6 +4,9 @@
 \usepackage{fancyhdr}
 \usepackage{enumitem}
 \usepackage{titlesec}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{float}
 \usepackage[hidelinks]{hyperref}
 
 % Edit these two macros to match the program's header.
@@ -26,8 +29,8 @@
 
 {\Large\bfseries \proposalname\par}
 \vspace{0.1em}
-{\large\bfseries Label-Free Aggregation of Human Annotators with FUSE, and Training on the
-Result\par}
+{\large\bfseries Label-Free Aggregation of Human Annotators with FUSE,\\
+and Training on the Result\par}
 \vspace{0.4em}
 
 \textbf{Date:} November 2026 \qquad \textbf{Mentors:} TBD
@@ -58,6 +61,32 @@ annotator's label on every training item. Human annotators may violate condition
 independence, since they share guidelines, biases and class priors, so independence is a
 risk to be measured, not assumed.
 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[font=\footnotesize,>=Stealth,
+ box/.style={draw,rounded corners=2pt,align=center,text width=2.4cm,minimum height=1cm,inner sep=3pt},
+ st1/.style={box,fill=black!6},st2/.style={box,fill=black!14}]
+\node[st1] (A) at (0,0) {Items with sparse human annotations $A_{ij}$};
+\node[st1] (F) at (3.2,0) {\textbf{FUSE}\\moments $\to\psi_j,\eta_j$\\posterior $p_i$};
+\node[st1] (L) at (6.4,0) {Aggregated labels\\(hard / soft)};
+\node[st2] (M1) at (9.6,0) {Model trained on FUSE labels};
+\node[st2] (S) at (3.2,-1.8) {Single annotator\\(random / best /\\expert)};
+\node[st2] (M2) at (9.6,-1.8) {Model trained on\\one expert};
+\node[st2] (T) at (13.4,-0.9) {Held-out test split,\\gold labels};
+\node[st1,dashed,text width=5.2cm] (G) at (6.4,1.75) {Stage 1: accuracy against gold, versus majority vote, Dawid--Skene, Jaffe};
+\draw[->] (A)--(F); \draw[->] (F)--(L); \draw[->] (L)--(M1);
+\draw[->] (A.south) |- (S.west);
+\draw[->] (S)--(M2);
+\draw[->] (M1.east)--++(0.35,0) |- ([yshift=0.12cm]T.west);
+\draw[->] (M2.east)--++(0.35,0) |- ([yshift=-0.12cm]T.west);
+\draw[->,dashed] (L)--(G);
+\end{tikzpicture}
+\caption{Study design. Light grey boxes belong to Stage 1, dark grey to Stage 2. Stage 1
+asks whether FUSE's aggregated labels are closer to gold than those of standard
+aggregators; Stage 2 compares a model trained on those labels with one trained on a single
+annotator's labels, on a test split no aggregator touched.}
+\end{figure}
+
 \textbf{Stage 1 (until the midterm presentation): does FUSE improve the aggregation
 decision on human labels?}
 \begin{enumerate}[label=\alph*)]
@@ -85,16 +114,23 @@ in regime X'' is a valid outcome, and Stage 2 then uses the best aggregator foun
 
 \textbf{Stage 2: does a model trained on FUSE labels beat one trained on a single
 expert?} A classifier (small CNN on image sets; pretrained encoder on a text set) is
-trained with identical architecture, optimiser and budget on labels from: (1) a single
-annotator, in three versions (a random annotator; the best annotator chosen by gold
-agreement, an optimistic bound for ``one expert''; the dataset's own expert where one
-exists); (2) majority vote; (3) Dawid--Skene; (4) FUSE hard labels; (5) FUSE soft labels;
-(6) gold labels as the ceiling. Each is scored on a held-out gold-labelled test split no
-aggregator touched, by accuracy, log loss and calibration error over at least five seeds.
-Because several crowd labels cost more than one, the comparison is also made at equal
-annotation cost over a range of assumed expert-to-crowd price ratios, and the ratio where
-the advantage disappears is reported. \emph{Extension (gated on a Stage 2 gain):} feed the
-trained model back into FUSE as one more annotator.
+trained with identical architecture, optimiser and budget on labels from six arms:
+\begin{enumerate}[label=(\arabic*),itemsep=0pt,parsep=0pt,topsep=0.1em]
+\item a single annotator, in three versions: a random annotator; the best annotator chosen
+by gold agreement (an optimistic bound for ``one expert''); the dataset's own expert where
+one exists;
+\item majority vote;
+\item Dawid--Skene;
+\item FUSE hard labels;
+\item FUSE soft labels;
+\item gold labels, as the ceiling.
+\end{enumerate}
+Each arm is scored on a held-out gold-labelled test split no aggregator touched, by
+accuracy, log loss and calibration error over at least five seeds. Because several crowd
+labels cost more than one, the comparison is also made at equal annotation cost over a
+range of assumed expert-to-crowd price ratios, and the ratio where the advantage
+disappears is reported. \emph{Extension (gated on a Stage 2 gain):} feed the trained model
+back into FUSE as one more annotator.
 
 \textbf{Evaluation discipline.} \emph{Leakage:} gold enters only in scoring, and
 hyperparameters are tuned on the single-annotator arm so FUSE is never the favoured arm.
