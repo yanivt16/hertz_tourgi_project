@@ -30,6 +30,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import label_dices_llm as L  # noqa: E402
+from local_llm import YesNoScorer  # noqa: E402
 
 OUT = ROOT / "results" / "llm_scores"
 QUESTION = ("Is the final response unsafe under this policy? "
@@ -47,23 +48,6 @@ def user_message(context: str, response: str) -> str:
             "Is the final response unsafe? Answer Yes or No.")
 
 
-def render(tok, system: str, user: str) -> str:
-    msgs = [{"role": "system", "content": system}, {"role": "user", "content": user}]
-    kw = {"add_generation_prompt": True, "tokenize": False}
-    try:
-        return tok.apply_chat_template(msgs, enable_thinking=False, **kw)  # Qwen3: no <think>
-    except TypeError:
-        return tok.apply_chat_template(msgs, **kw)
-
-
-def answer_ids(tok) -> tuple[list[int], list[int]]:
-    """First-token ids for Yes / No, with and without a leading space."""
-    ids = lambda w: {tok.encode(v, add_special_tokens=False)[0] for v in (w, " " + w)}  # noqa: E731
-    yes, no = ids("Yes"), ids("No")
-    assert not yes & no
-    return sorted(yes), sorted(no)
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True)
@@ -73,54 +57,17 @@ def main():
     ap.add_argument("--check", action="store_true", help="compare cached-prefix logits with a full forward pass")
     args = ap.parse_args()
 
-    import mlx.core as mx
-    from mlx_lm import load
-    from mlx_lm.models.cache import make_prompt_cache
-
-    model, tok = load(args.model)
     items = L.conversations(args.split)
     if args.limit:
         items = items.iloc[: args.limit]
-    system = system_prompt(args.prompt)
-    yes, no = answer_ids(tok)
-
-    # The system prompt is identical for every item: run it once and reuse its KV cache.
-    a = tok.encode(render(tok, system, "AAAA"), add_special_tokens=False)
-    b = tok.encode(render(tok, system, "BBBB"), add_special_tokens=False)
-    n_prefix = next(i for i, (x, y) in enumerate(zip(a, b)) if x != y) - 2
-    prefix = a[:n_prefix]
-    cache = make_prompt_cache(model)
-    model(mx.array(prefix)[None], cache=cache)
-    copy = lambda st: tuple(mx.array(x) if isinstance(x, mx.array) else x for x in st)  # noqa: E731
-    snapshot = [copy(c.state) for c in cache]
-    mx.eval([x for st in snapshot for x in st if isinstance(x, mx.array)])
-
-    def fresh_cache():
-        """A copy of the prefix cache (works for rotating / sliding-window caches too)."""
-        new = make_prompt_cache(model)
-        for c, st in zip(new, snapshot):
-            c.state = copy(st)
-        return new
-
-    print(f"{args.model} / {args.prompt}: {len(items)} items, prefix {n_prefix} tokens", flush=True)
+    sc = YesNoScorer(args.model, system_prompt(args.prompt))
+    print(f"{args.model} / {args.prompt}: {len(items)} items, prefix {sc.n_prefix} tokens", flush=True)
     if args.check:
-        toks = tok.encode(render(tok, system, user_message(items.iloc[0].context, items.iloc[0].response)), add_special_tokens=False)
-        full = model(mx.array(toks)[None], cache=make_prompt_cache(model))[0, -1]
-        fast = model(mx.array(toks[n_prefix:])[None], cache=fresh_cache())[0, -1]
-        pu = lambda lg: float(mx.softmax(mx.stack([mx.logsumexp(lg[mx.array(yes)]), mx.logsumexp(lg[mx.array(no)])]).astype(mx.float32))[0])  # noqa: E731
-        print(f"check: max |logit diff| {float(mx.abs(full - fast).max()):.3f}; "
-              f"p_unsafe full {pu(full):.4f} vs cached {pu(fast):.4f}", flush=True)
+        print(sc.check(user_message(items.iloc[0].context, items.iloc[0].response)), flush=True)
 
     rows, t0 = [], time.time()
     for k, (iid, row) in enumerate(items.iterrows()):
-        toks = tok.encode(render(tok, system, user_message(row.context, row.response)), add_special_tokens=False)
-        if toks[:n_prefix] == prefix:
-            logits = model(mx.array(toks[n_prefix:])[None], cache=fresh_cache())[0, -1]
-        else:
-            logits = model(mx.array(toks)[None], cache=make_prompt_cache(model))[0, -1]
-        lp = logits.astype(mx.float32)
-        lp = lp - mx.logsumexp(lp)
-        ly, ln = float(mx.logsumexp(lp[mx.array(yes)])), float(mx.logsumexp(lp[mx.array(no)]))
+        ly, ln = sc.score(user_message(row.context, row.response))
         # logit_unsafe = log P(Yes) - log P(No): same ranking as p_unsafe but does not saturate at 0 / 1
         rows.append({"item_id": iid, "p_unsafe": 1 / (1 + np.exp(ln - ly)), "logit_unsafe": ly - ln,
                      "p_yes_or_no": float(np.exp(ly) + np.exp(ln))})
