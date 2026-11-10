@@ -23,6 +23,7 @@ from .preprocess import minmax_to_unit_interval
 from .tci import binarize, minimize_tci
 
 Predictor = Literal["logistic", "posterior"]
+Missing = Literal["zero", "skip"]
 
 
 @dataclass
@@ -64,6 +65,13 @@ class FUSE:
     max_triplets: int = 20000
     cluster_threshold: float | None = None
     seed: int = 0
+    # Missing ratings (NaN). "zero": the caller imputes (the paper's convention; NaN raises).
+    # "skip": missing-aware FUSE (missing.py): moments over co-rated items only, posterior
+    # from the verifiers that rated the item, predictor forced to the posterior.
+    missing: Missing = "zero"
+    min_overlap: int = 20
+    posterior_mode: Literal["triplet", "product"] = "triplet"
+    em_refine: bool = False  # "skip" only: refine the FUSE posterior with Dawid-Skene EM
 
     def fit_scores(self, V: np.ndarray, rescale: bool = True) -> FUSEResult:
         """Run FUSE on one score matrix V (N responses x m verifiers).
@@ -72,8 +80,10 @@ class FUSE:
         (Appendix A.2, footnote 3). NaNs must be imputed before calling.
         """
         V = np.asarray(V, dtype=float)
+        if self.missing == "skip":
+            return self._fit_skip(V, rescale)
         if np.isnan(V).any():
-            raise ValueError("impute missing scores before running FUSE")
+            raise ValueError("impute missing scores before running FUSE, or use missing='skip'")
         Vs = minmax_to_unit_interval(V) if rescale else V
         info: dict = {}
         Vm = Vs
@@ -117,6 +127,41 @@ class FUSE:
             tci=thr.statistic,
             info=info,
         )
+
+    def _fit_skip(self, V: np.ndarray, rescale: bool) -> FUSEResult:
+        from . import missing as mi
+
+        if self.cluster_threshold is not None:
+            raise ValueError("cluster_threshold is not supported with missing='skip'")
+        Vs = mi.minmax_observed(V) if rescale else V
+        thr = mi.minimize_tci_masked(Vs, self.n_sweeps, self.n_quantiles, self.tci_clip, self.min_overlap)
+        active = np.flatnonzero(thr.active)
+        if active.size < 3:
+            return self._fallback(np.nan_to_num(Vs), "fewer than three non-constant verifiers")
+        Vt = mi.binarize_observed(Vs[:, active], thr.tau[active])
+        est = mi.masked_mom_estimate(Vt, self.min_overlap)
+        kept = np.arange(active.size)
+        if self.drop_below_random:
+            good = np.flatnonzero(est.balanced_accuracy >= 0.5)
+            kept = good if good.size >= 3 else np.argsort(-est.balanced_accuracy)[:3]
+            if kept.size < active.size:
+                est = mi.masked_mom_estimate(Vt[:, kept], self.min_overlap) if self.refit_after_drop else _subset(est, kept)
+        Vk = Vt[:, kept]
+        if self.posterior_mode == "product":
+            post = mi.product_posterior(Vk, est)
+        else:
+            post = mi.observed_triplet_posterior(Vk, est, self.max_triplets, rng=np.random.default_rng(self.seed))
+        info = {"predictor_used": "posterior"}
+        if self.em_refine:
+            post = mi.em_from(Vk, post)
+            info["em_refine"] = True
+        if self.predictor == "logistic" and not np.isnan(V).any():
+            scores = self._predict(Vs, post)
+            info["predictor_used"] = "logistic"
+        else:
+            scores = post
+        return FUSEResult(scores=scores, posterior=post, kept=active[kept], tau=thr.tau,
+                          estimate=est, tci=thr.statistic, info=info)
 
     def _predict(self, Vs: np.ndarray, post: np.ndarray) -> np.ndarray:
         if self.predictor == "posterior":

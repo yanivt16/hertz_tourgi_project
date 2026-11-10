@@ -95,3 +95,49 @@ exactly. This becomes a unit test.
 4. Simulation.
 5. Real datasets.
 6. FUSE + EM.
+
+## First results (10 Nov 2026)
+
+Implemented as `FUSE(missing="skip")` in [src/fuse/missing.py](../src/fuse/missing.py). The
+default (`missing="zero"`) is unchanged. With no missing entries, skip mode reproduces the
+current FUSE exactly; this is unit-tested in `tests/test_missing.py`.
+
+Simulation, 30 conditionally independent raters ([results/MISSING_SIM.md](../results/MISSING_SIM.md)):
+
+- **Zero-imputation breaks quickly.** At 50% observed it gets 73% accuracy against
+  97% for the other methods. Its parameter error is 0.25, against 0.02 with skip.
+- **Skip with the product posterior matches Dawid-Skene** down to about 7 ratings per item.
+- **At 3 or fewer ratings per item** too few rater pairs share items, so the moments fail.
+
+Real data ([results/MISSING_REAL.md](../results/MISSING_REAL.md)), accuracy against gold:
+
+| Dataset | MV | Dawid-Skene | FUSE missing = 0 | FUSE skip, triplet | FUSE skip, product |
+|---|---:|---:|---:|---:|---:|
+| RTE (94% missing) | 90.1 | 93.0 | 69.1 | 90.1 | 92.0 |
+| D_PosSent (76%) | 93.3 | 95.9 | 84.0 | 95.6 | 95.6 |
+| D_Product (98%) | 89.7 | 93.8 | 87.8 | 92.6 | 92.6 |
+| DICES-990 (58%, LLM label) | 71.8 | 77.5 | 70.9 | 75.2 | **77.7** |
+| DICES-350 (dense, expert) | 65.4 | 68.6 | 65.1 | 65.1 | 68.0 |
+| Bluebird (dense) | 75.9 | 88.9 | 86.1 | 86.1 | 88.9 |
+
+What this says:
+
+1. **Most of FUSE's gap to Dawid-Skene on human data was missing-data handling.**
+   - On sparse crowds, zero-imputed FUSE is far below even majority vote (RTE: 21 points
+     below). Skipping missing ratings recovers it.
+   - On DICES-990 the full sparse matrix now ties Dawid-Skene (+0.2) and beats MV by 5.9.
+     The dense-block workaround gave 75.6, and this needs no blocks.
+2. **The other part is the triplet-averaged posterior (eq. 9).**
+   - With many raters, averaging posteriors from 3 raters at a time throws away evidence.
+     On dense DICES-350 it gives 65.1, the same as MV. The product over all raters gives 68.0.
+   - This explains the earlier finding that "per rater, FUSE = MV".
+3. **FUSE + EM ends at the same fixed point as Dawid-Skene**, so it adds nothing. Dropped
+   as a method.
+4. **On VIPER, skip mode is worse than MV** (AUC 68-71 vs 73). This is consistent with the
+   warning above: when assignment depends on the label, prevalence differs between rater
+   pairs and the rank-one moment model is wrong. Not further investigated.
+5. **Honest bottom line.** On binary human labels under conditional independence,
+   missing-aware FUSE matches Dawid-Skene but does not beat it. Dawid-Skene is the MLE for
+   exactly this model. Where FUSE could still add something is continuous scores
+   (thresholds chosen by TCI) and few, correlated verifiers. That is the next question for
+   Stage 1.
