@@ -76,3 +76,15 @@ def test_fuse_skip_beats_zero_imputation_on_sparse_data():
     skip = FUSE(missing="skip", predictor="posterior").fit_scores(V, rescale=False).scores
     zero = FUSE(predictor="posterior").fit_scores(np.nan_to_num(V), rescale=False).scores
     assert ((skip > 0.5) == y).mean() > ((zero > 0.5) == y).mean() + 0.02
+
+
+def test_ordinal_dawid_skene_recovers_labels_from_scores():
+    from fuse.ordinal import dawid_skene_ordinal, quantile_bins
+
+    rng = np.random.default_rng(5)
+    y = rng.random(2000) < 0.3
+    V = y[:, None] * rng.uniform(1.0, 2.0, 8) + rng.normal(0, 1, (2000, 8))
+    assert set(np.unique(quantile_bins(V, 5))) == {0, 1, 2, 3, 4}
+    q = dawid_skene_ordinal(V, 5)
+    assert ((q > 0.5) == y).mean() > 0.9
+    assert q.mean() == pytest.approx(0.3, abs=0.05)
