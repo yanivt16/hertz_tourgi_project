@@ -58,6 +58,8 @@ class FUSE:
     n_quantiles: int = 19
     tci_clip: float = 1e-3
     tci_standardize: bool = False
+    # Quantile range of the threshold search (paper: 5%-95%). Not in the paper when narrowed.
+    quantile_range: tuple[float, float] = (0.05, 0.95)
     drop_below_random: bool = True
     refit_after_drop: bool = True
     predictor: Predictor = "logistic"
@@ -98,6 +100,7 @@ class FUSE:
             n_quantiles=self.n_quantiles,
             clip=self.tci_clip,
             standardize=self.tci_standardize,
+            quantile_range=self.quantile_range,
         )
         active = np.flatnonzero(thr.active)
         if active.size < 3:

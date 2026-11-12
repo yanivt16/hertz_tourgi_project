@@ -306,3 +306,47 @@ def test_llm_label_helpers_normalize_parse_and_reference():
     sub = dices.with_reference(m, [12, 10], [True, False])
     assert list(sub.items) == [10, 12] and list(sub.gold) == [False, True] and sub.V.shape == (2, 3)
     assert dices.drop_sparse_raters(m, 2).verifiers == ["a", "c"]
+
+
+def test_quantile_range_narrows_threshold_search():
+    from fuse.tci import candidate_thresholds
+
+    col = np.random.default_rng(0).normal(size=500)
+    paper = candidate_thresholds(col)
+    narrow = candidate_thresholds(col, quantile_range=(0.3, 0.7))
+    assert np.allclose(paper, candidate_thresholds(col, quantile_range=(0.05, 0.95)))
+    assert narrow.min() >= np.quantile(col, 0.3) - 1e-12 and narrow.max() <= np.quantile(col, 0.7) + 1e-12
+    votes = np.r_[np.zeros(450), np.ones(50)]  # one midpoint, 10% positive: kept as the only option
+    assert candidate_thresholds(votes, quantile_range=(0.3, 0.7)).size == 1
+
+
+def test_residual_groups_find_a_block_of_shared_errors_only():
+    from fuse.clustering import collapse_groups, residual_groups
+
+    rng = np.random.default_rng(0)
+    n, y = 1000, rng.random(1000) < 0.3
+    noise = rng.normal(size=(n, 10))
+    noise[:, 6:] = np.sqrt(0.6) * rng.normal(size=(n, 1)) + np.sqrt(0.4) * noise[:, 6:]
+    d = np.r_[rng.uniform(0.5, 1.5, 6), np.full(4, 0.2)]
+    V = y[:, None] * d + noise
+    groups, _, _ = residual_groups(V)
+    assert sorted(len(g) for g in groups) == [1] * 6 + [4]
+    assert collapse_groups(V, groups).shape == (n, 7)
+    groups_ind, _, _ = residual_groups(y[:, None] * d + rng.normal(size=(n, 10)))  # no block
+    assert all(len(g) == 1 for g in groups_ind)
+
+
+def test_jaffe_groups_recover_one_dependent_group_in_their_binary_model():
+    """Jaffe et al. (2016) model: classifiers 0-3 share one latent teacher, the rest have their own."""
+    from fuse.clustering import jaffe_groups
+
+    rng = np.random.default_rng(0)
+    n, m, g1 = 5000, 12, 4
+    y = rng.choice([-1, 1], n)
+    c = np.r_[np.zeros(g1, int), np.arange(1, m - g1 + 1)]
+    K = m - g1 + 1
+    acc = rng.uniform(0.6, 0.8, K)
+    A = np.where(rng.random((n, K)) < acc, y[:, None], -y[:, None])
+    F = np.where(rng.random((n, m)) < 0.85, A[:, c], -A[:, c]).astype(float)
+    groups, _, _, _ = jaffe_groups(np.cov(F.T))
+    assert any(set(g) == set(range(g1)) for g in groups)
