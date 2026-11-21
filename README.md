@@ -23,6 +23,7 @@ their data, and this repo runs on it directly.
 | FUSE on DICES-990 block by block (conversations grouped by shared raters) | Tables: [results/DICES990_BLOCKS.md](results/DICES990_BLOCKS.md) · raw (incl. each conversation's block): [results/dices990_blocks.json](results/dices990_blocks.json) · script: [scripts/dices990_blocks.py](scripts/dices990_blocks.py) |
 | FUSE tuned on DICES-350: one change at a time, chosen on a dev half, scored once on a test half | Tables: [results/DICES_TUNING.md](results/DICES_TUNING.md) · raw: [results/dices_tuning.json](results/dices_tuning.json) · script: [scripts/tune_dices350.py](scripts/tune_dices350.py) · write-up: [Tuning FUSE on DICES-350](#tuning-fuse-on-dices-350) · live log: [claude.ai/artifact/THS4D4Qjrtd6UkbxGuUdbu](https://claude.ai/artifact/THS4D4Qjrtd6UkbxGuUdbu) (private until shared) |
 | Other methods (majority vote, Dawid–Skene) on the same grouped DICES-350 views | Tables: [results/DICES_GROUP_METHODS.md](results/DICES_GROUP_METHODS.md) · raw: [results/dices_group_methods.json](results/dices_group_methods.json) · script: [scripts/dices_group_methods.py](scripts/dices_group_methods.py) |
+| FUSE vs Dawid–Skene over 1000 random rater groupings per group size (DICES-350) | Tables: [results/DICES_RANDOM_GROUPS.md](results/DICES_RANDOM_GROUPS.md) · raw: [results/dices_random_groups.json](results/dices_random_groups.json) · script: [scripts/dices_random_groups.py](scripts/dices_random_groups.py) |
 | Daily summary of the human-annotator work (7 Nov 2026): DICES, LLM label, block-by-block FUSE, scope decision, advisor message | [docs/daily_summaries/2026-11-07.md](docs/daily_summaries/2026-11-07.md) |
 | DICES dataset explainer page | [claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD](https://claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD) (private until shared from the page's Share menu) |
 
@@ -397,6 +398,33 @@ and Dawid–Skene each group first casts one vote (unsafe when more than half it
 - Random groups are a control: FUSE on them matches the demographic groups. The 71.0 is one
   shuffle of raters; over 5 shuffles tuned FUSE scores 68.8–71.0 on test (mean 69.8). The gain
   comes from averaging raters into a few groups, not from who is in each group.
+
+**FUSE vs Dawid–Skene over 1000 random groupings** ([results/DICES_RANDOM_GROUPS.md](results/DICES_RANDOM_GROUPS.md),
+`scripts/dices_random_groups.py`). For each group size, the 123 raters are shuffled 1000 times
+and cut into near-equal groups. FUSE sees each group's share of "unsafe" votes; Dawid–Skene sees
+each group's vote. Accuracy on the test half, mean over splits:
+
+| Groups of about | FUSE defaults | Dawid–Skene, same groups | FUSE − DS (% of splits FUSE wins) | Same, over conversations (95% CI) | Dawid–Skene per rater, no groups |
+|---|---:|---:|---|---|---:|
+| 5 (24 groups) | 70.1 | 69.3 | +0.8 (63%) | +0.8 [−2.1, +3.7] | 71.0 |
+| 10 (12 groups) | 70.2 | 67.8 | +2.5 (91%) | +2.5 [−2.5, +7.6] | 71.0 |
+| 20 (6 groups) | 70.2 | 67.0 | +3.3 (98%) | +3.3 [−2.4, +9.1] | 71.0 |
+
+- **On the same groups FUSE beats Dawid–Skene almost every time, more so with bigger groups.**
+  On all 350 conversations (neither method uses a label) FUSE defaults wins 84%, 99% and 100% of
+  splits, by +1.2, +2.7 and +3.5 points.
+- **That consistency is over groupings, not over conversations.** Every split scores the same 350
+  conversations, so 1000 splits remove the grouping noise but not the sampling noise. Averaging
+  each conversation's hit rate over the splits and bootstrapping over conversations, every
+  interval still includes 0.
+- **Part of the gap is Dawid–Skene losing information.** A group's yes/no vote drops the share
+  behind it: Dawid–Skene's AUC falls from 79 per rater to 71 with groups of 20, while FUSE stays
+  at 79. Dawid–Skene on the individual raters (71.0 on test) beats tuned FUSE on test in 80–92%
+  of splits (−0.9 to −1.4 points), and on all 350 it is level with FUSE defaults (FUSE ahead by
+  +0.1 to +1.0, every interval includes 0).
+- **FUSE wins on the cut-off, not the ranking.** It calls 37–46% of conversations unsafe against
+  Dawid–Skene's 24–28% (experts 50%), with the same AUC as per-rater Dawid–Skene.
+- The grouping itself matters little: FUSE's test accuracy varies by sd 0.7–1.0 points across splits.
 
 ## Choices the paper leaves open
 
