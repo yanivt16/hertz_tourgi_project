@@ -21,6 +21,8 @@ their data, and this repo runs on it directly.
 | LLM safety label for DICES: prompt development on DICES-350, held-out test, labels for all of DICES-990 | Write-up: [results/DICES_LLM_LABELS.md](results/DICES_LLM_LABELS.md) · labels and run metadata: [results/llm_labels/](results/llm_labels/) · prompts: [scripts/dices_prompts/](scripts/dices_prompts/) · script: [scripts/label_dices_llm.py](scripts/label_dices_llm.py) |
 | FUSE on DICES-990 against the LLM label (missing ratings) | Tables: [results/DICES990.md](results/DICES990.md) · raw: [results/dices990.json](results/dices990.json), [results/dices990.log](results/dices990.log) · script: [scripts/run_dices990.py](scripts/run_dices990.py) · write-up: [DICES-990](#dices-990-against-an-llm-safety-label) |
 | FUSE on DICES-990 block by block (conversations grouped by shared raters) | Tables: [results/DICES990_BLOCKS.md](results/DICES990_BLOCKS.md) · raw (incl. each conversation's block): [results/dices990_blocks.json](results/dices990_blocks.json) · script: [scripts/dices990_blocks.py](scripts/dices990_blocks.py) |
+| FUSE tuned on DICES-350: one change at a time, chosen on a dev half, scored once on a test half | Tables: [results/DICES_TUNING.md](results/DICES_TUNING.md) · raw: [results/dices_tuning.json](results/dices_tuning.json) · script: [scripts/tune_dices350.py](scripts/tune_dices350.py) · write-up: [Tuning FUSE on DICES-350](#tuning-fuse-on-dices-350) · live log: [claude.ai/artifact/THS4D4Qjrtd6UkbxGuUdbu](https://claude.ai/artifact/THS4D4Qjrtd6UkbxGuUdbu) (private until shared) |
+| Other methods (majority vote, Dawid–Skene) on the same grouped DICES-350 views | Tables: [results/DICES_GROUP_METHODS.md](results/DICES_GROUP_METHODS.md) · raw: [results/dices_group_methods.json](results/dices_group_methods.json) · script: [scripts/dices_group_methods.py](scripts/dices_group_methods.py) |
 | Daily summary of the human-annotator work (7 Nov 2026): DICES, LLM label, block-by-block FUSE, scope decision, advisor message | [docs/daily_summaries/2026-11-07.md](docs/daily_summaries/2026-11-07.md) |
 | DICES dataset explainer page | [claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD](https://claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD) (private until shared from the page's Share menu) |
 
@@ -324,6 +326,77 @@ block, majority vote included, sees the same raters; predictions are pooled over
 - The number of blocks barely matters: with 3 or 4 blocks FUSE posterior gains +5.3 and +4.9.
 - Density is what helps, not the split: the same blocks with all their raters (21–37% empty
   inside the block) give FUSE only +0.5 to +1.8.
+
+### Tuning FUSE on DICES-350
+
+`scripts/tune_dices350.py` searches FUSE's settings one change at a time, coarse to fine:
+stage 1 is the verifier view (17 options, including random rater groups as a control),
+stage 2 switches parts of the algorithm on and off (predictor, rater dropping, scale-free TCI,
+clustering, and a new label-free cut-off at FUSE's own estimated prevalence), and stage 3
+sweeps the numbers (threshold grid, sweeps, `logistic_C`, `tci_clip`). FUSE is always fitted on
+all 350 conversations without labels; settings are chosen on the dev half (174), and the
+winner is scored once on the test half (176). A change is adopted only if it gains at least
+2 points of dev accuracy without lowering dev AUC by more than 0.5. The stages repeat until a
+full pass adopts nothing. Every step: [results/DICES_TUNING.md](results/DICES_TUNING.md), raw
+state: [results/dices_tuning.json](results/dices_tuning.json).
+
+```bash
+.venv/bin/python scripts/tune_dices350.py reset && .venv/bin/python scripts/tune_dices350.py all
+.venv/bin/python scripts/tune_dices350.py final
+```
+
+| | Dev (choosing) | Test (scored once) | Test − majority vote (95% CI) |
+|---|---:|---:|---|
+| FUSE defaults, per rater | 64.9 | 65.3 | +0.0 [−1.7, +1.7] |
+| FUSE defaults, race × gender groups | 71.3 | 68.8 | +3.4 [−4.0, +10.8] |
+| **Tuned: race × education groups, cut-off at estimated prevalence** | **75.9** | **69.9** | +4.5 [−3.4, +12.5] |
+| Dawid–Skene | 66.1 | 71.0 | +5.7 [+0.6, +10.8] |
+| Majority vote | 64.9 | 65.3 | |
+
+- **Two changes were adopted, and the search converged after the second pass.** The view
+  (race × education groups, +8.1 on dev) and the cut-off (+2.9). No other switch or number
+  gained 2 points. The closest was `logistic_C=10` (+1.1).
+- **Most of the dev gain does not survive the test half.** Dev 75.9 falls to 69.9 on test. The
+  tuned configuration is 1.1 points above the untuned race × gender view [−2.3, +4.5], and
+  Dawid–Skene is still ahead (tuned − Dawid–Skene: −1.1 [−7.4, +5.1]). Dawid–Skene is the
+  only method whose test gain over majority vote has an interval that excludes 0.
+- **The view is the only large lever, and part of it is plain averaging.** Random groups of 20
+  raters reach 68.4 on dev, against 64.9 per rater. The choice of demographic split is not stable:
+  dev accuracy runs from 58.6 (gender) to 73.0 (race × education).
+- **Accuracy here is mostly about how many conversations get called unsafe.** AUC barely moves
+  (77.5–80.4 across every working configuration), and the configurations that win are those whose
+  estimated prevalence lands near 0.5, the experts' share. The cut-off at estimated prevalence
+  helps for the same reason.
+- **Some settings behave like noise.** `n_quantiles` gives 70.1 / 65.5 / 75.9 / 70.1 for
+  5 / 9 / 19 / 39 with no trend. The default (19) happens to be the peak.
+- **No label-free selector found.** Within a step, a lower TCI statistic goes with *lower* dev
+  accuracy (Spearman −0.95 across `n_quantiles`), so minimising it cannot replace the labels.
+  With 15 verifiers every triplet is used, so the seed has no effect (5 seeds, sd 0).
+
+**Do the grouped views help the other methods too?** ([results/DICES_GROUP_METHODS.md](results/DICES_GROUP_METHODS.md),
+`scripts/dices_group_methods.py`). Each method runs on the same group matrices; for majority vote
+and Dawid–Skene each group first casts one vote (unsafe when more than half its raters said so).
+
+| View (test half, 176) | Majority of group votes | Dawid–Skene on group votes | FUSE, tuned |
+|---|---:|---:|---:|
+| Per rater (reference) | 65.3 | 71.0 | 65.3 (defaults) |
+| Race × education (15 groups) | 65.9 | 68.2 | 69.9 |
+| Race × gender (10) | 63.6 | 71.0 (72.2 cut at its own prevalence) | 69.3 |
+| Race (5) | 68.8 | 68.8 | 68.8 |
+| Random groups of 20 (7, one split) | 64.8 | 67.0 | 71.0 |
+
+- On test every method lands at 64–72%, and the gaps between methods are inside the bootstrap
+  intervals. The best single test number is Dawid–Skene on race × gender (72.2), whose dev score
+  (65.5) would never have selected it.
+- All methods rank the conversations about equally well (test AUC 80–82 on the demographic views,
+  lower when groups vote on race alone or on random groups). What differs is how many they call
+  unsafe: FUSE estimates the unsafe share at 0.43–0.52 on grouped views, while majority vote and
+  Dawid–Skene stay at 22–27%. That is why FUSE leads on dev, where the view was chosen.
+- Grouping does not help majority vote, since the groups' votes still follow the crowd's 22%.
+- The split alone moves results: per-rater Dawid–Skene scores 66.1 on dev and 71.0 on test.
+- Random groups are a control: FUSE on them matches the demographic groups. The 71.0 is one
+  shuffle of raters; over 5 shuffles tuned FUSE scores 68.8–71.0 on test (mean 69.8). The gain
+  comes from averaging raters into a few groups, not from who is in each group.
 
 ## Choices the paper leaves open
 
