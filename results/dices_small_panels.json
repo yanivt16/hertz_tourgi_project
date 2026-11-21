@@ -1,0 +1,757 @@
+{
+ "reps": 100,
+ "reference_123": {
+  "Majority vote, 123 raters": 65.14,
+  "Dawid\u2013Skene, 123 raters": 68.57,
+  "FUSE, 123 raters": 65.14
+ },
+ "sizes": {
+  "5": {
+   "summary": {
+    "Majority vote": {
+     "acc": {
+      "mean": 63.11,
+      "sd": 3.66,
+      "p2.5": 55.14,
+      "p97.5": 69.44
+     },
+     "auc": {
+      "mean": 71.73,
+      "sd": 3.55,
+      "p2.5": 63.78,
+      "p97.5": 77.48
+     },
+     "unsafe": {
+      "mean": 25.77,
+      "sd": 10.6,
+      "p2.5": 9.1,
+      "p97.5": 50.3
+     }
+    },
+    "Dawid\u2013Skene": {
+     "acc": {
+      "mean": 63.6,
+      "sd": 3.72,
+      "p2.5": 55.14,
+      "p97.5": 70.0
+     },
+     "auc": {
+      "mean": 71.24,
+      "sd": 3.56,
+      "p2.5": 62.98,
+      "p97.5": 76.88
+     },
+     "unsafe": {
+      "mean": 26.83,
+      "sd": 9.67,
+      "p2.5": 9.99,
+      "p97.5": 47.7
+     }
+    },
+    "Dawid\u2013Skene cut at its prevalence": {
+     "acc": {
+      "mean": 63.93,
+      "sd": 3.44,
+      "p2.5": 56.0,
+      "p97.5": 70.0
+     },
+     "auc": {
+      "mean": 71.24,
+      "sd": 3.56,
+      "p2.5": 62.98,
+      "p97.5": 76.88
+     },
+     "unsafe": {
+      "mean": 28.23,
+      "sd": 8.72,
+      "p2.5": 12.3,
+      "p97.5": 46.31
+     }
+    },
+    "FUSE": {
+     "acc": {
+      "mean": 63.35,
+      "sd": 4.18,
+      "p2.5": 54.29,
+      "p97.5": 70.29
+     },
+     "auc": {
+      "mean": 72.31,
+      "sd": 3.53,
+      "p2.5": 64.12,
+      "p97.5": 77.89
+     },
+     "unsafe": {
+      "mean": 25.72,
+      "sd": 11.07,
+      "p2.5": 6.6,
+      "p97.5": 50.0
+     }
+    },
+    "FUSE cut at its prevalence": {
+     "acc": {
+      "mean": 64.87,
+      "sd": 3.39,
+      "p2.5": 57.14,
+      "p97.5": 70.57
+     },
+     "auc": {
+      "mean": 72.31,
+      "sd": 3.53,
+      "p2.5": 64.12,
+      "p97.5": 77.89
+     },
+     "unsafe": {
+      "mean": 31.29,
+      "sd": 8.81,
+      "p2.5": 14.9,
+      "p97.5": 48.91
+     }
+    }
+   },
+   "pairs": [
+    {
+     "a": "FUSE",
+     "b": "Majority vote",
+     "metric": "acc",
+     "mean_diff": 0.24,
+     "a_wins": 50.4,
+     "tie": 9.3,
+     "b_wins": 40.3,
+     "p2.5": -5.71,
+     "p97.5": 6.0,
+     "conv_ci": [
+      0.03,
+      0.46
+     ]
+    },
+    {
+     "a": "FUSE",
+     "b": "Majority vote",
+     "metric": "auc",
+     "mean_diff": 0.59,
+     "a_wins": 72.1,
+     "tie": 0.5,
+     "b_wins": 27.5,
+     "p2.5": -1.24,
+     "p97.5": 3.11
+    },
+    {
+     "a": "FUSE",
+     "b": "Dawid\u2013Skene",
+     "metric": "acc",
+     "mean_diff": -0.25,
+     "a_wins": 42.2,
+     "tie": 9.0,
+     "b_wins": 48.8,
+     "p2.5": -5.15,
+     "p97.5": 4.29,
+     "conv_ci": [
+      -0.48,
+      -0.03
+     ]
+    },
+    {
+     "a": "FUSE",
+     "b": "Dawid\u2013Skene",
+     "metric": "auc",
+     "mean_diff": 1.07,
+     "a_wins": 83.5,
+     "tie": 0.3,
+     "b_wins": 16.1,
+     "p2.5": -0.89,
+     "p97.5": 3.89
+    },
+    {
+     "a": "FUSE cut at its prevalence",
+     "b": "Dawid\u2013Skene cut at its prevalence",
+     "metric": "acc",
+     "mean_diff": 0.93,
+     "a_wins": 65.6,
+     "tie": 8.3,
+     "b_wins": 26.1,
+     "p2.5": -2.29,
+     "p97.5": 5.14,
+     "conv_ci": [
+      0.5,
+      1.38
+     ]
+    },
+    {
+     "a": "FUSE cut at its prevalence",
+     "b": "Dawid\u2013Skene cut at its prevalence",
+     "metric": "auc",
+     "mean_diff": 1.07,
+     "a_wins": 83.5,
+     "tie": 0.3,
+     "b_wins": 16.1,
+     "p2.5": -0.89,
+     "p97.5": 3.89
+    },
+    {
+     "a": "Dawid\u2013Skene",
+     "b": "Majority vote",
+     "metric": "acc",
+     "mean_diff": 0.49,
+     "a_wins": 49.2,
+     "tie": 10.3,
+     "b_wins": 40.5,
+     "p2.5": -4.59,
+     "p97.5": 6.85,
+     "conv_ci": [
+      0.24,
+      0.76
+     ]
+    },
+    {
+     "a": "Dawid\u2013Skene",
+     "b": "Majority vote",
+     "metric": "auc",
+     "mean_diff": -0.48,
+     "a_wins": 35.5,
+     "tie": 0.5,
+     "b_wins": 64.0,
+     "p2.5": -3.26,
+     "p97.5": 2.26
+    }
+   ],
+   "diagnostics": {
+    "panels": 2400,
+    "panel_sizes": [
+     5,
+     6
+    ],
+    "fuse_quality_rho_mean": 0.656,
+    "fuse_quality_rho_n": 2400,
+    "ds_quality_rho_mean": 0.693,
+    "ds_quality_rho_n": 2400,
+    "fuse_kept_mean": 5.06,
+    "best_rater_acc_mean": 65.81,
+    "mean_rater_acc_mean": 59.72,
+    "fallbacks": 0,
+    "fuse_est_prev_mean": 0.313,
+    "ds_est_prev_mean": 0.282,
+    "by_spread": {
+     "Majority vote": {
+      "high": 62.9,
+      "low": 63.65
+     },
+     "Dawid\u2013Skene": {
+      "high": 64.27,
+      "low": 63.38
+     },
+     "Dawid\u2013Skene cut at its prevalence": {
+      "high": 64.51,
+      "low": 63.75
+     },
+     "FUSE": {
+      "high": 63.99,
+      "low": 63.25
+     },
+     "FUSE cut at its prevalence": {
+      "high": 65.37,
+      "low": 64.67
+     }
+    }
+   }
+  },
+  "10": {
+   "summary": {
+    "Majority vote": {
+     "acc": {
+      "mean": 64.09,
+      "sd": 3.04,
+      "p2.5": 57.43,
+      "p97.5": 69.43
+     },
+     "auc": {
+      "mean": 74.72,
+      "sd": 2.5,
+      "p2.5": 69.1,
+      "p97.5": 78.84
+     },
+     "unsafe": {
+      "mean": 23.86,
+      "sd": 7.15,
+      "p2.5": 11.1,
+      "p97.5": 39.1
+     }
+    },
+    "Dawid\u2013Skene": {
+     "acc": {
+      "mean": 65.79,
+      "sd": 2.5,
+      "p2.5": 60.29,
+      "p97.5": 70.29
+     },
+     "auc": {
+      "mean": 74.71,
+      "sd": 2.43,
+      "p2.5": 69.46,
+      "p97.5": 78.65
+     },
+     "unsafe": {
+      "mean": 28.62,
+      "sd": 5.64,
+      "p2.5": 17.1,
+      "p97.5": 38.9
+     }
+    },
+    "Dawid\u2013Skene cut at its prevalence": {
+     "acc": {
+      "mean": 65.96,
+      "sd": 2.41,
+      "p2.5": 60.57,
+      "p97.5": 70.29
+     },
+     "auc": {
+      "mean": 74.71,
+      "sd": 2.43,
+      "p2.5": 69.46,
+      "p97.5": 78.65
+     },
+     "unsafe": {
+      "mean": 29.23,
+      "sd": 5.37,
+      "p2.5": 18.29,
+      "p97.5": 39.4
+     }
+    },
+    "FUSE": {
+     "acc": {
+      "mean": 64.49,
+      "sd": 3.19,
+      "p2.5": 57.43,
+      "p97.5": 70.0
+     },
+     "auc": {
+      "mean": 75.32,
+      "sd": 2.38,
+      "p2.5": 70.28,
+      "p97.5": 79.25
+     },
+     "unsafe": {
+      "mean": 23.85,
+      "sd": 7.01,
+      "p2.5": 10.59,
+      "p97.5": 38.6
+     }
+    },
+    "FUSE cut at its prevalence": {
+     "acc": {
+      "mean": 66.78,
+      "sd": 2.35,
+      "p2.5": 61.71,
+      "p97.5": 70.87
+     },
+     "auc": {
+      "mean": 75.32,
+      "sd": 2.38,
+      "p2.5": 70.28,
+      "p97.5": 79.25
+     },
+     "unsafe": {
+      "mean": 32.13,
+      "sd": 5.3,
+      "p2.5": 21.7,
+      "p97.5": 43.11
+     }
+    }
+   },
+   "pairs": [
+    {
+     "a": "FUSE",
+     "b": "Majority vote",
+     "metric": "acc",
+     "mean_diff": 0.39,
+     "a_wins": 52.8,
+     "tie": 6.2,
+     "b_wins": 40.9,
+     "p2.5": -4.28,
+     "p97.5": 5.71,
+     "conv_ci": [
+      0.17,
+      0.63
+     ]
+    },
+    {
+     "a": "FUSE",
+     "b": "Majority vote",
+     "metric": "auc",
+     "mean_diff": 0.6,
+     "a_wins": 78.8,
+     "tie": 0.6,
+     "b_wins": 20.7,
+     "p2.5": -0.73,
+     "p97.5": 2.37
+    },
+    {
+     "a": "FUSE",
+     "b": "Dawid\u2013Skene",
+     "metric": "acc",
+     "mean_diff": -1.3,
+     "a_wins": 21.3,
+     "tie": 5.2,
+     "b_wins": 73.4,
+     "p2.5": -5.14,
+     "p97.5": 2.0,
+     "conv_ci": [
+      -2.04,
+      -0.58
+     ]
+    },
+    {
+     "a": "FUSE",
+     "b": "Dawid\u2013Skene",
+     "metric": "auc",
+     "mean_diff": 0.61,
+     "a_wins": 78.8,
+     "tie": 0.6,
+     "b_wins": 20.7,
+     "p2.5": -0.73,
+     "p97.5": 2.37
+    },
+    {
+     "a": "FUSE cut at its prevalence",
+     "b": "Dawid\u2013Skene cut at its prevalence",
+     "metric": "acc",
+     "mean_diff": 0.82,
+     "a_wins": 67.8,
+     "tie": 8.8,
+     "b_wins": 23.4,
+     "p2.5": -1.71,
+     "p97.5": 3.72,
+     "conv_ci": [
+      0.34,
+      1.32
+     ]
+    },
+    {
+     "a": "FUSE cut at its prevalence",
+     "b": "Dawid\u2013Skene cut at its prevalence",
+     "metric": "auc",
+     "mean_diff": 0.61,
+     "a_wins": 78.8,
+     "tie": 0.6,
+     "b_wins": 20.7,
+     "p2.5": -0.73,
+     "p97.5": 2.37
+    },
+    {
+     "a": "Dawid\u2013Skene",
+     "b": "Majority vote",
+     "metric": "acc",
+     "mean_diff": 1.69,
+     "a_wins": 74.5,
+     "tie": 5.2,
+     "b_wins": 20.3,
+     "p2.5": -2.57,
+     "p97.5": 7.43,
+     "conv_ci": [
+      0.91,
+      2.49
+     ]
+    },
+    {
+     "a": "Dawid\u2013Skene",
+     "b": "Majority vote",
+     "metric": "auc",
+     "mean_diff": -0.01,
+     "a_wins": 47.8,
+     "tie": 0.4,
+     "b_wins": 51.7,
+     "p2.5": -1.92,
+     "p97.5": 1.9
+    }
+   ],
+   "diagnostics": {
+    "panels": 1200,
+    "panel_sizes": [
+     10,
+     11
+    ],
+    "fuse_quality_rho_mean": 0.737,
+    "fuse_quality_rho_n": 1200,
+    "ds_quality_rho_mean": 0.783,
+    "ds_quality_rho_n": 1200,
+    "fuse_kept_mean": 10.14,
+    "best_rater_acc_mean": 67.18,
+    "mean_rater_acc_mean": 59.72,
+    "fallbacks": 0,
+    "fuse_est_prev_mean": 0.321,
+    "ds_est_prev_mean": 0.292,
+    "by_spread": {
+     "Majority vote": {
+      "high": 64.26,
+      "low": 64.11
+     },
+     "Dawid\u2013Skene": {
+      "high": 66.32,
+      "low": 65.33
+     },
+     "Dawid\u2013Skene cut at its prevalence": {
+      "high": 66.48,
+      "low": 65.46
+     },
+     "FUSE": {
+      "high": 64.96,
+      "low": 64.11
+     },
+     "FUSE cut at its prevalence": {
+      "high": 67.28,
+      "low": 66.34
+     }
+    }
+   }
+  },
+  "20": {
+   "summary": {
+    "Majority vote": {
+     "acc": {
+      "mean": 64.89,
+      "sd": 2.31,
+      "p2.5": 59.99,
+      "p97.5": 69.14
+     },
+     "auc": {
+      "mean": 76.73,
+      "sd": 1.67,
+      "p2.5": 73.09,
+      "p97.5": 79.68
+     },
+     "unsafe": {
+      "mean": 23.66,
+      "sd": 4.96,
+      "p2.5": 14.0,
+      "p97.5": 33.71
+     }
+    },
+    "Dawid\u2013Skene": {
+     "acc": {
+      "mean": 67.11,
+      "sd": 1.7,
+      "p2.5": 64.0,
+      "p97.5": 70.29
+     },
+     "auc": {
+      "mean": 76.93,
+      "sd": 1.59,
+      "p2.5": 73.37,
+      "p97.5": 79.6
+     },
+     "unsafe": {
+      "mean": 30.05,
+      "sd": 3.61,
+      "p2.5": 22.59,
+      "p97.5": 36.9
+     }
+    },
+    "Dawid\u2013Skene cut at its prevalence": {
+     "acc": {
+      "mean": 67.17,
+      "sd": 1.69,
+      "p2.5": 64.0,
+      "p97.5": 70.29
+     },
+     "auc": {
+      "mean": 76.93,
+      "sd": 1.59,
+      "p2.5": 73.37,
+      "p97.5": 79.6
+     },
+     "unsafe": {
+      "mean": 30.26,
+      "sd": 3.49,
+      "p2.5": 22.9,
+      "p97.5": 36.61
+     }
+    },
+    "FUSE": {
+     "acc": {
+      "mean": 65.0,
+      "sd": 2.27,
+      "p2.5": 60.56,
+      "p97.5": 69.43
+     },
+     "auc": {
+      "mean": 77.24,
+      "sd": 1.58,
+      "p2.5": 73.78,
+      "p97.5": 80.01
+     },
+     "unsafe": {
+      "mean": 23.02,
+      "sd": 4.86,
+      "p2.5": 13.7,
+      "p97.5": 32.9
+     }
+    },
+    "FUSE cut at its prevalence": {
+     "acc": {
+      "mean": 67.78,
+      "sd": 1.74,
+      "p2.5": 64.0,
+      "p97.5": 70.86
+     },
+     "auc": {
+      "mean": 77.24,
+      "sd": 1.58,
+      "p2.5": 73.78,
+      "p97.5": 80.01
+     },
+     "unsafe": {
+      "mean": 32.49,
+      "sd": 3.61,
+      "p2.5": 25.7,
+      "p97.5": 39.7
+     }
+    }
+   },
+   "pairs": [
+    {
+     "a": "FUSE",
+     "b": "Majority vote",
+     "metric": "acc",
+     "mean_diff": 0.1,
+     "a_wins": 48.8,
+     "tie": 6.5,
+     "b_wins": 44.7,
+     "p2.5": -3.72,
+     "p97.5": 3.71,
+     "conv_ci": [
+      -0.19,
+      0.41
+     ]
+    },
+    {
+     "a": "FUSE",
+     "b": "Majority vote",
+     "metric": "auc",
+     "mean_diff": 0.51,
+     "a_wins": 82.7,
+     "tie": 1.2,
+     "b_wins": 16.2,
+     "p2.5": -0.47,
+     "p97.5": 1.68
+    },
+    {
+     "a": "FUSE",
+     "b": "Dawid\u2013Skene",
+     "metric": "acc",
+     "mean_diff": -2.11,
+     "a_wins": 7.5,
+     "tie": 3.8,
+     "b_wins": 88.7,
+     "p2.5": -6.0,
+     "p97.5": 0.86,
+     "conv_ci": [
+      -3.43,
+      -0.86
+     ]
+    },
+    {
+     "a": "FUSE",
+     "b": "Dawid\u2013Skene",
+     "metric": "auc",
+     "mean_diff": 0.31,
+     "a_wins": 70.2,
+     "tie": 1.0,
+     "b_wins": 28.8,
+     "p2.5": -0.77,
+     "p97.5": 1.5
+    },
+    {
+     "a": "FUSE cut at its prevalence",
+     "b": "Dawid\u2013Skene cut at its prevalence",
+     "metric": "acc",
+     "mean_diff": 0.61,
+     "a_wins": 63.5,
+     "tie": 8.3,
+     "b_wins": 28.2,
+     "p2.5": -1.71,
+     "p97.5": 3.43,
+     "conv_ci": [
+      0.11,
+      1.09
+     ]
+    },
+    {
+     "a": "FUSE cut at its prevalence",
+     "b": "Dawid\u2013Skene cut at its prevalence",
+     "metric": "auc",
+     "mean_diff": 0.31,
+     "a_wins": 70.2,
+     "tie": 1.0,
+     "b_wins": 28.8,
+     "p2.5": -0.77,
+     "p97.5": 1.5
+    },
+    {
+     "a": "Dawid\u2013Skene",
+     "b": "Majority vote",
+     "metric": "acc",
+     "mean_diff": 2.22,
+     "a_wins": 84.7,
+     "tie": 5.2,
+     "b_wins": 10.2,
+     "p2.5": -1.14,
+     "p97.5": 6.3,
+     "conv_ci": [
+      1.03,
+      3.44
+     ]
+    },
+    {
+     "a": "Dawid\u2013Skene",
+     "b": "Majority vote",
+     "metric": "auc",
+     "mean_diff": 0.2,
+     "a_wins": 62.3,
+     "tie": 0.3,
+     "b_wins": 37.3,
+     "p2.5": -1.13,
+     "p97.5": 1.67
+    }
+   ],
+   "diagnostics": {
+    "panels": 600,
+    "panel_sizes": [
+     20,
+     21
+    ],
+    "fuse_quality_rho_mean": 0.784,
+    "fuse_quality_rho_n": 600,
+    "ds_quality_rho_mean": 0.823,
+    "ds_quality_rho_n": 600,
+    "fuse_kept_mean": 20.3,
+    "best_rater_acc_mean": 68.13,
+    "mean_rater_acc_mean": 59.72,
+    "fallbacks": 0,
+    "fuse_est_prev_mean": 0.325,
+    "ds_est_prev_mean": 0.303,
+    "by_spread": {
+     "Majority vote": {
+      "high": 64.9,
+      "low": 64.87
+     },
+     "Dawid\u2013Skene": {
+      "high": 67.35,
+      "low": 66.74
+     },
+     "Dawid\u2013Skene cut at its prevalence": {
+      "high": 67.4,
+      "low": 66.82
+     },
+     "FUSE": {
+      "high": 65.1,
+      "low": 64.64
+     },
+     "FUSE cut at its prevalence": {
+      "high": 67.99,
+      "low": 67.47
+     }
+    }
+   }
+  }
+ }
+}

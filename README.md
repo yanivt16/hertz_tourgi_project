@@ -24,6 +24,7 @@ their data, and this repo runs on it directly.
 | FUSE tuned on DICES-350: one change at a time, chosen on a dev half, scored once on a test half | Tables: [results/DICES_TUNING.md](results/DICES_TUNING.md) · raw: [results/dices_tuning.json](results/dices_tuning.json) · script: [scripts/tune_dices350.py](scripts/tune_dices350.py) · write-up: [Tuning FUSE on DICES-350](#tuning-fuse-on-dices-350) · live log: [claude.ai/artifact/THS4D4Qjrtd6UkbxGuUdbu](https://claude.ai/artifact/THS4D4Qjrtd6UkbxGuUdbu) (private until shared) |
 | Other methods (majority vote, Dawid–Skene) on the same grouped DICES-350 views | Tables: [results/DICES_GROUP_METHODS.md](results/DICES_GROUP_METHODS.md) · raw: [results/dices_group_methods.json](results/dices_group_methods.json) · script: [scripts/dices_group_methods.py](scripts/dices_group_methods.py) |
 | FUSE vs Dawid–Skene over 1000 random rater groupings per group size (DICES-350) | Tables: [results/DICES_RANDOM_GROUPS.md](results/DICES_RANDOM_GROUPS.md) · raw: [results/dices_random_groups.json](results/dices_random_groups.json) · script: [scripts/dices_random_groups.py](scripts/dices_random_groups.py) |
+| Small random rater panels: majority vote vs Dawid–Skene vs FUSE inside each panel, 100 reshuffles (DICES-350) | Tables: [results/DICES_SMALL_PANELS.md](results/DICES_SMALL_PANELS.md) · raw: [results/dices_small_panels.json](results/dices_small_panels.json) · script: [scripts/dices_small_panels.py](scripts/dices_small_panels.py) |
 | Daily summary of the human-annotator work (7 Nov 2026): DICES, LLM label, block-by-block FUSE, scope decision, advisor message | [docs/daily_summaries/2026-11-07.md](docs/daily_summaries/2026-11-07.md) |
 | DICES dataset explainer page | [claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD](https://claude.ai/artifact/771KB6KMA3VUGRKyS3WUHD) (private until shared from the page's Share menu) |
 
@@ -425,6 +426,35 @@ each group's vote. Accuracy on the test half, mean over splits:
 - **FUSE wins on the cut-off, not the ranking.** It calls 37–46% of conversations unsafe against
   Dawid–Skene's 24–28% (experts 50%), with the same AUC as per-rater Dawid–Skene.
 - The grouping itself matters little: FUSE's test accuracy varies by sd 0.7–1.0 points across splits.
+
+**Small random panels: does FUSE find the good raters better when the crowd is small?**
+([results/DICES_SMALL_PANELS.md](results/DICES_SMALL_PANELS.md), `scripts/dices_small_panels.py`).
+The idea: among 123 raters the few good ones are diluted, and in a small panel they weigh more, so a
+method that learns rater quality without labels should gain most there. Each of 100 reshuffles cuts
+the 123 raters into disjoint panels (24 of ~5, 12 of ~10 or 6 of ~20). Inside each panel, majority
+vote, Dawid–Skene and FUSE each see only that panel's raters, one verifier per rater, and are scored
+on all 350 conversations. Mean over panels:
+
+| Panel size | Majority vote | Dawid–Skene | FUSE | FUSE − DS, accuracy | FUSE − DS, AUC (% of panels FUSE wins) | Both cut at own est. prevalence: FUSE − DS |
+|---|---:|---:|---:|---:|---|---|
+| ~5 (2400 panels) | 63.1 | 63.6 | 63.4 | −0.2 | +1.1 (84%) | +0.9 (wins 66%) [+0.5, +1.4] |
+| ~10 (1200) | 64.1 | 65.8 | 64.5 | −1.3 | +0.6 (79%) | +0.8 (68%) [+0.3, +1.3] |
+| ~20 (600) | 64.9 | 67.1 | 65.0 | −2.1 | +0.3 (70%) | +0.6 (64%) [+0.1, +1.1] |
+| all 123 | 65.1 | 68.6 | 65.1 | −3.5 | | |
+
+- **FUSE as published is no better than majority vote in small panels** (+0.1 to +0.4) and loses
+  accuracy to Dawid–Skene in every panel size. Its 0.5 cut-off calls too few conversations unsafe.
+- **The one trend in the direction of the hypothesis is ranking.** FUSE's AUC edge over
+  Dawid–Skene grows as panels shrink (+0.3 → +0.6 → +1.1), but it stays about one point.
+- **With the same label-free cut-off for both** (unsafe = the top share each method estimates),
+  FUSE leads Dawid–Skene by 0.6–0.9 points and wins about two panels in three. The interval is
+  over conversations for this pool of 123 raters, averaging over all panels. The cut-off rule was
+  adopted on the dev half, so it is not fully label-free.
+- **Neither method finds the good raters better.** The Spearman correlation between estimated and
+  true rater quality is +0.66 / +0.74 / +0.78 for FUSE and +0.69 / +0.78 / +0.82 for Dawid–Skene. The
+  gap between methods barely changes in the panels where raters differ most in quality.
+- **Small panels are worse than the full crowd for every method.** The best rater in a panel,
+  picked with the labels, reaches 65.8–68.1; Dawid–Skene on all 123 raters reaches 68.6.
 
 ## Choices the paper leaves open
 
