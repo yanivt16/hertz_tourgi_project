@@ -1,0 +1,457 @@
+## gpqa-70b batch  (646 queries, 32 verifiers, 25s)
+  FUSE paper                                  66.9
+  D&S                                         56.6
+  D&S -> logistic                             55.2
+  Mean z                                      58.8
+  FUSE median thresholds                      55.6
+  D&S on FUSE thresholds -> logistic          67.3
+  Collapse repo@0.4 -> D&S -> logistic        56.0
+  Collapse repo@0.4 -> Mean z                 57.3
+  Collapse repo@0.4 -> FUSE                   52.9
+  Collapse repo@0.3 -> D&S -> logistic        54.8
+  Collapse repo@0.3 -> Mean z                 56.5
+  Collapse repo@0.3 -> FUSE                   53.1
+  Collapse ties@0.4 -> D&S -> logistic        56.2
+  Collapse ties@0.4 -> Mean z                 57.9
+  Collapse ties@0.4 -> FUSE                   55.3
+  Collapse ties@0.3 -> D&S -> logistic        55.1
+  Collapse ties@0.3 -> Mean z                 57.1
+  Collapse ties@0.3 -> FUSE                   55.3
+## gpqa-70b query  (646 queries, 32 verifiers, 250s)
+  FUSE paper                                  60.5
+  D&S                                         59.5
+  D&S -> logistic                             56.8
+  Mean z                                      59.1
+  FUSE median thresholds                      57.1
+  D&S on FUSE thresholds -> logistic          59.4
+  Collapse repo@0.4 -> D&S -> logistic        55.7
+  Collapse repo@0.4 -> Mean z                 57.6
+  Collapse repo@0.4 -> FUSE                   57.5
+  Collapse repo@0.3 -> D&S -> logistic        56.0
+  Collapse repo@0.3 -> Mean z                 57.4
+  Collapse repo@0.3 -> FUSE                   57.0
+  Collapse ties@0.4 -> D&S -> logistic        56.8
+  Collapse ties@0.4 -> Mean z                 59.0
+  Collapse ties@0.4 -> FUSE                   59.6
+  Collapse ties@0.3 -> D&S -> logistic        56.5
+  Collapse ties@0.3 -> Mean z                 58.4
+  Collapse ties@0.3 -> FUSE                   59.9
+## gpqa-diamond-70b batch  (198 queries, 32 verifiers, 7s)
+  FUSE paper                                  59.6
+  D&S                                         54.0
+  D&S -> logistic                             52.6
+  Mean z                                      55.1
+  FUSE median thresholds                      53.1
+  D&S on FUSE thresholds -> logistic          58.6
+  Collapse repo@0.4 -> D&S -> logistic        52.9
+  Collapse repo@0.4 -> Mean z                 53.5
+  Collapse repo@0.4 -> FUSE                   51.4
+  Collapse repo@0.3 -> D&S -> logistic        52.0
+  Collapse repo@0.3 -> Mean z                 54.0
+  Collapse repo@0.3 -> FUSE                   51.5
+  Collapse ties@0.4 -> D&S -> logistic        52.9
+  Collapse ties@0.4 -> Mean z                 53.5
+  Collapse ties@0.4 -> FUSE                   61.1
+  Collapse ties@0.3 -> D&S -> logistic        52.0
+  Collapse ties@0.3 -> Mean z                 54.5
+  Collapse ties@0.3 -> FUSE                   60.6
+## gpqa-diamond-70b query  (198 queries, 32 verifiers, 77s)
+  FUSE paper                                  55.1
+  D&S                                         56.6
+  D&S -> logistic                             52.5
+  Mean z                                      54.5
+  FUSE median thresholds                      54.0
+  D&S on FUSE thresholds -> logistic          54.5
+  Collapse repo@0.4 -> D&S -> logistic        52.5
+  Collapse repo@0.4 -> Mean z                 54.0
+  Collapse repo@0.4 -> FUSE                   54.0
+  Collapse repo@0.3 -> D&S -> logistic        53.0
+  Collapse repo@0.3 -> Mean z                 54.0
+  Collapse repo@0.3 -> FUSE                   54.0
+  Collapse ties@0.4 -> D&S -> logistic        53.5
+  Collapse ties@0.4 -> Mean z                 55.6
+  Collapse ties@0.4 -> FUSE                   55.6
+  Collapse ties@0.3 -> D&S -> logistic        53.0
+  Collapse ties@0.3 -> Mean z                 54.0
+  Collapse ties@0.3 -> FUSE                   55.1
+## math500-70b batch  (500 queries, 32 verifiers, 21s)
+  FUSE paper                                  94.1
+  D&S                                         86.7
+  D&S -> logistic                             87.0
+  Mean z                                      92.6
+  FUSE median thresholds                      88.2
+  D&S on FUSE thresholds -> logistic          94.4
+  Collapse repo@0.4 -> D&S -> logistic        86.6
+  Collapse repo@0.4 -> Mean z                 92.4
+  Collapse repo@0.4 -> FUSE                   87.6
+  Collapse repo@0.3 -> D&S -> logistic        87.2
+  Collapse repo@0.3 -> Mean z                 92.2
+  Collapse repo@0.3 -> FUSE                   86.6
+  Collapse ties@0.4 -> D&S -> logistic        86.4
+  Collapse ties@0.4 -> Mean z                 92.2
+  Collapse ties@0.4 -> FUSE                   92.5
+  Collapse ties@0.3 -> D&S -> logistic        86.6
+  Collapse ties@0.3 -> Mean z                 91.0
+  Collapse ties@0.3 -> FUSE                   87.2
+## math500-70b query  (500 queries, 32 verifiers, 205s)
+  FUSE paper                                  91.2
+  D&S                                         84.0
+  D&S -> logistic                             83.6
+  Mean z                                      92.4
+  FUSE median thresholds                      87.0
+  D&S on FUSE thresholds -> logistic          90.3
+  Collapse repo@0.4 -> D&S -> logistic        84.0
+  Collapse repo@0.4 -> Mean z                 90.4
+  Collapse repo@0.4 -> FUSE                   87.6
+  Collapse repo@0.3 -> D&S -> logistic        84.4
+  Collapse repo@0.3 -> Mean z                 90.4
+  Collapse repo@0.3 -> FUSE                   87.8
+  Collapse ties@0.4 -> D&S -> logistic        85.2
+  Collapse ties@0.4 -> Mean z                 91.0
+  Collapse ties@0.4 -> FUSE                   88.4
+  Collapse ties@0.3 -> D&S -> logistic        85.4
+  Collapse ties@0.3 -> Mean z                 90.8
+  Collapse ties@0.3 -> FUSE                   87.4
+## mmlu-70b batch  (719 queries, 32 verifiers, 26s)
+  FUSE paper                                  93.7
+  D&S                                         85.7
+  D&S -> logistic                             89.6
+  Mean z                                      93.0
+  FUSE median thresholds                      90.3
+  D&S on FUSE thresholds -> logistic          94.2
+  Collapse repo@0.4 -> D&S -> logistic        89.3
+  Collapse repo@0.4 -> Mean z                 92.2
+  Collapse repo@0.4 -> FUSE                   92.3
+  Collapse repo@0.3 -> D&S -> logistic        89.7
+  Collapse repo@0.3 -> Mean z                 91.7
+  Collapse repo@0.3 -> FUSE                   85.8
+  Collapse ties@0.4 -> D&S -> logistic        89.3
+  Collapse ties@0.4 -> Mean z                 93.0
+  Collapse ties@0.4 -> FUSE                   90.8
+  Collapse ties@0.3 -> D&S -> logistic        89.3
+  Collapse ties@0.3 -> Mean z                 92.2
+  Collapse ties@0.3 -> FUSE                   88.2
+## mmlu-70b query  (719 queries, 32 verifiers, 218s)
+  FUSE paper                                  92.8
+  D&S                                         87.0
+  D&S -> logistic                             88.9
+  Mean z                                      92.5
+  FUSE median thresholds                      90.1
+  D&S on FUSE thresholds -> logistic          92.6
+  Collapse repo@0.4 -> D&S -> logistic        89.3
+  Collapse repo@0.4 -> Mean z                 91.9
+  Collapse repo@0.4 -> FUSE                   91.4
+  Collapse repo@0.3 -> D&S -> logistic        89.6
+  Collapse repo@0.3 -> Mean z                 92.4
+  Collapse repo@0.3 -> FUSE                   91.5
+  Collapse ties@0.4 -> D&S -> logistic        89.0
+  Collapse ties@0.4 -> Mean z                 92.6
+  Collapse ties@0.4 -> FUSE                   93.2
+  Collapse ties@0.3 -> D&S -> logistic        89.6
+  Collapse ties@0.3 -> Mean z                 92.4
+  Collapse ties@0.3 -> FUSE                   92.8
+## mmlu-pro-70b batch  (500 queries, 32 verifiers, 15s)
+  FUSE paper                                  91.6
+  D&S                                         77.0
+  D&S -> logistic                             83.8
+  Mean z                                      86.8
+  FUSE median thresholds                      85.0
+  D&S on FUSE thresholds -> logistic          91.6
+  Collapse repo@0.4 -> D&S -> logistic        82.8
+  Collapse repo@0.4 -> Mean z                 85.8
+  Collapse repo@0.4 -> FUSE                   89.2
+  Collapse repo@0.3 -> D&S -> logistic        82.8
+  Collapse repo@0.3 -> Mean z                 86.4
+  Collapse repo@0.3 -> FUSE                   79.7
+  Collapse ties@0.4 -> D&S -> logistic        83.6
+  Collapse ties@0.4 -> Mean z                 85.8
+  Collapse ties@0.4 -> FUSE                   89.2
+  Collapse ties@0.3 -> D&S -> logistic        82.8
+  Collapse ties@0.3 -> Mean z                 86.4
+  Collapse ties@0.3 -> FUSE                   88.0
+## mmlu-pro-70b query  (500 queries, 32 verifiers, 164s)
+  FUSE paper                                  88.2
+  D&S                                         79.6
+  D&S -> logistic                             82.8
+  Mean z                                      87.0
+  FUSE median thresholds                      84.4
+  D&S on FUSE thresholds -> logistic          87.4
+  Collapse repo@0.4 -> D&S -> logistic        83.0
+  Collapse repo@0.4 -> Mean z                 85.4
+  Collapse repo@0.4 -> FUSE                   86.4
+  Collapse repo@0.3 -> D&S -> logistic        83.0
+  Collapse repo@0.3 -> Mean z                 85.4
+  Collapse repo@0.3 -> FUSE                   86.0
+  Collapse ties@0.4 -> D&S -> logistic        83.4
+  Collapse ties@0.4 -> Mean z                 87.2
+  Collapse ties@0.4 -> FUSE                   87.0
+  Collapse ties@0.3 -> D&S -> logistic        84.0
+  Collapse ties@0.3 -> Mean z                 87.4
+  Collapse ties@0.3 -> FUSE                   87.6
+## gpqa-8b batch  (646 queries, 16 verifiers, 8s)
+  FUSE paper                                  37.9
+  D&S                                         32.1
+  D&S -> logistic                             35.2
+  Mean z                                      39.8
+  FUSE median thresholds                      34.8
+  D&S on FUSE thresholds -> logistic          36.8
+  Collapse repo@0.4 -> D&S -> logistic        35.4
+  Collapse repo@0.4 -> Mean z                 39.0
+  Collapse repo@0.4 -> FUSE                   37.3
+  Collapse repo@0.3 -> D&S -> logistic        35.2
+  Collapse repo@0.3 -> Mean z                 38.2
+  Collapse repo@0.3 -> FUSE                   37.5
+  Collapse ties@0.4 -> D&S -> logistic        35.4
+  Collapse ties@0.4 -> Mean z                 39.0
+  Collapse ties@0.4 -> FUSE                   37.3
+  Collapse ties@0.3 -> D&S -> logistic        35.2
+  Collapse ties@0.3 -> Mean z                 38.2
+  Collapse ties@0.3 -> FUSE                   35.8
+## gpqa-8b query  (646 queries, 16 verifiers, 76s)
+  FUSE paper                                  38.7
+  D&S                                         30.2
+  D&S -> logistic                             35.8
+  Mean z                                      40.2
+  FUSE median thresholds                      35.3
+  D&S on FUSE thresholds -> logistic          38.3
+  Collapse repo@0.4 -> D&S -> logistic        36.1
+  Collapse repo@0.4 -> Mean z                 38.7
+  Collapse repo@0.4 -> FUSE                   37.9
+  Collapse repo@0.3 -> D&S -> logistic        36.7
+  Collapse repo@0.3 -> Mean z                 38.2
+  Collapse repo@0.3 -> FUSE                   38.3
+  Collapse ties@0.4 -> D&S -> logistic        35.9
+  Collapse ties@0.4 -> Mean z                 38.5
+  Collapse ties@0.4 -> FUSE                   37.9
+  Collapse ties@0.3 -> D&S -> logistic        36.5
+  Collapse ties@0.3 -> Mean z                 37.9
+  Collapse ties@0.3 -> FUSE                   38.1
+## gpqa-diamond-8b batch  (198 queries, 16 verifiers, 2s)
+  FUSE paper                                  31.7
+  D&S                                         32.5
+  D&S -> logistic                             36.8
+  Mean z                                      42.4
+  FUSE median thresholds                      37.7
+  D&S on FUSE thresholds -> logistic          37.3
+  Collapse repo@0.4 -> D&S -> logistic        37.0
+  Collapse repo@0.4 -> Mean z                 40.4
+  Collapse repo@0.4 -> FUSE                   32.4
+  Collapse repo@0.3 -> D&S -> logistic        37.0
+  Collapse repo@0.3 -> Mean z                 40.4
+  Collapse repo@0.3 -> FUSE                   32.4
+  Collapse ties@0.4 -> D&S -> logistic        37.0
+  Collapse ties@0.4 -> Mean z                 40.4
+  Collapse ties@0.4 -> FUSE                   31.6
+  Collapse ties@0.3 -> D&S -> logistic        37.0
+  Collapse ties@0.3 -> Mean z                 40.4
+  Collapse ties@0.3 -> FUSE                   31.6
+## gpqa-diamond-8b query  (198 queries, 16 verifiers, 28s)
+  FUSE paper                                  40.9
+  D&S                                         31.6
+  D&S -> logistic                             36.9
+  Mean z                                      42.9
+  FUSE median thresholds                      37.9
+  D&S on FUSE thresholds -> logistic          41.8
+  Collapse repo@0.4 -> D&S -> logistic        34.8
+  Collapse repo@0.4 -> Mean z                 41.9
+  Collapse repo@0.4 -> FUSE                   41.9
+  Collapse repo@0.3 -> D&S -> logistic        36.4
+  Collapse repo@0.3 -> Mean z                 42.4
+  Collapse repo@0.3 -> FUSE                   38.4
+  Collapse ties@0.4 -> D&S -> logistic        34.8
+  Collapse ties@0.4 -> Mean z                 41.4
+  Collapse ties@0.4 -> FUSE                   40.9
+  Collapse ties@0.3 -> D&S -> logistic        37.4
+  Collapse ties@0.3 -> Mean z                 40.9
+  Collapse ties@0.3 -> FUSE                   41.4
+## math500-8b batch  (500 queries, 16 verifiers, 4s)
+  FUSE paper                                  55.2
+  D&S                                         32.8
+  D&S -> logistic                             53.5
+  Mean z                                      73.2
+  FUSE median thresholds                      53.1
+  D&S on FUSE thresholds -> logistic          54.6
+  Collapse repo@0.4 -> D&S -> logistic        53.1
+  Collapse repo@0.4 -> Mean z                 69.8
+  Collapse repo@0.4 -> FUSE                   53.0
+  Collapse repo@0.3 -> D&S -> logistic        53.7
+  Collapse repo@0.3 -> Mean z                 68.6
+  Collapse repo@0.3 -> FUSE                   53.9
+  Collapse ties@0.4 -> D&S -> logistic        53.1
+  Collapse ties@0.4 -> Mean z                 69.8
+  Collapse ties@0.4 -> FUSE                   53.0
+  Collapse ties@0.3 -> D&S -> logistic        53.7
+  Collapse ties@0.3 -> Mean z                 68.6
+  Collapse ties@0.3 -> FUSE                   53.9
+## math500-8b query  (500 queries, 16 verifiers, 48s)
+  FUSE paper                                  66.0
+  D&S                                         59.7
+  D&S -> logistic                             56.4
+  Mean z                                      74.6
+  FUSE median thresholds                      59.8
+  D&S on FUSE thresholds -> logistic          63.9
+  Collapse repo@0.4 -> D&S -> logistic        56.8
+  Collapse repo@0.4 -> Mean z                 70.8
+  Collapse repo@0.4 -> FUSE                   65.2
+  Collapse repo@0.3 -> D&S -> logistic        56.6
+  Collapse repo@0.3 -> Mean z                 71.6
+  Collapse repo@0.3 -> FUSE                   64.3
+  Collapse ties@0.4 -> D&S -> logistic        56.6
+  Collapse ties@0.4 -> Mean z                 71.2
+  Collapse ties@0.4 -> FUSE                   64.2
+  Collapse ties@0.3 -> D&S -> logistic        56.0
+  Collapse ties@0.3 -> Mean z                 71.6
+  Collapse ties@0.3 -> FUSE                   64.1
+## mmlu-8b batch  (719 queries, 16 verifiers, 6s)
+  FUSE paper                                  70.6
+  D&S                                         76.6
+  D&S -> logistic                             70.5
+  Mean z                                      82.6
+  FUSE median thresholds                      69.9
+  D&S on FUSE thresholds -> logistic          74.2
+  Collapse repo@0.4 -> D&S -> logistic        70.2
+  Collapse repo@0.4 -> Mean z                 82.3
+  Collapse repo@0.4 -> FUSE                   69.7
+  Collapse repo@0.3 -> D&S -> logistic        70.0
+  Collapse repo@0.3 -> Mean z                 82.5
+  Collapse repo@0.3 -> FUSE                   69.4
+  Collapse ties@0.4 -> D&S -> logistic        70.2
+  Collapse ties@0.4 -> Mean z                 82.3
+  Collapse ties@0.4 -> FUSE                   69.7
+  Collapse ties@0.3 -> D&S -> logistic        70.0
+  Collapse ties@0.3 -> Mean z                 82.5
+  Collapse ties@0.3 -> FUSE                   69.4
+## mmlu-8b query  (719 queries, 16 verifiers, 84s)
+  FUSE paper                                  80.5
+  D&S                                         76.3
+  D&S -> logistic                             79.3
+  Mean z                                      82.9
+  FUSE median thresholds                      79.6
+  D&S on FUSE thresholds -> logistic          80.3
+  Collapse repo@0.4 -> D&S -> logistic        78.0
+  Collapse repo@0.4 -> Mean z                 82.5
+  Collapse repo@0.4 -> FUSE                   80.5
+  Collapse repo@0.3 -> D&S -> logistic        78.7
+  Collapse repo@0.3 -> Mean z                 82.8
+  Collapse repo@0.3 -> FUSE                   80.9
+  Collapse ties@0.4 -> D&S -> logistic        78.2
+  Collapse ties@0.4 -> Mean z                 82.5
+  Collapse ties@0.4 -> FUSE                   80.5
+  Collapse ties@0.3 -> D&S -> logistic        78.7
+  Collapse ties@0.3 -> Mean z                 82.8
+  Collapse ties@0.3 -> FUSE                   81.4
+## mmlu-pro-8b batch  (500 queries, 16 verifiers, 6s)
+  FUSE paper                                  60.3
+  D&S                                         55.0
+  D&S -> logistic                             65.8
+  Mean z                                      68.8
+  FUSE median thresholds                      55.3
+  D&S on FUSE thresholds -> logistic          66.4
+  Collapse repo@0.4 -> D&S -> logistic        63.4
+  Collapse repo@0.4 -> Mean z                 68.6
+  Collapse repo@0.4 -> FUSE                   69.6
+  Collapse repo@0.3 -> D&S -> logistic        66.2
+  Collapse repo@0.3 -> Mean z                 67.6
+  Collapse repo@0.3 -> FUSE                   70.0
+  Collapse ties@0.4 -> D&S -> logistic        63.4
+  Collapse ties@0.4 -> Mean z                 68.6
+  Collapse ties@0.4 -> FUSE                   67.0
+  Collapse ties@0.3 -> D&S -> logistic        66.2
+  Collapse ties@0.3 -> Mean z                 67.6
+  Collapse ties@0.3 -> FUSE                   69.0
+## mmlu-pro-8b query  (500 queries, 16 verifiers, 60s)
+  FUSE paper                                  69.0
+  D&S                                         58.0
+  D&S -> logistic                             63.8
+  Mean z                                      68.8
+  FUSE median thresholds                      65.8
+  D&S on FUSE thresholds -> logistic          66.1
+  Collapse repo@0.4 -> D&S -> logistic        65.0
+  Collapse repo@0.4 -> Mean z                 68.4
+  Collapse repo@0.4 -> FUSE                   67.4
+  Collapse repo@0.3 -> D&S -> logistic        65.4
+  Collapse repo@0.3 -> Mean z                 68.6
+  Collapse repo@0.3 -> FUSE                   66.3
+  Collapse ties@0.4 -> D&S -> logistic        64.2
+  Collapse ties@0.4 -> Mean z                 68.4
+  Collapse ties@0.4 -> FUSE                   66.0
+  Collapse ties@0.3 -> D&S -> logistic        65.8
+  Collapse ties@0.3 -> Mean z                 68.6
+  Collapse ties@0.3 -> FUSE                   67.3
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+## hle batch  (649 queries, 7 verifiers, 1s)
+  FUSE paper                                  52.2
+  D&S                                         51.6
+  D&S -> logistic                             53.2
+  Mean z                                      51.2
+  FUSE median thresholds                      52.3
+  D&S on FUSE thresholds -> logistic          52.6
+  Collapse repo@0.4 -> D&S -> logistic        53.2
+  Collapse repo@0.4 -> FUSE                   52.2
+  Collapse repo@0.4 -> Mean z                 51.2
+  Collapse repo@0.3 -> D&S -> logistic        53.2
+  Collapse repo@0.3 -> FUSE                   52.2
+  Collapse repo@0.3 -> Mean z                 51.2
+  Collapse ties@0.4 -> D&S -> logistic        53.2
+  Collapse ties@0.4 -> FUSE                   52.2
+  Collapse ties@0.4 -> Mean z                 51.2
+  Collapse ties@0.3 -> D&S -> logistic        53.2
+  Collapse ties@0.3 -> FUSE                   52.2
+  Collapse ties@0.3 -> Mean z                 51.2
+## hle query  (649 queries, 7 verifiers, 10s)
+  FUSE paper                                  53.4
+  D&S                                         50.1
+  D&S -> logistic                             49.9
+  Mean z                                      52.2
+  FUSE median thresholds                      51.4
+  D&S on FUSE thresholds -> logistic          53.4
+  Collapse repo@0.4 -> D&S -> logistic        53.2
+  Collapse repo@0.4 -> Mean z                 52.6
+  Collapse repo@0.4 -> FUSE                   52.7
+  Collapse repo@0.3 -> D&S -> logistic        53.9
+  Collapse repo@0.3 -> Mean z                 53.0
+  Collapse repo@0.3 -> FUSE                   51.5
+  Collapse ties@0.4 -> D&S -> logistic        51.2
+  Collapse ties@0.4 -> Mean z                 52.3
+  Collapse ties@0.4 -> FUSE                   53.4
+  Collapse ties@0.3 -> D&S -> logistic        50.9
+  Collapse ties@0.3 -> Mean z                 52.0
+  Collapse ties@0.3 -> FUSE                   52.5
+## imo batch  (123 queries, 9 verifiers, 0s)
+  FUSE paper                                  62.1
+  D&S                                         59.6
+  D&S -> logistic                             59.6
+  Mean z                                      62.1
+  FUSE median thresholds                      62.1
+  D&S on FUSE thresholds -> logistic          62.1
+  Collapse repo@0.4 -> D&S -> logistic        59.6
+  Collapse repo@0.4 -> FUSE                   62.1
+  Collapse repo@0.4 -> Mean z                 62.1
+  Collapse repo@0.3 -> D&S -> logistic        59.6
+  Collapse repo@0.3 -> FUSE                   62.1
+  Collapse repo@0.3 -> Mean z                 62.1
+  Collapse ties@0.4 -> D&S -> logistic        59.6
+  Collapse ties@0.4 -> FUSE                   62.1
+  Collapse ties@0.4 -> Mean z                 62.1
+  Collapse ties@0.3 -> D&S -> logistic        59.6
+  Collapse ties@0.3 -> FUSE                   62.1
+  Collapse ties@0.3 -> Mean z                 62.1
+## imo query  (123 queries, 9 verifiers, 4s)
+  FUSE paper                                  57.1
+  D&S                                         56.2
+  D&S -> logistic                             57.6
+  Mean z                                      62.1
+  FUSE median thresholds                      59.0
+  D&S on FUSE thresholds -> logistic          59.2
+  Collapse repo@0.4 -> D&S -> logistic        58.5
+  Collapse repo@0.4 -> Mean z                 62.1
+  Collapse repo@0.4 -> FUSE                   57.4
+  Collapse repo@0.3 -> D&S -> logistic        58.1
+  Collapse repo@0.3 -> Mean z                 62.1
+  Collapse repo@0.3 -> FUSE                   58.8
+  Collapse ties@0.4 -> D&S -> logistic        56.8
+  Collapse ties@0.4 -> Mean z                 62.1
+  Collapse ties@0.4 -> FUSE                   56.5
+  Collapse ties@0.3 -> D&S -> logistic        57.7
+  Collapse ties@0.3 -> Mean z                 62.1
+  Collapse ties@0.3 -> FUSE                   58.7

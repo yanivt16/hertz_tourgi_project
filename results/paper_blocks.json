@@ -1,0 +1,1767 @@
+{
+ "gpqa-70b|batch": {
+  "accuracy": {
+   "FUSE paper": 66.87306501547987,
+   "D&S": 56.59184726522187,
+   "D&S -> logistic": 55.196184280911496,
+   "Mean z": 58.82352941176471,
+   "FUSE median thresholds": 55.58219504599098,
+   "D&S on FUSE thresholds -> logistic": 67.3374613003096,
+   "Collapse repo@0.4 -> D&S -> logistic": 55.9530055199007,
+   "Collapse repo@0.4 -> Mean z": 57.27554179566563,
+   "Collapse repo@0.4 -> FUSE": 52.88002386549533,
+   "Collapse repo@0.3 -> D&S -> logistic": 54.78481113711986,
+   "Collapse repo@0.3 -> Mean z": 56.5015479876161,
+   "Collapse repo@0.3 -> FUSE": 53.08148988504846,
+   "Collapse ties@0.4 -> D&S -> logistic": 56.15030573706432,
+   "Collapse ties@0.4 -> Mean z": 57.89473684210527,
+   "Collapse ties@0.4 -> FUSE": 55.30982597110972,
+   "Collapse ties@0.3 -> D&S -> logistic": 55.13650190758946,
+   "Collapse ties@0.3 -> Mean z": 57.120743034055735,
+   "Collapse ties@0.3 -> FUSE": 55.33558053640365
+  },
+  "m": 32,
+  "queries": 646,
+  "groups": {
+   "repo@0.4": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Mixtral-8x22B-Instruct-v0.1_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts",
+     "SkyT1_verdicts"
+    ]
+   ],
+   "repo@0.3": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "LDLRewardGemma_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_max_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage1_min_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Mixtral-8x22B-Instruct-v0.1_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts",
+     "SkyT1_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ]
+   ],
+   "ties@0.4": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts"
+    ]
+   ],
+   "ties@0.3": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_max_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage1_min_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "LDLRewardGemma_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Mixtral-8x22B-Instruct-v0.1_verdicts"
+    ]
+   ]
+  },
+  "columns": {
+   "repo@0.4": 22,
+   "repo@0.3": 17,
+   "ties@0.4": 26,
+   "ties@0.3": 21
+  }
+ },
+ "gpqa-70b|query": {
+  "accuracy": {
+   "FUSE paper": 60.526315789473685,
+   "D&S": 59.53508807152672,
+   "D&S -> logistic": 56.811145510835914,
+   "Mean z": 59.133126934984524,
+   "FUSE median thresholds": 57.120743034055735,
+   "D&S on FUSE thresholds -> logistic": 59.44272445820433,
+   "Collapse repo@0.4 -> D&S -> logistic": 55.72755417956656,
+   "Collapse repo@0.4 -> Mean z": 57.585139318885446,
+   "Collapse repo@0.4 -> FUSE": 57.50773993808049,
+   "Collapse repo@0.3 -> D&S -> logistic": 56.03715170278638,
+   "Collapse repo@0.3 -> Mean z": 57.43034055727554,
+   "Collapse repo@0.3 -> FUSE": 57.0046439628483,
+   "Collapse ties@0.4 -> D&S -> logistic": 56.811145510835914,
+   "Collapse ties@0.4 -> Mean z": 58.978328173374614,
+   "Collapse ties@0.4 -> FUSE": 59.59752321981424,
+   "Collapse ties@0.3 -> D&S -> logistic": 56.5015479876161,
+   "Collapse ties@0.3 -> Mean z": 58.35913312693498,
+   "Collapse ties@0.3 -> FUSE": 59.907120743034056
+  },
+  "m": 32,
+  "queries": 646,
+  "mean_columns": {
+   "repo@0.4": 19.41950464396285,
+   "repo@0.3": 16.371517027863778,
+   "ties@0.4": 25.205882352941178,
+   "ties@0.3": 22.075851393188856
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 1.0,
+   "repo@0.3": 1.0,
+   "ties@0.4": 0.9969040247678018,
+   "ties@0.3": 0.9984520123839009
+  }
+ },
+ "gpqa-diamond-70b|batch": {
+  "accuracy": {
+   "FUSE paper": 59.59595959595959,
+   "D&S": 53.956228956228955,
+   "D&S -> logistic": 52.578098798288664,
+   "Mean z": 55.05050505050505,
+   "FUSE median thresholds": 53.118908540058875,
+   "D&S on FUSE thresholds -> logistic": 58.58585858585859,
+   "Collapse repo@0.4 -> D&S -> logistic": 52.9109890769399,
+   "Collapse repo@0.4 -> Mean z": 53.535353535353536,
+   "Collapse repo@0.4 -> FUSE": 51.422363802320604,
+   "Collapse repo@0.3 -> D&S -> logistic": 52.04835598264423,
+   "Collapse repo@0.3 -> Mean z": 54.04040404040404,
+   "Collapse repo@0.3 -> FUSE": 51.52078029268717,
+   "Collapse ties@0.4 -> D&S -> logistic": 52.917834918516604,
+   "Collapse ties@0.4 -> Mean z": 53.535353535353536,
+   "Collapse ties@0.4 -> FUSE": 61.111111111111114,
+   "Collapse ties@0.3 -> D&S -> logistic": 52.02801937191796,
+   "Collapse ties@0.3 -> Mean z": 54.54545454545454,
+   "Collapse ties@0.3 -> FUSE": 60.60606060606061
+  },
+  "m": 32,
+  "queries": 198,
+  "groups": {
+   "repo@0.4": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "QRMGemma_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Mixtral-8x22B-Instruct-v0.1_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts",
+     "SkyT1_verdicts"
+    ]
+   ],
+   "repo@0.3": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_max_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage1_min_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "LDLRewardGemma_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Mixtral-8x22B-Instruct-v0.1_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts",
+     "SkyT1_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ]
+   ],
+   "ties@0.4": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ]
+   ],
+   "ties@0.3": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "LDLRewardGemma_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "Mixtral-8x22B-Instruct-v0.1_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_max_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage1_min_scores"
+    ]
+   ]
+  },
+  "columns": {
+   "repo@0.4": 22,
+   "repo@0.3": 17,
+   "ties@0.4": 26,
+   "ties@0.3": 21
+  }
+ },
+ "gpqa-diamond-70b|query": {
+  "accuracy": {
+   "FUSE paper": 55.05050505050505,
+   "D&S": 56.635707929684855,
+   "D&S -> logistic": 52.52525252525253,
+   "Mean z": 54.54545454545454,
+   "FUSE median thresholds": 54.04040404040404,
+   "D&S on FUSE thresholds -> logistic": 54.54545454545454,
+   "Collapse repo@0.4 -> D&S -> logistic": 52.52525252525253,
+   "Collapse repo@0.4 -> Mean z": 54.04040404040404,
+   "Collapse repo@0.4 -> FUSE": 54.04040404040404,
+   "Collapse repo@0.3 -> D&S -> logistic": 53.03030303030303,
+   "Collapse repo@0.3 -> Mean z": 54.04040404040404,
+   "Collapse repo@0.3 -> FUSE": 54.04040404040404,
+   "Collapse ties@0.4 -> D&S -> logistic": 53.535353535353536,
+   "Collapse ties@0.4 -> Mean z": 55.55555555555556,
+   "Collapse ties@0.4 -> FUSE": 55.55555555555556,
+   "Collapse ties@0.3 -> D&S -> logistic": 53.03030303030303,
+   "Collapse ties@0.3 -> Mean z": 54.04040404040404,
+   "Collapse ties@0.3 -> FUSE": 55.05050505050505
+  },
+  "m": 32,
+  "queries": 198,
+  "mean_columns": {
+   "repo@0.4": 19.63131313131313,
+   "repo@0.3": 16.51010101010101,
+   "ties@0.4": 25.282828282828284,
+   "ties@0.3": 22.095959595959595
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 1.0,
+   "repo@0.3": 1.0,
+   "ties@0.4": 0.9949494949494949,
+   "ties@0.3": 0.9949494949494949
+  }
+ },
+ "math500-70b|batch": {
+  "accuracy": {
+   "FUSE paper": 94.05333333333333,
+   "D&S": 86.68269182331115,
+   "D&S -> logistic": 87.0,
+   "Mean z": 92.60000000000001,
+   "FUSE median thresholds": 88.2,
+   "D&S on FUSE thresholds -> logistic": 94.39999999999999,
+   "Collapse repo@0.4 -> D&S -> logistic": 86.6,
+   "Collapse repo@0.4 -> Mean z": 92.4,
+   "Collapse repo@0.4 -> FUSE": 87.6,
+   "Collapse repo@0.3 -> D&S -> logistic": 87.2,
+   "Collapse repo@0.3 -> Mean z": 92.2,
+   "Collapse repo@0.3 -> FUSE": 86.6,
+   "Collapse ties@0.4 -> D&S -> logistic": 86.4,
+   "Collapse ties@0.4 -> Mean z": 92.2,
+   "Collapse ties@0.4 -> FUSE": 92.53333333333332,
+   "Collapse ties@0.3 -> D&S -> logistic": 86.6,
+   "Collapse ties@0.3 -> Mean z": 91.0,
+   "Collapse ties@0.3 -> FUSE": 87.2
+  },
+  "m": 32,
+  "queries": 500,
+  "groups": {
+   "repo@0.4": [
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Mixtral-8x22B-Instruct-v0.1_verdicts"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts",
+     "SkyT1_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "QRMGemma_scores"
+    ],
+    [
+     "GRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ]
+   ],
+   "repo@0.3": [
+    [
+     "EurusPRMStage1_max_scores",
+     "LDLRewardGemma_scores"
+    ],
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Mixtral-8x22B-Instruct-v0.1_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts",
+     "SkyT1_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "QRMGemma_scores"
+    ],
+    [
+     "GRMGemma_scores",
+     "INFORM_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ]
+   ],
+   "ties@0.4": [
+    [
+     "DecisionTreeReward27B_scores",
+     "QRMGemma_scores"
+    ],
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ]
+   ],
+   "ties@0.3": [
+    [
+     "EurusPRMStage1_max_scores",
+     "LDLRewardGemma_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "QRMGemma_scores"
+    ],
+    [
+     "GRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ],
+    [
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Mixtral-8x22B-Instruct-v0.1_verdicts"
+    ],
+    [
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "Qwen/Qwen2.5-72B-Instruct_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts",
+     "Qwen72B_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores",
+     "SkyT1_verdicts"
+    ]
+   ]
+  },
+  "columns": {
+   "repo@0.4": 20,
+   "repo@0.3": 17,
+   "ties@0.4": 26,
+   "ties@0.3": 19
+  }
+ },
+ "math500-70b|query": {
+  "accuracy": {
+   "FUSE paper": 91.2,
+   "D&S": 83.97455525112095,
+   "D&S -> logistic": 83.6,
+   "Mean z": 92.4,
+   "FUSE median thresholds": 87.0,
+   "D&S on FUSE thresholds -> logistic": 90.34,
+   "Collapse repo@0.4 -> D&S -> logistic": 84.0,
+   "Collapse repo@0.4 -> Mean z": 90.4,
+   "Collapse repo@0.4 -> FUSE": 87.6,
+   "Collapse repo@0.3 -> D&S -> logistic": 84.39999999999999,
+   "Collapse repo@0.3 -> Mean z": 90.4,
+   "Collapse repo@0.3 -> FUSE": 87.8,
+   "Collapse ties@0.4 -> D&S -> logistic": 85.2,
+   "Collapse ties@0.4 -> Mean z": 91.0,
+   "Collapse ties@0.4 -> FUSE": 88.4,
+   "Collapse ties@0.3 -> D&S -> logistic": 85.39999999999999,
+   "Collapse ties@0.3 -> Mean z": 90.8,
+   "Collapse ties@0.3 -> FUSE": 87.4
+  },
+  "m": 32,
+  "queries": 500,
+  "mean_columns": {
+   "repo@0.4": 20.766,
+   "repo@0.3": 17.73,
+   "ties@0.4": 25.736,
+   "ties@0.3": 22.214
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 1.0,
+   "repo@0.3": 1.0,
+   "ties@0.4": 0.982,
+   "ties@0.3": 0.996
+  }
+ },
+ "mmlu-70b|batch": {
+  "accuracy": {
+   "FUSE paper": 93.7413073713491,
+   "D&S": 85.71606702430815,
+   "D&S -> logistic": 89.58430452557259,
+   "Mean z": 93.04589707927677,
+   "FUSE median thresholds": 90.34150719334389,
+   "D&S on FUSE thresholds -> logistic": 94.1585535465925,
+   "Collapse repo@0.4 -> D&S -> logistic": 89.3359453948029,
+   "Collapse repo@0.4 -> Mean z": 92.21140472878999,
+   "Collapse repo@0.4 -> FUSE": 92.34845850718591,
+   "Collapse repo@0.3 -> D&S -> logistic": 89.6794636878086,
+   "Collapse repo@0.3 -> Mean z": 91.65507649513212,
+   "Collapse repo@0.3 -> FUSE": 85.83815923517643,
+   "Collapse ties@0.4 -> D&S -> logistic": 89.28958470866475,
+   "Collapse ties@0.4 -> Mean z": 93.04589707927677,
+   "Collapse ties@0.4 -> FUSE": 90.82058414464534,
+   "Collapse ties@0.3 -> D&S -> logistic": 89.3359453948029,
+   "Collapse ties@0.3 -> Mean z": 92.21140472878999,
+   "Collapse ties@0.3 -> FUSE": 88.18864899547432
+  },
+  "m": 32,
+  "queries": 719,
+  "groups": {
+   "repo@0.4": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ],
+    [
+     "EurusPRMStage1_min_scores",
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "SkyT1_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts"
+    ]
+   ],
+   "repo@0.3": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "INFORM_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ],
+    [
+     "EurusPRMStage1_min_scores",
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Mixtral-8x22B-Instruct-v0.1_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts",
+     "SkyT1_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ]
+   ],
+   "ties@0.4": [
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts"
+    ],
+    [
+     "EurusPRMStage1_min_scores",
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ]
+   ],
+   "ties@0.3": [
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts"
+    ],
+    [
+     "EurusPRMStage1_min_scores",
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "DeepSeekQwen32B_verdicts",
+     "Llama-3.3-70B-Instruct_verdicts",
+     "SkyT1_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ]
+   ]
+  },
+  "columns": {
+   "repo@0.4": 20,
+   "repo@0.3": 17,
+   "ties@0.4": 23,
+   "ties@0.3": 20
+  }
+ },
+ "mmlu-70b|query": {
+  "accuracy": {
+   "FUSE paper": 92.76773296244785,
+   "D&S": 87.02606695322804,
+   "D&S -> logistic": 88.87343532684284,
+   "Mean z": 92.48956884561892,
+   "FUSE median thresholds": 90.12517385257301,
+   "D&S on FUSE thresholds -> logistic": 92.62865090403338,
+   "Collapse repo@0.4 -> D&S -> logistic": 89.29068150208623,
+   "Collapse repo@0.4 -> Mean z": 91.93324061196105,
+   "Collapse repo@0.4 -> FUSE": 91.3769123783032,
+   "Collapse repo@0.3 -> D&S -> logistic": 89.56884561891516,
+   "Collapse repo@0.3 -> Mean z": 92.35048678720446,
+   "Collapse repo@0.3 -> FUSE": 91.51599443671766,
+   "Collapse ties@0.4 -> D&S -> logistic": 89.01251738525731,
+   "Collapse ties@0.4 -> Mean z": 92.62865090403338,
+   "Collapse ties@0.4 -> FUSE": 93.18497913769124,
+   "Collapse ties@0.3 -> D&S -> logistic": 89.56884561891516,
+   "Collapse ties@0.3 -> Mean z": 92.35048678720446,
+   "Collapse ties@0.3 -> FUSE": 92.76773296244785
+  },
+  "m": 32,
+  "queries": 719,
+  "mean_columns": {
+   "repo@0.4": 16.386648122392213,
+   "repo@0.3": 13.510431154381084,
+   "ties@0.4": 21.910987482614743,
+   "ties@0.3": 18.891515994436716
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 1.0,
+   "repo@0.3": 1.0,
+   "ties@0.4": 1.0,
+   "ties@0.3": 1.0
+  }
+ },
+ "mmlu-pro-70b|batch": {
+  "accuracy": {
+   "FUSE paper": 91.60000000000001,
+   "D&S": 76.97504041954421,
+   "D&S -> logistic": 83.79820305480682,
+   "Mean z": 86.8,
+   "FUSE median thresholds": 85.0,
+   "D&S on FUSE thresholds -> logistic": 91.60000000000001,
+   "Collapse repo@0.4 -> D&S -> logistic": 82.8,
+   "Collapse repo@0.4 -> Mean z": 85.8,
+   "Collapse repo@0.4 -> FUSE": 89.2,
+   "Collapse repo@0.3 -> D&S -> logistic": 82.8,
+   "Collapse repo@0.3 -> Mean z": 86.4,
+   "Collapse repo@0.3 -> FUSE": 79.67386703965711,
+   "Collapse ties@0.4 -> D&S -> logistic": 83.6,
+   "Collapse ties@0.4 -> Mean z": 85.8,
+   "Collapse ties@0.4 -> FUSE": 89.2,
+   "Collapse ties@0.3 -> D&S -> logistic": 82.8,
+   "Collapse ties@0.3 -> Mean z": 86.4,
+   "Collapse ties@0.3 -> FUSE": 88.0
+  },
+  "m": 32,
+  "queries": 500,
+  "groups": {
+   "repo@0.4": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "INFORM_scores",
+     "LDLRewardGemma_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "EurusPRMStage1_min_scores",
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "Mixtral-8x22B-Instruct-v0.1_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts",
+     "SkyT1_verdicts"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ]
+   ],
+   "repo@0.3": [
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "INFORM_scores",
+     "LDLRewardGemma_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "EurusPRMStage1_min_scores",
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "Llama-3.3-70B-Instruct_verdicts",
+     "Mixtral-8x22B-Instruct-v0.1_verdicts",
+     "Qwen/Qwen2.5-72B-Instruct_verdicts",
+     "SkyT1_verdicts"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts",
+     "GPM_scores",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_max_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ]
+   ],
+   "ties@0.4": [
+    [
+     "EurusPRMStage1_min_scores",
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "INFORM_scores",
+     "QRMGemma_scores"
+    ],
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ]
+   ],
+   "ties@0.3": [
+    [
+     "EurusPRMStage1_min_scores",
+     "EurusPRMStage2_avg_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_max_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "DeepSeekLlama70B_verdicts",
+     "DeepSeekQwen32B_verdicts",
+     "GPM_scores",
+     "Meta-Llama-3.1-405B-Instruct-quantized.w8a16_verdicts",
+     "WizardLM-2-8x22B_verdicts"
+    ],
+    [
+     "InternLM2Reward7B_scores",
+     "InternLM2RewardModel_scores"
+    ],
+    [
+     "DecisionTreeReward27B_scores",
+     "INFORM_scores",
+     "LDLRewardGemma_scores",
+     "QRMGemma_scores",
+     "SkyworksGemma_scores"
+    ],
+    [
+     "DecisionTreeReward8B_scores",
+     "QRM_scores"
+    ]
+   ]
+  },
+  "columns": {
+   "repo@0.4": 18,
+   "repo@0.3": 15,
+   "ties@0.4": 22,
+   "ties@0.3": 18
+  }
+ },
+ "mmlu-pro-70b|query": {
+  "accuracy": {
+   "FUSE paper": 88.2,
+   "D&S": 79.57739034725489,
+   "D&S -> logistic": 82.8,
+   "Mean z": 87.0,
+   "FUSE median thresholds": 84.39999999999999,
+   "D&S on FUSE thresholds -> logistic": 87.4,
+   "Collapse repo@0.4 -> D&S -> logistic": 83.0,
+   "Collapse repo@0.4 -> Mean z": 85.39999999999999,
+   "Collapse repo@0.4 -> FUSE": 86.4,
+   "Collapse repo@0.3 -> D&S -> logistic": 83.0,
+   "Collapse repo@0.3 -> Mean z": 85.39999999999999,
+   "Collapse repo@0.3 -> FUSE": 86.0,
+   "Collapse ties@0.4 -> D&S -> logistic": 83.39999999999999,
+   "Collapse ties@0.4 -> Mean z": 87.2,
+   "Collapse ties@0.4 -> FUSE": 87.0,
+   "Collapse ties@0.3 -> D&S -> logistic": 84.0,
+   "Collapse ties@0.3 -> Mean z": 87.4,
+   "Collapse ties@0.3 -> FUSE": 87.6
+  },
+  "m": 32,
+  "queries": 500,
+  "mean_columns": {
+   "repo@0.4": 18.032,
+   "repo@0.3": 15.112,
+   "ties@0.4": 22.692,
+   "ties@0.3": 19.502
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 1.0,
+   "repo@0.3": 1.0,
+   "ties@0.4": 0.998,
+   "ties@0.3": 0.998
+  }
+ },
+ "gpqa-8b|batch": {
+  "accuracy": {
+   "FUSE paper": 37.925696594427244,
+   "D&S": 32.13751603145109,
+   "D&S -> logistic": 35.161492235028014,
+   "Mean z": 39.78328173374613,
+   "FUSE median thresholds": 34.789701502614335,
+   "D&S on FUSE thresholds -> logistic": 36.84210526315789,
+   "Collapse repo@0.4 -> D&S -> logistic": 35.36311021541586,
+   "Collapse repo@0.4 -> Mean z": 39.0092879256966,
+   "Collapse repo@0.4 -> FUSE": 37.306501547987615,
+   "Collapse repo@0.3 -> D&S -> logistic": 35.2163968517644,
+   "Collapse repo@0.3 -> Mean z": 38.23529411764706,
+   "Collapse repo@0.3 -> FUSE": 37.461300309597526,
+   "Collapse ties@0.4 -> D&S -> logistic": 35.36311021541586,
+   "Collapse ties@0.4 -> Mean z": 39.0092879256966,
+   "Collapse ties@0.4 -> FUSE": 37.306501547987615,
+   "Collapse ties@0.3 -> D&S -> logistic": 35.2163968517644,
+   "Collapse ties@0.3 -> Mean z": 38.23529411764706,
+   "Collapse ties@0.3 -> FUSE": 35.758513931888544
+  },
+  "m": 16,
+  "queries": 646,
+  "groups": {
+   "repo@0.4": [
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ]
+   ],
+   "repo@0.3": [
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage2_max_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ]
+   ],
+   "ties@0.4": [
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores"
+    ]
+   ],
+   "ties@0.3": [
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage2_max_scores"
+    ]
+   ]
+  },
+  "columns": {
+   "repo@0.4": 14,
+   "repo@0.3": 13,
+   "ties@0.4": 14,
+   "ties@0.3": 13
+  }
+ },
+ "gpqa-8b|query": {
+  "accuracy": {
+   "FUSE paper": 38.69969040247678,
+   "D&S": 30.225913395041843,
+   "D&S -> logistic": 35.758513931888544,
+   "Mean z": 40.24767801857585,
+   "FUSE median thresholds": 35.294117647058826,
+   "D&S on FUSE thresholds -> logistic": 38.33454220973066,
+   "Collapse repo@0.4 -> D&S -> logistic": 36.06811145510836,
+   "Collapse repo@0.4 -> Mean z": 38.69969040247678,
+   "Collapse repo@0.4 -> FUSE": 37.925696594427244,
+   "Collapse repo@0.3 -> D&S -> logistic": 36.68730650154799,
+   "Collapse repo@0.3 -> Mean z": 38.23529411764706,
+   "Collapse repo@0.3 -> FUSE": 38.28173374613003,
+   "Collapse ties@0.4 -> D&S -> logistic": 35.91331269349845,
+   "Collapse ties@0.4 -> Mean z": 38.54489164086687,
+   "Collapse ties@0.4 -> FUSE": 37.925696594427244,
+   "Collapse ties@0.3 -> D&S -> logistic": 36.53250773993808,
+   "Collapse ties@0.3 -> Mean z": 37.925696594427244,
+   "Collapse ties@0.3 -> FUSE": 38.126934984520126
+  },
+  "m": 16,
+  "queries": 646,
+  "mean_columns": {
+   "repo@0.4": 12.193498452012383,
+   "repo@0.3": 10.628482972136222,
+   "ties@0.4": 12.213622291021672,
+   "ties@0.3": 10.639318885448917
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 0.9891640866873065,
+   "repo@0.3": 0.9938080495356038,
+   "ties@0.4": 0.9891640866873065,
+   "ties@0.3": 0.9922600619195047
+  }
+ },
+ "gpqa-diamond-8b|batch": {
+  "accuracy": {
+   "FUSE paper": 31.653748309464348,
+   "D&S": 32.46109179569187,
+   "D&S -> logistic": 36.785890159553254,
+   "Mean z": 42.42424242424242,
+   "FUSE median thresholds": 37.69218121737119,
+   "D&S on FUSE thresholds -> logistic": 37.34247234247234,
+   "Collapse repo@0.4 -> D&S -> logistic": 37.01781026475215,
+   "Collapse repo@0.4 -> Mean z": 40.4040404040404,
+   "Collapse repo@0.4 -> FUSE": 32.403573051216696,
+   "Collapse repo@0.3 -> D&S -> logistic": 37.01781026475215,
+   "Collapse repo@0.3 -> Mean z": 40.4040404040404,
+   "Collapse repo@0.3 -> FUSE": 32.403573051216696,
+   "Collapse ties@0.4 -> D&S -> logistic": 37.01781026475215,
+   "Collapse ties@0.4 -> Mean z": 40.4040404040404,
+   "Collapse ties@0.4 -> FUSE": 31.632027034461807,
+   "Collapse ties@0.3 -> D&S -> logistic": 37.01781026475215,
+   "Collapse ties@0.3 -> Mean z": 40.4040404040404,
+   "Collapse ties@0.3 -> FUSE": 31.632027034461807
+  },
+  "m": 16,
+  "queries": 198,
+  "groups": {
+   "repo@0.4": [
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores"
+    ]
+   ],
+   "repo@0.3": [
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores"
+    ]
+   ],
+   "ties@0.4": [
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ]
+   ],
+   "ties@0.3": [
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ]
+   ]
+  },
+  "columns": {
+   "repo@0.4": 14,
+   "repo@0.3": 14,
+   "ties@0.4": 14,
+   "ties@0.3": 14
+  }
+ },
+ "gpqa-diamond-8b|query": {
+  "accuracy": {
+   "FUSE paper": 40.909090909090914,
+   "D&S": 31.606547554241686,
+   "D&S -> logistic": 36.868686868686865,
+   "Mean z": 42.92929292929293,
+   "FUSE median thresholds": 37.878787878787875,
+   "D&S on FUSE thresholds -> logistic": 41.79101321958464,
+   "Collapse repo@0.4 -> D&S -> logistic": 34.84848484848485,
+   "Collapse repo@0.4 -> Mean z": 41.91919191919192,
+   "Collapse repo@0.4 -> FUSE": 41.91919191919192,
+   "Collapse repo@0.3 -> D&S -> logistic": 36.36363636363637,
+   "Collapse repo@0.3 -> Mean z": 42.42424242424242,
+   "Collapse repo@0.3 -> FUSE": 38.38383838383838,
+   "Collapse ties@0.4 -> D&S -> logistic": 34.84848484848485,
+   "Collapse ties@0.4 -> Mean z": 41.41414141414141,
+   "Collapse ties@0.4 -> FUSE": 40.909090909090914,
+   "Collapse ties@0.3 -> D&S -> logistic": 37.37373737373738,
+   "Collapse ties@0.3 -> Mean z": 40.909090909090914,
+   "Collapse ties@0.3 -> FUSE": 41.41414141414141
+  },
+  "m": 16,
+  "queries": 198,
+  "mean_columns": {
+   "repo@0.4": 12.242424242424242,
+   "repo@0.3": 10.621212121212121,
+   "ties@0.4": 12.267676767676768,
+   "ties@0.3": 10.646464646464647
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 0.9949494949494949,
+   "repo@0.3": 0.9949494949494949,
+   "ties@0.4": 0.9949494949494949,
+   "ties@0.3": 0.9949494949494949
+  }
+ },
+ "math500-8b|batch": {
+  "accuracy": {
+   "FUSE paper": 55.20751398225621,
+   "D&S": 32.77337301587301,
+   "D&S -> logistic": 53.50774806264382,
+   "Mean z": 73.2,
+   "FUSE median thresholds": 53.134050115076846,
+   "D&S on FUSE thresholds -> logistic": 54.63959439998389,
+   "Collapse repo@0.4 -> D&S -> logistic": 53.093303927639255,
+   "Collapse repo@0.4 -> Mean z": 69.8,
+   "Collapse repo@0.4 -> FUSE": 53.008630982406935,
+   "Collapse repo@0.3 -> D&S -> logistic": 53.669171911419575,
+   "Collapse repo@0.3 -> Mean z": 68.60000000000001,
+   "Collapse repo@0.3 -> FUSE": 53.89210626485722,
+   "Collapse ties@0.4 -> D&S -> logistic": 53.093303927639255,
+   "Collapse ties@0.4 -> Mean z": 69.8,
+   "Collapse ties@0.4 -> FUSE": 53.008630982406935,
+   "Collapse ties@0.3 -> D&S -> logistic": 53.669171911419575,
+   "Collapse ties@0.3 -> Mean z": 68.60000000000001,
+   "Collapse ties@0.3 -> FUSE": 53.89210626485722
+  },
+  "m": 16,
+  "queries": 500,
+  "groups": {
+   "repo@0.4": [
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage2_min_scores"
+    ]
+   ],
+   "repo@0.3": [
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage2_max_scores",
+     "EurusPRMStage2_min_scores",
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "QRM_scores",
+     "Skyworks_scores"
+    ],
+    [
+     "OffsetBias_scores",
+     "URM_scores"
+    ]
+   ],
+   "ties@0.4": [
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage2_min_scores"
+    ]
+   ],
+   "ties@0.3": [
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage2_max_scores",
+     "EurusPRMStage2_min_scores",
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "QRM_scores",
+     "Skyworks_scores"
+    ],
+    [
+     "OffsetBias_scores",
+     "URM_scores"
+    ]
+   ]
+  },
+  "columns": {
+   "repo@0.4": 13,
+   "repo@0.3": 9,
+   "ties@0.4": 13,
+   "ties@0.3": 9
+  }
+ },
+ "math500-8b|query": {
+  "accuracy": {
+   "FUSE paper": 66.0,
+   "D&S": 59.654377289377294,
+   "D&S -> logistic": 56.39999999999999,
+   "Mean z": 74.6,
+   "FUSE median thresholds": 59.8,
+   "D&S on FUSE thresholds -> logistic": 63.91482828282828,
+   "Collapse repo@0.4 -> D&S -> logistic": 56.8,
+   "Collapse repo@0.4 -> Mean z": 70.8,
+   "Collapse repo@0.4 -> FUSE": 65.2,
+   "Collapse repo@0.3 -> D&S -> logistic": 56.599999999999994,
+   "Collapse repo@0.3 -> Mean z": 71.6,
+   "Collapse repo@0.3 -> FUSE": 64.25087719298246,
+   "Collapse ties@0.4 -> D&S -> logistic": 56.599999999999994,
+   "Collapse ties@0.4 -> Mean z": 71.2,
+   "Collapse ties@0.4 -> FUSE": 64.2,
+   "Collapse ties@0.3 -> D&S -> logistic": 56.00000000000001,
+   "Collapse ties@0.3 -> Mean z": 71.6,
+   "Collapse ties@0.3 -> FUSE": 64.05087719298245
+  },
+  "m": 16,
+  "queries": 500,
+  "mean_columns": {
+   "repo@0.4": 10.904,
+   "repo@0.3": 9.108,
+   "ties@0.4": 10.908,
+   "ties@0.3": 9.104
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 1.0,
+   "repo@0.3": 1.0,
+   "ties@0.4": 1.0,
+   "ties@0.3": 1.0
+  }
+ },
+ "mmlu-8b|batch": {
+  "accuracy": {
+   "FUSE paper": 70.5540743757785,
+   "D&S": 76.6453076362673,
+   "D&S -> logistic": 70.47475677190023,
+   "Mean z": 82.61474269819193,
+   "FUSE median thresholds": 69.92098710752931,
+   "D&S on FUSE thresholds -> logistic": 74.17337381580657,
+   "Collapse repo@0.4 -> D&S -> logistic": 70.22578266158229,
+   "Collapse repo@0.4 -> Mean z": 82.336578581363,
+   "Collapse repo@0.4 -> FUSE": 69.70070373369391,
+   "Collapse repo@0.3 -> D&S -> logistic": 70.03541683027981,
+   "Collapse repo@0.3 -> Mean z": 82.47566063977747,
+   "Collapse repo@0.3 -> FUSE": 69.35181566723884,
+   "Collapse ties@0.4 -> D&S -> logistic": 70.22578266158229,
+   "Collapse ties@0.4 -> Mean z": 82.336578581363,
+   "Collapse ties@0.4 -> FUSE": 69.70070373369391,
+   "Collapse ties@0.3 -> D&S -> logistic": 70.03541683027981,
+   "Collapse ties@0.3 -> Mean z": 82.47566063977747,
+   "Collapse ties@0.3 -> FUSE": 69.35181566723884
+  },
+  "m": 16,
+  "queries": 719,
+  "groups": {
+   "repo@0.4": [
+    [
+     "ArmorRM_scores",
+     "OffsetBias_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ]
+   ],
+   "repo@0.3": [
+    [
+     "ArmorRM_scores",
+     "OffsetBias_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage2_max_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "GRM_scores",
+     "InternLM2Reward7B_scores"
+    ]
+   ],
+   "ties@0.4": [
+    [
+     "ArmorRM_scores",
+     "OffsetBias_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ]
+   ],
+   "ties@0.3": [
+    [
+     "ArmorRM_scores",
+     "OffsetBias_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage2_max_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "GRM_scores",
+     "InternLM2Reward7B_scores"
+    ]
+   ]
+  },
+  "columns": {
+   "repo@0.4": 13,
+   "repo@0.3": 11,
+   "ties@0.4": 13,
+   "ties@0.3": 11
+  }
+ },
+ "mmlu-8b|query": {
+  "accuracy": {
+   "FUSE paper": 80.52851182197497,
+   "D&S": 76.30085375912914,
+   "D&S -> logistic": 79.27677329624478,
+   "Mean z": 82.89290681502086,
+   "FUSE median thresholds": 79.55493741307372,
+   "D&S on FUSE thresholds -> logistic": 80.29050009070568,
+   "Collapse repo@0.4 -> D&S -> logistic": 78.0250347705146,
+   "Collapse repo@0.4 -> Mean z": 82.47566063977747,
+   "Collapse repo@0.4 -> FUSE": 80.52851182197497,
+   "Collapse repo@0.3 -> D&S -> logistic": 78.72044506258693,
+   "Collapse repo@0.3 -> Mean z": 82.75382475660639,
+   "Collapse repo@0.3 -> FUSE": 80.94575799721837,
+   "Collapse ties@0.4 -> D&S -> logistic": 78.16411682892907,
+   "Collapse ties@0.4 -> Mean z": 82.47566063977747,
+   "Collapse ties@0.4 -> FUSE": 80.52851182197497,
+   "Collapse ties@0.3 -> D&S -> logistic": 78.72044506258693,
+   "Collapse ties@0.3 -> Mean z": 82.75382475660639,
+   "Collapse ties@0.3 -> FUSE": 81.36300417246176
+  },
+  "m": 16,
+  "queries": 719,
+  "mean_columns": {
+   "repo@0.4": 12.147426981919333,
+   "repo@0.3": 10.465924895688456,
+   "ties@0.4": 12.15855354659249,
+   "ties@0.3": 10.468706536856745
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 1.0,
+   "repo@0.3": 1.0,
+   "ties@0.4": 1.0,
+   "ties@0.3": 1.0
+  }
+ },
+ "mmlu-pro-8b|batch": {
+  "accuracy": {
+   "FUSE paper": 60.33111808486994,
+   "D&S": 54.99000000000001,
+   "D&S -> logistic": 65.85,
+   "Mean z": 68.8,
+   "FUSE median thresholds": 55.283364024818795,
+   "D&S on FUSE thresholds -> logistic": 66.4,
+   "Collapse repo@0.4 -> D&S -> logistic": 63.448553125237325,
+   "Collapse repo@0.4 -> Mean z": 68.60000000000001,
+   "Collapse repo@0.4 -> FUSE": 69.6,
+   "Collapse repo@0.3 -> D&S -> logistic": 66.2,
+   "Collapse repo@0.3 -> Mean z": 67.60000000000001,
+   "Collapse repo@0.3 -> FUSE": 70.0,
+   "Collapse ties@0.4 -> D&S -> logistic": 63.448553125237325,
+   "Collapse ties@0.4 -> Mean z": 68.60000000000001,
+   "Collapse ties@0.4 -> FUSE": 67.0,
+   "Collapse ties@0.3 -> D&S -> logistic": 66.2,
+   "Collapse ties@0.3 -> Mean z": 67.60000000000001,
+   "Collapse ties@0.3 -> FUSE": 69.0
+  },
+  "m": 16,
+  "queries": 500,
+  "groups": {
+   "repo@0.4": [
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "GRM_scores",
+     "InternLM2Reward7B_scores"
+    ]
+   ],
+   "repo@0.3": [
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "GRMLlama32_scores",
+     "Skyworks_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "GRM_scores",
+     "InternLM2Reward7B_scores"
+    ]
+   ],
+   "ties@0.4": [
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "GRM_scores",
+     "InternLM2Reward7B_scores"
+    ]
+   ],
+   "ties@0.3": [
+    [
+     "GRMLlama32_scores",
+     "Skyworks_scores"
+    ],
+    [
+     "EurusPRMStage1_avg_scores",
+     "EurusPRMStage1_max_scores",
+     "EurusPRMStage2_min_scores"
+    ],
+    [
+     "QwenPRM_avg_scores",
+     "QwenPRM_min_scores"
+    ],
+    [
+     "GRM_scores",
+     "InternLM2Reward7B_scores"
+    ]
+   ]
+  },
+  "columns": {
+   "repo@0.4": 13,
+   "repo@0.3": 11,
+   "ties@0.4": 13,
+   "ties@0.3": 11
+  }
+ },
+ "mmlu-pro-8b|query": {
+  "accuracy": {
+   "FUSE paper": 69.0,
+   "D&S": 57.98078787878788,
+   "D&S -> logistic": 63.800000000000004,
+   "Mean z": 68.8,
+   "FUSE median thresholds": 65.8,
+   "D&S on FUSE thresholds -> logistic": 66.12371027055974,
+   "Collapse repo@0.4 -> D&S -> logistic": 65.0,
+   "Collapse repo@0.4 -> Mean z": 68.4,
+   "Collapse repo@0.4 -> FUSE": 67.4,
+   "Collapse repo@0.3 -> D&S -> logistic": 65.4,
+   "Collapse repo@0.3 -> Mean z": 68.60000000000001,
+   "Collapse repo@0.3 -> FUSE": 66.3,
+   "Collapse ties@0.4 -> D&S -> logistic": 64.2,
+   "Collapse ties@0.4 -> Mean z": 68.4,
+   "Collapse ties@0.4 -> FUSE": 66.0,
+   "Collapse ties@0.3 -> D&S -> logistic": 65.8,
+   "Collapse ties@0.3 -> Mean z": 68.60000000000001,
+   "Collapse ties@0.3 -> FUSE": 67.30000000000001
+  },
+  "m": 16,
+  "queries": 500,
+  "mean_columns": {
+   "repo@0.4": 12.764,
+   "repo@0.3": 11.352,
+   "ties@0.4": 12.756,
+   "ties@0.3": 11.372
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 0.998,
+   "repo@0.3": 1.0,
+   "ties@0.4": 0.998,
+   "ties@0.3": 1.0
+  }
+ },
+ "hle|batch": {
+  "accuracy": {
+   "FUSE paper": 52.227478313676755,
+   "D&S": 51.633704776155774,
+   "D&S -> logistic": 53.24956357305015,
+   "Mean z": 51.18346651231251,
+   "FUSE median thresholds": 52.33790461054374,
+   "D&S on FUSE thresholds -> logistic": 52.587005791848306,
+   "Collapse repo@0.4 -> D&S -> logistic": 53.24956357305015,
+   "Collapse repo@0.4 -> FUSE": 52.227478313676755,
+   "Collapse repo@0.4 -> Mean z": 51.18346651231251,
+   "Collapse repo@0.3 -> D&S -> logistic": 53.24956357305015,
+   "Collapse repo@0.3 -> FUSE": 52.227478313676755,
+   "Collapse repo@0.3 -> Mean z": 51.18346651231251,
+   "Collapse ties@0.4 -> D&S -> logistic": 53.24956357305015,
+   "Collapse ties@0.4 -> FUSE": 52.227478313676755,
+   "Collapse ties@0.4 -> Mean z": 51.18346651231251,
+   "Collapse ties@0.3 -> D&S -> logistic": 53.24956357305015,
+   "Collapse ties@0.3 -> FUSE": 52.227478313676755,
+   "Collapse ties@0.3 -> Mean z": 51.18346651231251
+  },
+  "m": 7,
+  "queries": 649,
+  "groups": {
+   "repo@0.4": [],
+   "repo@0.3": [],
+   "ties@0.4": [],
+   "ties@0.3": []
+  },
+  "columns": {
+   "repo@0.4": 7,
+   "repo@0.3": 7,
+   "ties@0.4": 7,
+   "ties@0.3": 7
+  }
+ },
+ "hle|query": {
+  "accuracy": {
+   "FUSE paper": 53.43451031129458,
+   "D&S": 50.14603101660112,
+   "D&S -> logistic": 49.89152090847006,
+   "Mean z": 52.218121717351295,
+   "FUSE median thresholds": 51.37781573995659,
+   "D&S on FUSE thresholds -> logistic": 53.353831474340105,
+   "Collapse repo@0.4 -> D&S -> logistic": 53.19058930598951,
+   "Collapse repo@0.4 -> Mean z": 52.62901026383307,
+   "Collapse repo@0.4 -> FUSE": 52.667558055054556,
+   "Collapse repo@0.3 -> D&S -> logistic": 53.88794277459469,
+   "Collapse repo@0.3 -> Mean z": 53.039898810314824,
+   "Collapse repo@0.3 -> FUSE": 51.54144534206849,
+   "Collapse ties@0.4 -> D&S -> logistic": 51.206056116959765,
+   "Collapse ties@0.4 -> Mean z": 52.34652438812686,
+   "Collapse ties@0.4 -> FUSE": 53.38890776218419,
+   "Collapse ties@0.3 -> D&S -> logistic": 50.86420869884116,
+   "Collapse ties@0.3 -> Mean z": 52.03835797826552,
+   "Collapse ties@0.3 -> FUSE": 52.545927762612976
+  },
+  "m": 7,
+  "queries": 649,
+  "mean_columns": {
+   "repo@0.4": 6.057010785824345,
+   "repo@0.3": 5.613251155624037,
+   "ties@0.4": 6.596302003081664,
+   "ties@0.3": 6.334360554699538
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 0.6594761171032357,
+   "repo@0.3": 0.8305084745762712,
+   "ties@0.4": 0.33281972265023113,
+   "ties@0.3": 0.5130970724191063
+  }
+ },
+ "imo|batch": {
+  "accuracy": {
+   "FUSE paper": 62.1316600261814,
+   "D&S": 59.58222609538137,
+   "D&S -> logistic": 59.58222609538137,
+   "Mean z": 62.1316600261814,
+   "FUSE median thresholds": 62.1316600261814,
+   "D&S on FUSE thresholds -> logistic": 62.1316600261814,
+   "Collapse repo@0.4 -> D&S -> logistic": 59.58222609538137,
+   "Collapse repo@0.4 -> FUSE": 62.1316600261814,
+   "Collapse repo@0.4 -> Mean z": 62.1316600261814,
+   "Collapse repo@0.3 -> D&S -> logistic": 59.58222609538137,
+   "Collapse repo@0.3 -> FUSE": 62.1316600261814,
+   "Collapse repo@0.3 -> Mean z": 62.1316600261814,
+   "Collapse ties@0.4 -> D&S -> logistic": 59.58222609538137,
+   "Collapse ties@0.4 -> FUSE": 62.1316600261814,
+   "Collapse ties@0.4 -> Mean z": 62.1316600261814,
+   "Collapse ties@0.3 -> D&S -> logistic": 59.58222609538137,
+   "Collapse ties@0.3 -> FUSE": 62.1316600261814,
+   "Collapse ties@0.3 -> Mean z": 62.1316600261814
+  },
+  "m": 9,
+  "queries": 123,
+  "groups": {
+   "repo@0.4": [],
+   "repo@0.3": [],
+   "ties@0.4": [],
+   "ties@0.3": []
+  },
+  "columns": {
+   "repo@0.4": 9,
+   "repo@0.3": 9,
+   "ties@0.4": 9,
+   "ties@0.3": 9
+  }
+ },
+ "imo|query": {
+  "accuracy": {
+   "FUSE paper": 57.08137541756276,
+   "D&S": 56.22199662210423,
+   "D&S -> logistic": 57.58356725196755,
+   "Mean z": 62.1316600261814,
+   "FUSE median thresholds": 59.03356398122664,
+   "D&S on FUSE thresholds -> logistic": 59.24405275635334,
+   "Collapse repo@0.4 -> D&S -> logistic": 58.452121871745454,
+   "Collapse repo@0.4 -> Mean z": 62.1316600261814,
+   "Collapse repo@0.4 -> FUSE": 57.397441131021246,
+   "Collapse repo@0.3 -> D&S -> logistic": 58.09583140473612,
+   "Collapse repo@0.3 -> Mean z": 62.1316600261814,
+   "Collapse repo@0.3 -> FUSE": 58.84817290984722,
+   "Collapse ties@0.4 -> D&S -> logistic": 56.804994305173636,
+   "Collapse ties@0.4 -> Mean z": 62.1316600261814,
+   "Collapse ties@0.4 -> FUSE": 56.51204963004061,
+   "Collapse ties@0.3 -> D&S -> logistic": 57.661356226635995,
+   "Collapse ties@0.3 -> Mean z": 62.1316600261814,
+   "Collapse ties@0.3 -> FUSE": 58.66617200968855
+  },
+  "m": 9,
+  "queries": 123,
+  "mean_columns": {
+   "repo@0.4": 7.300813008130081,
+   "repo@0.3": 6.569105691056911,
+   "ties@0.4": 8.341463414634147,
+   "ties@0.3": 7.764227642276423
+  },
+  "share_of_queries_with_a_merge": {
+   "repo@0.4": 0.8292682926829268,
+   "repo@0.3": 0.967479674796748,
+   "ties@0.4": 0.4634146341463415,
+   "ties@0.3": 0.7235772357723578
+  }
+ }
+}
