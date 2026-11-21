@@ -1,6 +1,9 @@
 <!-- Mirror of the Google Doc "FUSE on Human Annotators: Progress Update".
      The Google Doc is the canonical version: https://docs.google.com/document/d/1Zsr_Y5Iax8SfreIJF5TE5SUnH0ADE3DeWreIkypeWz0/edit
-     Regenerate with scripts/gdoc_to_md.py (see CLAUDE.md). Last synced: 2026-11-21. -->
+     Regenerate with scripts/gdoc_to_md.py (see CLAUDE.md). Last synced: 2026-11-21.
+     AHEAD OF THE GOOGLE DOC: the 21 Nov paper-benchmark result (new section "The paper's own
+     benchmarks", plus one sentence each in Summary and "Where this leaves FUSE", one Next steps
+     bullet, one question) is in this mirror only. Copy it into the Google Doc, then regenerate. -->
 
 # FUSE on Human Annotators: Progress Update
 
@@ -12,7 +15,7 @@ Code and all result files: [github.com/yanivt16/hertz_tourgi_project](https://gi
 
 On human annotators, the baseline FUSE has to beat is Dawid–Skene, not majority vote. With many interchangeable raters FUSE reduces to majority vote, and on sparse data, zero-imputation of missing ratings (as in the paper) costs it about 6 points against Dawid–Skene. When the matrix is made dense, by running FUSE on blocks of conversations that share raters, FUSE beats majority vote by 5.1 points and ties Dawid–Skene. We propose to focus the project on binary tasks and to make missing-data handling the main methodological work of Stage 1.
 
-Since the first draft we implemented missing-aware FUSE and tested continuous scores, a radiology reader study (VIPER), panels that mix humans with local LLM raters, a simulation map of where FUSE should win, two real crowds of non-experts on hard questions, and a correlated block of small LLMs next to humans. Missing-aware FUSE closes the gap to Dawid–Skene on sparse data. FUSE beats Dawid–Skene reliably in one setting only, a weak correlated block added to a human panel, and there it avoids damage rather than adding accuracy. The new sections start at "Missing-aware FUSE" below.
+Since the first draft we implemented missing-aware FUSE and tested continuous scores, a radiology reader study (VIPER), panels that mix humans with local LLM raters, a simulation map of where FUSE should win, two real crowds of non-experts on hard questions, and a correlated block of small LLMs next to humans. Missing-aware FUSE closes the gap to Dawid–Skene on sparse data. FUSE beats Dawid–Skene reliably in one setting only, a weak correlated block added to a human panel, and there it avoids damage rather than adding accuracy. The new sections start at "Missing-aware FUSE" below. A new test on the paper's own Best-of-N benchmarks shows where FUSE's lead over Dawid–Skene comes from: its threshold search, not its estimator.
 
 ## Paper reproduction
 
@@ -137,9 +140,26 @@ We then built the regime the simulation asked for from real labels. RTE has 10 c
 
 This is the first real panel where FUSE beats Dawid–Skene with an interval that excludes zero, and it also beats Dawid–Skene followed by the same logistic step. The mechanism is the one the simulation predicted: Dawid–Skene reads the block's shared errors as signal. But the gain is robustness, not added value. With 5 or 10 humans, no method does better with the block than without it, and the plain average of z-scores is within a point of FUSE. With 3 humans the block does add information, and the z-score average uses it best (89.1, against 87.5 for the humans alone) while FUSE falls behind. So far this is one task and one model family.
 
+## The paper's own benchmarks: what carries FUSE's lead
+
+The simulation and the RTE test point to the threshold search as the part of FUSE that matters. We checked this on the paper's own 12 Best-of-N settings, where FUSE beats Dawid–Skene. Two label-free changes isolate the search: FUSE with every verifier split at its median (no search), and Dawid–Skene run on the yes/no scores that FUSE's search produces, followed by the same logistic step. We also tested whether blocks of verifiers that share errors explain the lead: a label-free detector merges each block into one column before Dawid–Skene runs. Best-of-N accuracy, mean over the 12 settings (best of per-question and batched mode):
+
+| **Method** | **Mean accuracy (%)** |
+|---|---|
+| FUSE (our reproduction) | 68.0 |
+| Dawid–Skene on FUSE's thresholds, then logistic | 67.7 |
+| Mean z-score | 67.6 |
+| FUSE, median thresholds (no search) | 64.0 |
+| Dawid–Skene, then logistic | 63.1 |
+| Blocks merged, then Dawid–Skene, then logistic | 62.9 |
+
+Dawid–Skene given FUSE's thresholds matches FUSE, within one point in 7 of 12 settings in batched mode and 8 of 12 per question. Without the search, FUSE falls to Dawid–Skene's level. Merging blocks does not help: the detector finds sensible groups (variants of one reward model, reward models from one family, groups of LLM-judge verdicts), but Dawid–Skene stays 3–5 points behind FUSE after merging them. So on LLM verifiers FUSE's lead is its label-free threshold search, and its moment estimator and posterior add nothing over Dawid–Skene. This also explains the human results: yes/no votes leave nothing to search, so FUSE ties Dawid–Skene there. A plain average of z-scores comes close (67.6), but mostly on the 8B settings where our FUSE falls short of the paper (the paper reports 70.8 on average; see Paper reproduction). One run per setting, no confidence intervals. Results: results/PAPER_BLOCKS.md; write-up: docs/paper_blocks.md.
+
+While doing this we found a bug in our rater-clustering code: its Spearman correlation breaks ties by row order, so two unrelated yes/no columns correlate at about 0.2. On these benchmarks it only changes which LLM-judge verdicts are merged (accuracy moves by at most 0.3 points), but results that cluster yes/no votes need a rerun once it is fixed.
+
 ## Where this leaves FUSE
 
-In almost every setting we have tried (binary, sparse, continuous, and mixed panels of humans and LLMs), FUSE at best ties Dawid–Skene. Its one advantage is robustness to raters that are both correlated and weak, now confirmed on real labels, and there a plain average of z-scores does about as well. The simulation map and the two real crowds above narrow this further: FUSE is ahead only when a minority block of weak raters shares errors, and on real crowds of non-experts every method lands within noise of the crowd mean. On RTE with a block of small LLMs, FUSE wins by not being hurt by the block, not by getting more out of it. The honest midterm result may be a negative one, with missing-aware FUSE as the methodological contribution.
+In almost every setting we have tried (binary, sparse, continuous, and mixed panels of humans and LLMs), FUSE at best ties Dawid–Skene. Its one advantage is robustness to raters that are both correlated and weak, now confirmed on real labels, and there a plain average of z-scores does about as well. The simulation map and the two real crowds above narrow this further: FUSE is ahead only when a minority block of weak raters shares errors, and on real crowds of non-experts every method lands within noise of the crowd mean. On RTE with a block of small LLMs, FUSE wins by not being hurt by the block, not by getting more out of it. The honest midterm result may be a negative one, with missing-aware FUSE as the methodological contribution. On the paper's own Best-of-N benchmarks the picture is the same from the other side: FUSE's lead over Dawid–Skene there comes from its threshold search, and Dawid–Skene given the same thresholds matches it. So FUSE's real contribution is a label-free way to pick thresholds for continuous scores, which has nothing to work on when raters give yes/no votes.
 
 ## Proposed scope change
 
@@ -151,6 +171,7 @@ Compared with the attached proposal, we would like to focus on binary tasks, as 
 - Done: missing-aware FUSE (see above). Still open: raters who share fewer than 20 items, as in a thinned crowd.
 - Stage 2: train a text model on FUSE labels and compare it with one trained on a single annotator's labels.
 - Done: the one regime where the simulation puts FUSE ahead, tested on real labels (see above). Next: repeat it on a second task with a natural correlated block, to see whether it holds beyond RTE. Multi-class stays an optional extension.
+- Done: what carries FUSE's lead on the paper's own benchmarks (see above). Next: give Dawid–Skene FUSE's thresholds on the crowds with continuous scores (deepfakes, fact-checking, DICES group shares, VIPER), and fix the tie bug in the clustering code before rerunning results that use it.
 
 ## Questions for you
 
@@ -160,3 +181,4 @@ Compared with the attached proposal, we would like to focus on binary tasks, as 
 - Are you OK with focusing on binary tasks and moving multi-class to an optional extension?
 - Is a careful negative result (FUSE ties Dawid–Skene on human annotators) plus missing-aware FUSE an acceptable outcome for the midterm?
 - Do you see a setting, beyond correlated weak raters, where FUSE should beat Dawid–Skene on human or mixed panels?
+- Is "FUSE's contribution is a label-free way to pick thresholds for continuous scores" a framing you would accept for the thesis, given that its estimator adds nothing over Dawid–Skene on the paper's benchmarks?
