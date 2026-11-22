@@ -10,19 +10,29 @@ FUSE's estimated unsafe share averages 0.40 over splits; Dawid–Skene's 0.28 (e
 |---|---:|---:|---:|---:|---:|
 | FUSE defaults | 70.1 ± 1.0 | 68.2–71.6 | 68.7 | 79.1 | 37 |
 | FUSE tuned (cut at its prevalence) | 70.1 ± 0.8 | 68.8–71.6 | 69.1 | 79.1 | 40 |
+| FUSE cut at DS est. | 69.4 ± 1.1 | 67.0–71.6 | 67.4 | 79.1 | 28 |
 | Dawid–Skene | 69.3 ± 1.4 | 66.5–72.2 | 67.5 | 77.4 | 28 |
 | Dawid–Skene cut at its prevalence | 69.3 ± 1.4 | 66.5–72.2 | 67.5 | 77.4 | 28 |
+| Dawid–Skene cut at FUSE est. | 70.3 ± 1.3 | 67.6–72.7 | 69.3 | 77.4 | 40 |
+| Dawid–Skene, 5-bin shares | 70.2 ± 0.7 | 68.8–71.6 | 68.8 | 78.6 | 39 |
+| Dawid–Skene, 5-bin shares cut at FUSE est. | 70.2 ± 0.8 | 68.8–71.6 | 69.1 | 78.6 | 40 |
 | Majority of group votes | 64.0 ± 0.9 | 62.5–65.9 | 63.8 | 77.2 | 20 |
+| Dawid–Skene per rater, 3 answers | 70.5 ± 0.0 | 70.5–70.5 | 68.9 | 78.7 | 35 |
+| Dawid–Skene per rater, 3 answers cut at FUSE est. | 69.9 ± 0.9 | 68.8–71.6 | 69.0 | 78.7 | 40 |
 | Dawid–Skene per rater (no groups) | 71.0 ± 0.0 | 71.0–71.0 | 68.6 | 79.1 | 33 |
 
 | Comparison | Half | Mean difference | A wins / tie / B wins (% of splits) | Middle 95% of splits | Over conversations (95% CI) |
 |---|---|---:|---|---|---|
-| FUSE tuned (cut at its prevalence) − Dawid–Skene | test | +0.8 | 62 / 12 / 25 | -2.3 to +4.0 | +0.8 [-3.3, +4.8] |
-| FUSE defaults − Dawid–Skene | all | +1.2 | 84 / 4 / 12 | -1.1 to +3.4 | +1.2 [-0.8, +3.3] |
-| FUSE defaults − Dawid–Skene | test | +0.8 | 63 / 13 / 24 | -2.8 to +4.0 | +0.8 [-2.1, +3.7] |
-| FUSE tuned (cut at its prevalence) − Dawid–Skene cut at its prevalence | test | +0.8 | 63 / 12 / 26 | -2.3 to +3.4 | +0.8 [-3.2, +4.8] |
-| FUSE tuned (cut at its prevalence) − Dawid–Skene per rater (no groups) | test | -0.9 | 4 / 16 / 80 | -2.3 to +0.6 | -0.9 [-4.5, +2.8] |
-| FUSE defaults − Dawid–Skene per rater (no groups) | all | +0.1 | 52 / 18 / 31 | -1.4 to +1.4 | +0.1 [-1.5, +1.8] |
+| FUSE defaults − Dawid–Skene | all | +1.2 | 84 / 4 / 12 | -1.1 to +3.4 | +1.2 [-0.9, +3.2] |
+| FUSE defaults − Dawid–Skene | test | +0.8 | 63 / 13 / 24 | -2.8 to +4.0 | +0.8 [-2.2, +3.7] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene cut at FUSE est. | all | -0.2 | 32 / 22 / 46 | -2.3 to +2.3 | -0.2 [-0.7, +0.3] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene cut at FUSE est. | test | -0.2 | 38 / 16 / 46 | -2.9 to +2.8 | -0.2 [-0.9, +0.6] |
+| FUSE cut at DS est. − Dawid–Skene cut at its prevalence | all | -0.0 | 35 / 26 / 39 | -1.7 to +1.7 | -0.0 [-0.5, +0.5] |
+| FUSE cut at DS est. − Dawid–Skene cut at its prevalence | test | +0.1 | 45 / 16 / 39 | -2.3 to +2.8 | +0.1 [-0.7, +0.8] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene, 5-bin shares cut at FUSE est. | test | -0.1 | 37 / 23 / 40 | -1.7 to +1.7 | -0.1 [-0.2, +0.1] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene per rater, 3 answers cut at FUSE est. | test | +0.2 | 48 / 21 / 30 | -1.7 to +1.7 | +0.2 [-0.3, +0.7] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene per rater (no groups) | test | -0.9 | 4 / 16 / 80 | -2.3 to +0.6 | -0.9 [-4.8, +2.7] |
+| FUSE defaults − Dawid–Skene per rater (no groups) | all | +0.1 | 52 / 18 / 31 | -1.4 to +1.4 | +0.1 [-1.6, +1.8] |
 
 ## Groups of about 10 (12 groups per split)
 
@@ -32,18 +42,28 @@ FUSE's estimated unsafe share averages 0.45 over splits; Dawid–Skene's 0.26 (e
 |---|---:|---:|---:|---:|---:|
 | FUSE defaults | 70.2 ± 0.7 | 68.8–71.6 | 69.2 | 79.0 | 42 |
 | FUSE tuned (cut at its prevalence) | 69.9 ± 0.8 | 68.2–71.0 | 69.8 | 79.0 | 45 |
+| FUSE cut at DS est. | 68.3 ± 1.1 | 65.9–70.5 | 66.7 | 79.0 | 26 |
 | Dawid–Skene | 67.8 ± 1.4 | 64.8–70.5 | 66.5 | 74.4 | 26 |
 | Dawid–Skene cut at its prevalence | 67.9 ± 1.5 | 65.3–70.5 | 66.6 | 74.4 | 26 |
+| Dawid–Skene cut at FUSE est. | 70.2 ± 1.7 | 66.5–73.3 | 69.6 | 74.4 | 45 |
+| Dawid–Skene, 5-bin shares | 70.4 ± 0.7 | 68.8–71.6 | 69.0 | 78.7 | 40 |
+| Dawid–Skene, 5-bin shares cut at FUSE est. | 70.0 ± 0.8 | 68.2–71.6 | 69.8 | 78.7 | 45 |
 | Majority of group votes | 64.1 ± 1.0 | 62.5–65.9 | 63.9 | 74.4 | 20 |
+| Dawid–Skene per rater, 3 answers | 70.5 ± 0.0 | 70.5–70.5 | 68.9 | 78.7 | 35 |
+| Dawid–Skene per rater, 3 answers cut at FUSE est. | 69.9 ± 0.7 | 68.8–71.0 | 69.8 | 78.7 | 45 |
 | Dawid–Skene per rater (no groups) | 71.0 ± 0.0 | 71.0–71.0 | 68.6 | 79.1 | 33 |
 
 | Comparison | Half | Mean difference | A wins / tie / B wins (% of splits) | Middle 95% of splits | Over conversations (95% CI) |
 |---|---|---:|---|---|---|
-| FUSE tuned (cut at its prevalence) − Dawid–Skene | test | +2.1 | 86 / 6 / 8 | -1.1 to +5.1 | +2.1 [-3.5, +7.7] |
 | FUSE defaults − Dawid–Skene | all | +2.7 | 99 / 1 / 0 | +0.6 to +4.8 | +2.7 [-0.9, +6.3] |
-| FUSE defaults − Dawid–Skene | test | +2.5 | 91 / 5 / 4 | -0.6 to +5.1 | +2.5 [-2.5, +7.6] |
-| FUSE tuned (cut at its prevalence) − Dawid–Skene cut at its prevalence | test | +2.0 | 84 / 6 / 10 | -1.1 to +5.1 | +2.0 [-3.6, +7.6] |
-| FUSE tuned (cut at its prevalence) − Dawid–Skene per rater (no groups) | test | -1.2 | 2 / 12 / 86 | -2.8 to +0.0 | -1.2 [-5.8, +3.5] |
+| FUSE defaults − Dawid–Skene | test | +2.5 | 91 / 5 / 4 | -0.6 to +5.1 | +2.5 [-2.6, +7.7] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene cut at FUSE est. | all | +0.2 | 46 / 16 / 38 | -2.3 to +2.9 | +0.2 [-0.8, +1.2] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene cut at FUSE est. | test | -0.3 | 38 / 12 / 51 | -4.0 to +2.8 | -0.3 [-1.7, +1.1] |
+| FUSE cut at DS est. − Dawid–Skene cut at its prevalence | all | +0.2 | 43 / 29 / 28 | -1.7 to +1.7 | +0.2 [-0.4, +0.7] |
+| FUSE cut at DS est. − Dawid–Skene cut at its prevalence | test | +0.4 | 54 / 16 / 30 | -2.3 to +3.4 | +0.4 [-0.5, +1.3] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene, 5-bin shares cut at FUSE est. | test | -0.1 | 34 / 23 / 42 | -2.3 to +1.7 | -0.1 [-0.3, +0.1] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene per rater, 3 answers cut at FUSE est. | test | -0.0 | 36 / 24 / 40 | -1.1 to +1.7 | -0.0 [-0.7, +0.7] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene per rater (no groups) | test | -1.2 | 2 / 12 / 86 | -2.8 to +0.0 | -1.2 [-6.0, +3.5] |
 | FUSE defaults − Dawid–Skene per rater (no groups) | all | +0.7 | 78 / 12 / 10 | -0.6 to +2.0 | +0.7 [-2.1, +3.4] |
 
 ## Groups of about 20 (6 groups per split)
@@ -54,17 +74,27 @@ FUSE's estimated unsafe share averages 0.46 over splits; Dawid–Skene's 0.25 (e
 |---|---:|---:|---:|---:|---:|
 | FUSE defaults | 70.2 ± 0.8 | 68.8–71.6 | 69.5 | 79.0 | 43 |
 | FUSE tuned (cut at its prevalence) | 69.6 ± 0.8 | 68.2–71.0 | 70.0 | 79.0 | 46 |
+| FUSE cut at DS est. | 67.6 ± 1.1 | 65.3–69.3 | 66.4 | 79.0 | 25 |
 | Dawid–Skene | 67.0 ± 1.2 | 64.8–69.3 | 66.0 | 71.2 | 24 |
-| Dawid–Skene cut at its prevalence | 67.1 ± 1.3 | 64.8–69.9 | 66.0 | 71.2 | 25 |
+| Dawid–Skene cut at its prevalence | 67.1 ± 1.3 | 64.8–69.9 | 66.1 | 71.2 | 25 |
+| Dawid–Skene cut at FUSE est. | 69.4 ± 1.7 | 66.5–72.7 | 67.4 | 71.2 | 46 |
+| Dawid–Skene, 5-bin shares | 70.5 ± 0.7 | 68.8–71.6 | 69.2 | 78.7 | 41 |
+| Dawid–Skene, 5-bin shares cut at FUSE est. | 69.7 ± 1.0 | 67.6–71.6 | 70.0 | 78.7 | 46 |
 | Majority of group votes | 64.4 ± 1.0 | 62.5–66.5 | 64.2 | 71.1 | 20 |
+| Dawid–Skene per rater, 3 answers | 70.5 ± 0.0 | 70.5–70.5 | 68.9 | 78.7 | 35 |
+| Dawid–Skene per rater, 3 answers cut at FUSE est. | 69.6 ± 0.7 | 68.2–71.0 | 70.2 | 78.7 | 46 |
 | Dawid–Skene per rater (no groups) | 71.0 ± 0.0 | 71.0–71.0 | 68.6 | 79.1 | 33 |
 
 | Comparison | Half | Mean difference | A wins / tie / B wins (% of splits) | Middle 95% of splits | Over conversations (95% CI) |
 |---|---|---:|---|---|---|
-| FUSE tuned (cut at its prevalence) − Dawid–Skene | test | +2.6 | 94 / 4 / 2 | +0.0 to +5.7 | +2.6 [-3.7, +8.9] |
-| FUSE defaults − Dawid–Skene | all | +3.5 | 100 / 0 / 0 | +1.7 to +5.4 | +3.5 [-0.6, +7.7] |
-| FUSE defaults − Dawid–Skene | test | +3.3 | 98 / 1 / 0 | +0.6 to +6.2 | +3.3 [-2.4, +9.1] |
-| FUSE tuned (cut at its prevalence) − Dawid–Skene cut at its prevalence | test | +2.6 | 93 / 4 / 3 | -0.6 to +5.7 | +2.6 [-3.6, +8.7] |
-| FUSE tuned (cut at its prevalence) − Dawid–Skene per rater (no groups) | test | -1.4 | 1 / 6 / 92 | -2.8 to +0.0 | -1.4 [-6.4, +3.6] |
-| FUSE defaults − Dawid–Skene per rater (no groups) | all | +1.0 | 92 / 4 / 3 | -0.3 to +2.0 | +1.0 [-2.1, +4.0] |
+| FUSE defaults − Dawid–Skene | all | +3.5 | 100 / 0 / 0 | +1.7 to +5.4 | +3.5 [-0.6, +7.6] |
+| FUSE defaults − Dawid–Skene | test | +3.3 | 98 / 1 / 0 | +0.6 to +6.2 | +3.3 [-2.5, +9.2] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene cut at FUSE est. | all | +2.6 | 91 / 3 / 6 | -1.1 to +5.7 | +2.6 [-0.6, +5.8] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene cut at FUSE est. | test | +0.2 | 50 / 13 / 37 | -3.4 to +3.4 | +0.2 [-4.2, +4.5] |
+| FUSE cut at DS est. − Dawid–Skene cut at its prevalence | all | +0.3 | 52 / 24 / 24 | -1.1 to +1.7 | +0.3 [-0.3, +0.9] |
+| FUSE cut at DS est. − Dawid–Skene cut at its prevalence | test | +0.5 | 59 / 12 / 29 | -2.3 to +3.4 | +0.5 [-0.5, +1.5] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene, 5-bin shares cut at FUSE est. | test | -0.1 | 36 / 20 / 44 | -2.3 to +2.3 | -0.1 [-0.4, +0.2] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene per rater, 3 answers cut at FUSE est. | test | -0.0 | 30 / 26 / 44 | -1.1 to +1.7 | -0.0 [-0.9, +0.8] |
+| FUSE tuned (cut at its prevalence) − Dawid–Skene per rater (no groups) | test | -1.4 | 1 / 6 / 92 | -2.8 to +0.0 | -1.4 [-6.5, +3.7] |
+| FUSE defaults − Dawid–Skene per rater (no groups) | all | +1.0 | 92 / 4 / 3 | -0.3 to +2.0 | +1.0 [-2.1, +4.1] |
 

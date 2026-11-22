@@ -123,7 +123,8 @@ class Data:
         if spec["kind"] == "random":
             raters = np.sort(df.rater_id.unique())
             perm = np.random.default_rng(1000 + seed).permutation(raters)
-            gid = {r: f"g{i // spec['size']:02d}" for i, r in enumerate(perm)}
+            # Near-equal groups (123 // size of them), as in scripts/dices_random_groups.py.
+            gid = {r: f"g{g:02d}" for g, part in enumerate(np.array_split(perm, len(raters) // spec["size"])) for r in part}
             df = df.assign(rater_rand=df.rater_id.map(gid))
             df.attrs["variant"] = "350"
             m = dices.build(df, view="groups", groups=("rater_rand",))
@@ -145,6 +146,8 @@ def predict(data: Data, config: dict, seed: int = 0) -> dict:
     model = FUSE(**{k: config[k] for k in FUSE_DEFAULTS})
     r = model.fit_scores(X, rescale=False)
     est = None if r.estimate is None else float(r.estimate.prevalence)
+    if config["cutoff"] == "prevalence" and est is None:
+        print(f"warning: FUSE gave no prevalence estimate for {config['view']}; cut at 0.5 instead", flush=True)
     if config["cutoff"] == "prevalence" and est is not None:
         k = int(round(est * len(r.scores)))
         pred = np.zeros(len(r.scores), dtype=bool)

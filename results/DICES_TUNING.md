@@ -58,9 +58,9 @@ Dev half 174 conversations (choosing), test half 176 (scored once). A change is 
 | 13 | P1·01 | view = groups: gender×age | groups: gender×age | 67.2 | 78.2 | 41 | 0.45 | rejected |
 | 14 | P1·01 | view = groups: race×education | groups: race×education | 73.0 | 79.6 | 47 | 0.51 | adopted |
 | 15 | P1·01 | view = groups: race×gender×age | groups: race×gender×age | 64.4 | 77.6 | 24 | 0.26 | rejected |
-| 16 | P1·01 | view = random groups of 5 | random groups of 5 | 66.3 ± 0.8 | 78.2 | 35 | 0.39 | control |
-| 17 | P1·01 | view = random groups of 10 | random groups of 10 | 67.5 ± 0.6 | 78.3 | 40 | 0.43 | control |
-| 18 | P1·01 | view = random groups of 20 | random groups of 20 | 68.4 ± 1.7 | 78.3 | 43 | 0.46 | control |
+| 16 | P1·01 | view = random groups of 5 | random groups of 5 | 67.8 ± 0.5 | 78.2 | 37 | 0.42 | control |
+| 17 | P1·01 | view = random groups of 10 | random groups of 10 | 68.0 ± 1.4 | 78.4 | 42 | 0.45 | control |
+| 18 | P1·01 | view = random groups of 20 | random groups of 20 | 69.0 ± 0.8 | 78.2 | 44 | 0.47 | control |
 | 19 | P1·02 | predictor = logistic | groups: race×education | 73.0 | 79.6 | 47 | 0.51 | incumbent |
 | 20 | P1·02 | predictor = posterior | groups: race×education, predictor=posterior | 73.6 | 78.6 | 52 | 0.51 | rejected |
 | 21 | P1·03 | drop_below_random = True | groups: race×education | 73.0 | 79.6 | 47 | 0.51 | incumbent |
@@ -103,9 +103,9 @@ Dev half 174 conversations (choosing), test half 176 (scored once). A change is 
 | 58 | P2·01 | view = groups: gender×age | groups: gender×age, cutoff=prevalence | 70.7 | 78.2 | 45 | 0.45 | rejected |
 | 59 | P2·01 | view = groups: race×education | groups: race×education, cutoff=prevalence | 75.9 | 79.6 | 52 | 0.51 | incumbent |
 | 60 | P2·01 | view = groups: race×gender×age | groups: race×gender×age, cutoff=prevalence | 64.9 | 77.6 | 26 | 0.26 | rejected |
-| 61 | P2·01 | view = random groups of 5 | random groups of 5, cutoff=prevalence | 68.2 ± 1.5 | 78.2 | 39 | 0.39 | control |
-| 62 | P2·01 | view = random groups of 10 | random groups of 10, cutoff=prevalence | 68.6 ± 1.6 | 78.3 | 44 | 0.43 | control |
-| 63 | P2·01 | view = random groups of 20 | random groups of 20, cutoff=prevalence | 70.6 ± 1.4 | 78.3 | 47 | 0.46 | control |
+| 61 | P2·01 | view = random groups of 5 | random groups of 5, cutoff=prevalence | 68.5 ± 1.3 | 78.2 | 41 | 0.42 | control |
+| 62 | P2·01 | view = random groups of 10 | random groups of 10, cutoff=prevalence | 69.7 ± 1.5 | 78.4 | 45 | 0.45 | control |
+| 63 | P2·01 | view = random groups of 20 | random groups of 20, cutoff=prevalence | 70.9 ± 0.9 | 78.2 | 48 | 0.47 | control |
 | 64 | P2·02 | predictor = logistic | groups: race×education, cutoff=prevalence | 75.9 | 79.6 | 52 | 0.51 | incumbent |
 | 65 | P2·02 | predictor = posterior | groups: race×education, cutoff=prevalence, predictor=posterior | 73.6 | 78.6 | 53 | 0.51 | rejected |
 | 66 | P2·03 | drop_below_random = True | groups: race×education, cutoff=prevalence | 75.9 | 79.6 | 52 | 0.51 | incumbent |
@@ -148,7 +148,7 @@ Dev half 174 conversations (choosing), test half 176 (scored once). A change is 
 | P2·10 | logistic_C |  |
 | P2·12 | tci_clip |  |
 
-## Final: `groups: race×education, cutoff=prevalence`
+## Final: `groups: race×education, cutoff=prevalence, quantile_range=[0.05, 0.95]`
 
 Seed stability on dev (5 seeds): sd 0.00 points (75.9, 75.9, 75.9, 75.9, 75.9).
 

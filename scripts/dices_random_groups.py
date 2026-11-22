@@ -11,6 +11,14 @@ saying unsafe (Unsure = 1/2). On each split:
 * Dawid–Skene cut at its own estimated prevalence (the same label-free cut-off as FUSE tuned).
 * Majority of group votes, for reference.
 
+Like for like (added after review). Cutting each method at its OWN estimate is not one cut-off:
+both under-call, and whichever calls more wins accuracy. So FUSE and Dawid–Skene are also scored
+calling the SAME number of conversations unsafe, at FUSE's estimate and at Dawid–Skene's. And
+Dawid–Skene on group votes sees less than FUSE (one yes/no per group against each group's share),
+so two fuller Dawid–Skene baselines are added: Dawid–Skene on the group shares cut into 5 bins
+(fuse.ordinal), and three-answer Dawid–Skene on the individual raters, which needs no groups.
+Ties are broken by one fixed random order of the conversations (scripts/panel_eval.py).
+
 Neither FUSE defaults nor Dawid–Skene uses a label, so they can be compared on all 350.
 
 Two kinds of uncertainty are reported. Across splits: how often one method beats the other and
@@ -38,33 +46,38 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT / "src"))
 
+import panel_eval as PE  # noqa: E402
 import tune_dices350 as T  # noqa: E402
 from fuse import FUSE, dices  # noqa: E402
+from fuse.ordinal import dawid_skene_ordinal  # noqa: E402
 from fuse.preprocess import minmax_to_unit_interval  # noqa: E402
 
-METHODS = ["FUSE defaults", "FUSE tuned (cut at its prevalence)", "Dawid–Skene",
-           "Dawid–Skene cut at its prevalence", "Majority of group votes"]
+METHODS = ["FUSE defaults", "FUSE tuned (cut at its prevalence)", "FUSE cut at DS est.",
+           "Dawid–Skene", "Dawid–Skene cut at its prevalence", "Dawid–Skene cut at FUSE est.",
+           "Dawid–Skene, 5-bin shares", "Dawid–Skene, 5-bin shares cut at FUSE est.", "Majority of group votes",
+           "Dawid–Skene per rater, 3 answers", "Dawid–Skene per rater, 3 answers cut at FUSE est."]
 FIXED = "Dawid–Skene per rater (no groups)"  # same on every split; the strongest Dawid–Skene here
-PAIRS = [("FUSE tuned (cut at its prevalence)", "Dawid–Skene", "test"),
-         ("FUSE defaults", "Dawid–Skene", "all"),
+PAIRS = [("FUSE defaults", "Dawid–Skene", "all"),
          ("FUSE defaults", "Dawid–Skene", "test"),
-         ("FUSE tuned (cut at its prevalence)", "Dawid–Skene cut at its prevalence", "test"),
+         ("FUSE tuned (cut at its prevalence)", "Dawid–Skene cut at FUSE est.", "all"),
+         ("FUSE tuned (cut at its prevalence)", "Dawid–Skene cut at FUSE est.", "test"),
+         ("FUSE cut at DS est.", "Dawid–Skene cut at its prevalence", "all"),
+         ("FUSE cut at DS est.", "Dawid–Skene cut at its prevalence", "test"),
+         ("FUSE tuned (cut at its prevalence)", "Dawid–Skene, 5-bin shares cut at FUSE est.", "test"),
+         ("FUSE tuned (cut at its prevalence)", "Dawid–Skene per rater, 3 answers cut at FUSE est.", "test"),
          ("FUSE tuned (cut at its prevalence)", FIXED, "test"),
          ("FUSE defaults", FIXED, "all")]
 
-_R = None  # (items, raters) share of Yes, set in each worker
+_R = _Q3 = None  # (items, raters) share of Yes; per-rater three-answer Dawid–Skene; set in each worker
 
 
-def _init(R):
-    global _R
-    _R = R
+def _init(R, q3=None):
+    global _R, _Q3
+    _R, _Q3 = R, q3
 
 
 def top_share(score, share):
-    k = int(round(share * len(score)))
-    pred = np.zeros(len(score), dtype=bool)
-    pred[np.argsort(-score, kind="stable")[:k]] = True
-    return pred
+    return PE.top_k(score, int(round(share * len(score))))
 
 
 def one_split(args):
@@ -77,12 +90,22 @@ def one_split(args):
     est = None if r.estimate is None else float(r.estimate.prevalence)
     votes = S > 0.5
     q = dices.dawid_skene(votes.astype(float))
+    qo = dawid_skene_ordinal(S, k=5)
+    ef = est if est is not None else 0.5
+    if est is None:
+        print(f"warning: FUSE gave no prevalence estimate (size {size}, split {seed}); its cut uses 0.5", flush=True)
     preds = {
         "FUSE defaults": (r.scores, r.scores > 0.5),
         "FUSE tuned (cut at its prevalence)": (r.scores, top_share(r.scores, est) if est is not None else r.scores > 0.5),
         "Dawid–Skene": (q, q > 0.5),
         "Dawid–Skene cut at its prevalence": (q, top_share(q, float(q.mean()))),
+        "FUSE cut at DS est.": (r.scores, top_share(r.scores, float(q.mean()))),
+        "Dawid–Skene cut at FUSE est.": (q, top_share(q, ef)),
+        "Dawid–Skene, 5-bin shares": (qo, qo > 0.5),
+        "Dawid–Skene, 5-bin shares cut at FUSE est.": (qo, top_share(qo, ef)),
         "Majority of group votes": (votes.mean(1), votes.mean(1) > 0.5),
+        "Dawid–Skene per rater, 3 answers": (_Q3, _Q3 > 0.5),
+        "Dawid–Skene per rater, 3 answers cut at FUSE est.": (_Q3, top_share(_Q3, ef)),
     }
     return {"size": size, "seed": seed, "k": len(groups), "fuse_est_prev": est, "ds_est_prev": float(q.mean()),
             "fallback": r.fallback, "pred": {m: p for m, (_, p) in preds.items()},
@@ -114,7 +137,7 @@ def main():
         t0 = time.time()
         hits = {m: np.zeros(len(y)) for m in METHODS + [FIXED]}  # per-conversation hit counts over splits
         per = []
-        with ProcessPoolExecutor(a.workers, initializer=_init, initargs=(R,)) as pool:
+        with ProcessPoolExecutor(a.workers, initializer=_init, initargs=(R, dices.dawid_skene_3class(d.raters_V))) as pool:
             for i, res in enumerate(pool.map(one_split, [(size, s) for s in range(a.splits)], chunksize=8)):
                 row = {"seed": res["seed"], "k": res["k"], "fuse_est_prev": res["fuse_est_prev"],
                        "ds_est_prev": res["ds_est_prev"], "fallback": res["fallback"]}

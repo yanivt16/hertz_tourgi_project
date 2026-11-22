@@ -48,15 +48,15 @@ Estimated unsafe share: FUSE 0.52, Dawid–Skene 0.25 (experts 0.50).
 | FUSE defaults | 72.4 | 68.8 | 70.6 | 80.0 | 48 | +3.4 [-4.0, +10.8] |
 | FUSE, cut at its estimated prevalence (tuned) | 73.6 | 68.8 | 71.1 | 80.0 | 51 | +3.4 [-4.5, +11.4] |
 
-## random groups of 20 (7 groups)
+## random groups of 20 (6 groups)
 
-Estimated unsafe share: FUSE 0.43, Dawid–Skene 0.26 (experts 0.50).
+Estimated unsafe share: FUSE 0.47, Dawid–Skene 0.26 (experts 0.50).
 
 | Method | Dev | Test | All 350 | Test AUC | Called unsafe % | Test − per-rater MV (95% CI) |
 |---|---:|---:|---:|---:|---:|---|
-| Majority of group votes | 64.4 | 64.8 | 64.6 | 72.4 | 22 | -0.6 [-3.4, +2.3] |
-| Mean of group shares > 0.5 | 62.6 | 65.9 | 64.3 | 78.3 | 23 | +0.6 [-2.3, +3.4] |
-| Dawid–Skene on group votes | 64.9 | 67.0 | 66.0 | 72.9 | 26 | +1.7 [-2.3, +5.7] |
-| Dawid–Skene, cut at its estimated prevalence | 64.9 | 67.0 | 66.0 | 72.9 | 26 | +1.7 [-2.3, +5.7] |
-| FUSE defaults | 66.7 | 69.9 | 68.3 | 80.2 | 41 | +4.5 [-1.7, +10.8] |
-| FUSE, cut at its estimated prevalence (tuned) | 69.0 | 71.0 | 70.0 | 80.2 | 43 | +5.7 [-1.1, +12.5] |
+| Majority of group votes | 63.8 | 64.8 | 64.3 | 72.3 | 21 | -0.6 [-2.8, +1.7] |
+| Mean of group shares > 0.5 | 64.9 | 66.5 | 65.7 | 80.1 | 23 | +1.1 [+0.0, +2.8] |
+| Dawid–Skene on group votes | 64.9 | 66.5 | 65.7 | 72.4 | 25 | +1.1 [-1.7, +4.5] |
+| Dawid–Skene, cut at its estimated prevalence | 64.4 | 66.5 | 65.4 | 72.4 | 26 | +1.1 [-1.7, +4.5] |
+| FUSE defaults | 69.0 | 71.0 | 70.0 | 80.1 | 43 | +5.7 [-1.1, +12.5] |
+| FUSE, cut at its estimated prevalence (tuned) | 70.7 | 69.3 | 70.0 | 80.1 | 47 | +4.0 [-3.4, +11.4] |
