@@ -4,7 +4,7 @@
      AHEAD OF THE GOOGLE DOC: the 21 Nov paper-benchmark result (new section "The paper's own
      benchmarks", plus one sentence each in Summary and "Where this leaves FUSE", one Next steps
      bullet, one question) is in this mirror only. Copy it into the Google Doc, then regenerate.
-     ALSO AHEAD: the appended entry "22 November 2026: DICES-350 tuning and rater panels" at the
+     ALSO AHEAD: the appended entry "22 November 2026: DICES-350, tuning and small and demographic rater panels" at the
      end of this mirror. Append it to the end of the Google Doc as well. -->
 
 # FUSE on Human Annotators: Progress Update
@@ -185,7 +185,7 @@ Compared with the attached proposal, we would like to focus on binary tasks, as 
 - Do you see a setting, beyond correlated weak raters, where FUSE should beat Dawid–Skene on human or mixed panels?
 - Is "FUSE's contribution is a label-free way to pick thresholds for continuous scores" a framing you would accept for the thesis, given that its estimator adds nothing over Dawid–Skene on the paper's benchmarks?
 
-## 22 November 2026: DICES-350 tuning and rater panels, FUSE and Dawid–Skene are level
+## 22 November 2026: DICES-350, tuning and small and demographic rater panels
 
 **What is new.** Three experiments on DICES-350 (see [First experiment: DICES](#first-experiment-dices)), all asking whether FUSE can be made to beat Dawid–Skene on human raters. An independent review of the first versions found that FUSE's small leads came from two unfair comparisons, so the numbers below are the corrected ones.
 
@@ -206,16 +206,20 @@ Compared with the attached proposal, we would like to focus on binary tasks, as 
 
 The same correction applies to random groups of raters, where each group is one verifier (1,000 groupings per size, test half, results/DICES_RANDOM_GROUPS.md): FUSE's lead over Dawid–Skene on group votes was +0.8 / +2.5 / +3.3 points for groups of about 5 / 10 / 20; at a shared cut-off it is −0.3 to +0.5, every interval including 0, and Dawid–Skene given the group shares ties FUSE (−0.1). Dawid–Skene on the individual raters beats tuned FUSE on the test half in 80–92% of groupings.
 
-**A correction to [Findings](#findings).** The first DICES finding reports that FUSE on 10 race × gender groups beats majority vote by 5.7 points (95% CI +0.6 to +10.9). That number is on all 350 conversations, and this configuration was one of several views we looked at. On the held-out test half the same configuration gives +3.4 (95% CI −4.0 to +10.8), and Dawid–Skene on the same groups reaches 71.0%, above FUSE's 68.8% (results/DICES_GROUP_METHODS.md).
+**A qualification of [First experiment: DICES](#first-experiment-dices).** The first DICES finding reports that FUSE on 10 race × gender groups beats majority vote by 5.7 points (95% CI +0.6 to +10.9). That number is on all 350 conversations, and this configuration was one of several views we looked at. On the held-out test half the same configuration gives +3.4 (95% CI −4.0 to +10.8), and Dawid–Skene on the same groups reaches 71.0%, above FUSE's 68.8% (results/DICES_GROUP_METHODS.md).
 
-**What it changes.** The hypothesis that small or homogeneous panels let FUSE find the good raters is not supported. At a shared cut-off FUSE, Dawid–Skene and even majority vote make almost the same calls. FUSE's earlier AUC edge in small panels was the Unsure information Dawid–Skene had been denied: against Yes-only Dawid–Skene it was +1.1 / +0.6 / +0.3 AUC, about what Unsure adds to majority vote (+1.2 / +0.9 / +0.6), and against three-answer Dawid–Skene it is 0. Both methods rank raters by quality equally well (Spearman 0.70–0.85 each), and demographic panels behave like random panels of the same size (−0.2 points on average in the gap). On DICES the differences between methods come from how many conversations each calls unsafe, not from how they weigh raters. This adds to [Where this leaves FUSE](#where-this-leaves-fuse): on yes/no human votes FUSE ties Dawid–Skene, and small leads we saw earlier came from cut-off differences.
+### What this changes
 
-**Next steps from this entry.**
+In one sentence: on DICES-350, tuning FUSE and running it inside small or demographic rater panels does not change the picture; with the same information and the same cut-off, FUSE and Dawid–Skene make the same calls.
+
+The hypothesis that small or homogeneous panels let FUSE find the good raters is not supported. At a shared cut-off FUSE, Dawid–Skene and even majority vote make almost the same calls. FUSE's earlier AUC edge in small panels was the Unsure information Dawid–Skene had been denied: against Yes-only Dawid–Skene it was +1.1 / +0.6 / +0.3 AUC, about what Unsure adds to majority vote (+1.2 / +0.9 / +0.6), and against three-answer Dawid–Skene it is 0. Both methods rank raters by quality equally well (Spearman 0.70–0.85 each), and demographic panels behave like random panels of the same size (−0.2 points on average in the gap). On DICES the differences between methods come from how many conversations each calls unsafe, not from how they weigh raters. This adds to [Where this leaves FUSE](#where-this-leaves-fuse): on yes/no human votes FUSE ties Dawid–Skene, and small leads we saw earlier came from cut-off differences.
+
+### Next steps
 
 - In every comparison from now on, score methods at a shared cut-off as well as at their own rule, and give Dawid–Skene the same answer scale as FUSE (Unsure, score bins).
-- Recheck earlier results that compared methods at their own cut-offs (including the race × gender result in [Findings](#findings)) at a shared cut-off.
+- Recheck earlier results that compared methods at their own cut-offs (including the race × gender result in [First experiment: DICES](#first-experiment-dices)) at a shared cut-off.
 
-**Question for you.**
+### Question for you
 
 - Should accuracy at a shared cut-off (equal number called positive) be the main comparison in the midterm, with each method's own rule reported beside it?
 
