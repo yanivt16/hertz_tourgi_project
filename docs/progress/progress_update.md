@@ -223,3 +223,37 @@ The hypothesis that small or homogeneous panels let FUSE find the good raters is
 
 - Should accuracy at a shared cut-off (equal number called positive) be the main comparison in the midterm, with each method's own rule reported beside it?
 
+
+## 22 November 2026: DICES-350, groups of raters who share errors
+
+**Why.** The [demographic panels](#22-november-2026-dices-350-tuning-and-small-and-demographic-rater-panels) showed no FUSE advantage, but raters who are alike are not necessarily raters who make the *same mistakes*. FUSE beat Dawid–Skene only when a minority block of raters shared errors next to independent raters ([A correlated block on real labels](#a-correlated-block-on-real-labels)). So we built groups of DICES raters directly from shared errors, tested whether such groups exist, and planted one as a minority in small panels. Results: results/DICES_ERROR_BLOCKS.md (raw: results/dices_error_blocks.json; script: scripts/dices_error_blocks.py).
+
+**How.** Ratings coded Yes = 1, Unsure = 0, No = −1. A rater's residual on a conversation is the rating minus that rater's mean over conversations with the same expert label; correlating residuals between raters measures shared errors beyond the label (conditional dependence), not agreement. Groups were built on the dev half only (174 conversations, the fixed split of the tuning run), checked on the test half (176), and the panels were fitted and scored on the test half only. One rater who answers No to every conversation was left out (122 raters).
+
+**Do shared-error groups exist? Yes, but they are weak, and most shared error is global.**
+
+- Almost every pair of raters shares errors: mean residual correlation 0.22 on dev (plain correlation 0.26), only 4% of pairs negative.
+- Eigenvalues of the residual correlation matrix: one global mode (λ1 = 30.0, a quarter of all variance, every rater loading positively: conversations that everyone gets wrong together), then 5.1 and 3.6 above the Marchenko–Pastur edge of 3.38. The next is 2.9. The two group modes beat both nulls (shuffled residuals: largest of 100 null eigenvalues 3.5; a one-factor null with only the global mode: 95th percentile 2.6 and 2.5). They replicate on the test half (5.9, 3.7; dev and test eigenspaces aligned, cosines 0.98 and 0.86).
+- The second mode follows a rater's Yes rate (correlation +0.48): strict raters share false alarms and lenient raters share misses on the same borderline conversations. This looks like a severity gradient more than separate cliques.
+
+**Clustering** (dev-built groups, checked on test). With 2 group modes, MacMahon & Garlaschelli's community detection for correlation matrices gives 3 groups (49, 49, 24 raters). Their within-group residual correlation on the test half is 0.201, against 0.173 for random groups of the same sizes (95th percentile 0.177, p < 0.001). Spectral clustering (k = 4) is similar (0.215) but less stable (bootstrap ARI to the full-dev clustering 0.29, against 0.42 for MacMahon–Garlaschelli). Average-linkage hierarchical clustering puts 118 of 122 raters in one group. Yaniv's greedy rule stops at pairs: its stopping rule rejects anyone less correlated than the seed pair. Two of those pairs are striking (residual correlation 0.87 and 0.85 on dev, 0.73 and 0.84 on test). Grown to at least 8 raters, the greedy groups are the tightest ones that hold up on test: within 0.26–0.36 against 0.17 for random groups. None of the groupings follows demographics (adjusted Rand index between −0.03 and +0.02 for gender, race, education and age).
+
+**Does FUSE gain when one such group is a minority? No.** Each method's tightest group of 8 or more raters (chosen on dev), plus the least accurate grown-greedy group (closest to the weak block of the simulation), was planted as 20%, 30% or 40% of panels of 10, 15 and 20 raters, with 100 draws per setting and size-matched random panels as control. The methods were majority vote, three-answer Dawid–Skene, FUSE, mean z-score, and Dawid–Skene after the label-free detector.
+
+- At a shared cut-off, FUSE − Dawid–Skene is −0.1 to +0.6 accuracy points in the block panels and +0.1 / +0.4 / +0.3 in random panels of 10 / 15 / 20 raters. The part due to the block (block panels minus random panels) averages −0.01 points over the 45 block settings (range −0.28 to +0.44). Its 95% interval excludes 0 in 1 of the 45, about what chance gives.
+- AUC: FUSE is +0.2 to +0.8 AUC points above Dawid–Skene everywhere, random panels included. The part due to the block averages +0.08 (at most +0.35; 7 of 45 intervals exclude 0, all upward). Compare +5.6 AUC on RTE with an LLM block.
+- At each method's own rule FUSE loses 1 to 6 points (it under-calls, as before).
+- The label-free detector (residual correlation > 0.4 after the trimmed rank-one fit) almost never finds the large groups (recall 2–19%). It does find the lenient, least accurate block (precision 0.54–0.81, recall 0.49–0.62), but collapsing it changes Dawid–Skene's accuracy by −0.1 to +0.2 points, no interval excluding 0.
+
+### What this changes
+
+DICES-350 raters do share errors, but mostly all together (the global mode, which no aggregator can remove), with a weak strict-versus-lenient split on top. The groups are real: they beat both nulls and hold on held-out conversations. But they are far weaker than the LLM block on RTE (residual correlation about 0.2–0.35 against a background of 0.17). Planting one as a 20–40% minority does not open a gap between FUSE and Dawid–Skene. This closes the route we were testing on DICES: on these human raters the conditions under which FUSE wins (a strongly correlated minority block next to independent raters) do not occur naturally, and building blocks from the strongest shared errors we can find does not create them.
+
+### Next steps
+
+- If we test the block mechanism on humans again, it needs a dataset with a stronger natural block (e.g. raters sharing a guideline, a tool or an LLM assistant), or a mixed human + LLM panel as on RTE.
+- The two near-duplicate rater pairs (test residual correlation 0.73 and 0.84) are worth a look in the raw DICES data (shared sessions or copied answers?).
+
+### Question for you
+
+- Should we record "DICES human raters do not form shared-error blocks strong enough for FUSE to matter" as a finding in the thesis, and stop looking for FUSE gains on DICES?
