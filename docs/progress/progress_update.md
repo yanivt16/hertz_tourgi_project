@@ -3,9 +3,9 @@
      Regenerate with scripts/gdoc_to_md.py (see CLAUDE.md). Last synced: 2026-11-21.
      AHEAD OF THE GOOGLE DOC: the 21 Nov paper-benchmark result (new section "The paper's own
      benchmarks", plus one sentence each in Summary and "Where this leaves FUSE", one Next steps
-     bullet, one question) is in this mirror only. So is the 22 Nov DICES-350 result (new section
-     "DICES-350: tuning FUSE and small rater panels", plus one sentence each in Summary and
-     "Where this leaves FUSE", and one Next steps bullet). Copy both into the Google Doc, then regenerate. -->
+     bullet, one question) is in this mirror only. Copy it into the Google Doc, then regenerate.
+     ALSO AHEAD: the appended entry "22 November 2026: DICES-350 tuning and rater panels" at the
+     end of this mirror. Append it to the end of the Google Doc as well. -->
 
 # FUSE on Human Annotators: Progress Update
 
@@ -17,7 +17,7 @@ Code and all result files: [github.com/yanivt16/hertz_tourgi_project](https://gi
 
 On human annotators, the baseline FUSE has to beat is Dawid–Skene, not majority vote. With many interchangeable raters FUSE reduces to majority vote, and on sparse data, zero-imputation of missing ratings (as in the paper) costs it about 6 points against Dawid–Skene. When the matrix is made dense, by running FUSE on blocks of conversations that share raters, FUSE beats majority vote by 5.1 points and ties Dawid–Skene. We propose to focus the project on binary tasks and to make missing-data handling the main methodological work of Stage 1.
 
-Since the first draft we implemented missing-aware FUSE and tested continuous scores, a radiology reader study (VIPER), panels that mix humans with local LLM raters, a simulation map of where FUSE should win, two real crowds of non-experts on hard questions, and a correlated block of small LLMs next to humans. Missing-aware FUSE closes the gap to Dawid–Skene on sparse data. FUSE beats Dawid–Skene reliably in one setting only, a weak correlated block added to a human panel, and there it avoids damage rather than adding accuracy. The new sections start at "Missing-aware FUSE" below. A new test on the paper's own Best-of-N benchmarks shows where FUSE's lead over Dawid–Skene comes from: its threshold search, not its estimator. On DICES-350, tuning FUSE and running it inside small or demographic rater panels does not change the picture: with the same information and the same cut-off, FUSE and Dawid–Skene make the same calls.
+Since the first draft we implemented missing-aware FUSE and tested continuous scores, a radiology reader study (VIPER), panels that mix humans with local LLM raters, a simulation map of where FUSE should win, two real crowds of non-experts on hard questions, and a correlated block of small LLMs next to humans. Missing-aware FUSE closes the gap to Dawid–Skene on sparse data. FUSE beats Dawid–Skene reliably in one setting only, a weak correlated block added to a human panel, and there it avoids damage rather than adding accuracy. The new sections start at "Missing-aware FUSE" below. A new test on the paper's own Best-of-N benchmarks shows where FUSE's lead over Dawid–Skene comes from: its threshold search, not its estimator.
 
 ## Paper reproduction
 
@@ -159,24 +159,9 @@ Dawid–Skene given FUSE's thresholds matches FUSE, within one point in 7 of 12 
 
 While doing this we found a bug in our rater-clustering code: its Spearman correlation breaks ties by row order, so two unrelated yes/no columns correlate at about 0.2. On these benchmarks it only changes which LLM-judge verdicts are merged (accuracy moves by at most 0.3 points), but results that cluster yes/no votes need a rerun once it is fixed.
 
-## DICES-350: tuning FUSE and small rater panels
-
-We tuned FUSE on DICES-350 one setting at a time (how raters become verifiers, parts of the algorithm, numeric settings), choosing on a fixed dev half (174 conversations) and scoring once on the test half (176). Two changes were adopted: demographic groups (race × education) as verifiers, and a cut-off at FUSE's own estimated prevalence. Dev accuracy rose from 64.9% to 75.9%, but the test half gives 69.9%, against 65.3% for majority vote (+4.5, 95% CI −3.4 to +12.5) and 71.0% for Dawid–Skene on the individual raters. Grouping raters is the only large lever, and random groups do about as well as demographic ones.
-
-We then tested whether small panels, where good raters weigh more, let FUSE find them better than Dawid–Skene: 100 reshuffles of the 123 raters into disjoint panels of about 5, 10 and 20, and the raters of each demographic group (gender, race, education, age: 13 groups of 7–75 raters), each against 100 random panels of the same size. Every rater stays a separate verifier. A first version showed a small FUSE lead; an independent review found it came from two unfair comparisons, now fixed. Each method had been cut at its own estimated prevalence (both under-call, so whichever calls more wins), and Dawid–Skene had been given only Yes votes while FUSE also saw Unsure. With a three-answer Dawid–Skene (Yes / Unsure / No) and every method calling the same number of conversations unsafe (accuracy points, 95% intervals over conversations):
-
-| **Panels** | **FUSE minus Dawid–Skene, same cut-off** | **FUSE minus Dawid–Skene, each at its own rule** |
-|---|---|---|
-| About 5 raters (2,400 panels) | +0.0 [−0.1, +0.1] | −1.3 [−1.9, −0.8] |
-| About 10 raters (1,200 panels) | +0.1 [−0.1, +0.2] | −2.1 [−3.3, −1.0] |
-| About 20 raters (600 panels) | +0.1 [−0.0, +0.3] | −2.8 [−4.5, −1.1] |
-| 13 demographic groups | −0.1 on average; no interval excludes 0 | −2.9 on average; Dawid–Skene ahead in all 13 |
-
-The hypothesis is not supported. At a shared cut-off FUSE, Dawid–Skene and even majority vote make almost the same calls. FUSE's earlier AUC edge was the Unsure information Dawid–Skene had been denied (against three-answer Dawid–Skene it is 0). Both methods rank raters by quality equally well (Spearman 0.70–0.85 for each), and demographic panels behave like random panels of the same size (−0.2 points on average in the FUSE − Dawid–Skene gap). The same correction removes FUSE's lead on random groups of raters (1,000 groupings per size, −0.3 to +0.5 points at a shared cut-off), and Dawid–Skene on the individual raters beats tuned FUSE on the test half in 80–92% of groupings. On DICES the differences between methods come from how many conversations each calls unsafe, not from how they weigh raters. Results: results/DICES_TUNING.md, DICES_SMALL_PANELS.md, DICES_RANDOM_GROUPS.md, DICES_DEMOGRAPHIC_PANELS.md.
-
 ## Where this leaves FUSE
 
-In almost every setting we have tried (binary, sparse, continuous, and mixed panels of humans and LLMs), FUSE at best ties Dawid–Skene. Its one advantage is robustness to raters that are both correlated and weak, now confirmed on real labels, and there a plain average of z-scores does about as well. The simulation map and the two real crowds above narrow this further: FUSE is ahead only when a minority block of weak raters shares errors, and on real crowds of non-experts every method lands within noise of the crowd mean. On RTE with a block of small LLMs, FUSE wins by not being hurt by the block, not by getting more out of it. The honest midterm result may be a negative one, with missing-aware FUSE as the methodological contribution. On the paper's own Best-of-N benchmarks the picture is the same from the other side: FUSE's lead over Dawid–Skene there comes from its threshold search, and Dawid–Skene given the same thresholds matches it. So FUSE's real contribution is a label-free way to pick thresholds for continuous scores, which has nothing to work on when raters give yes/no votes. Small and demographic panels on DICES-350 give the same answer: with like-for-like inputs and a shared cut-off FUSE and Dawid–Skene are level, and the small leads we first saw came from cut-off differences.
+In almost every setting we have tried (binary, sparse, continuous, and mixed panels of humans and LLMs), FUSE at best ties Dawid–Skene. Its one advantage is robustness to raters that are both correlated and weak, now confirmed on real labels, and there a plain average of z-scores does about as well. The simulation map and the two real crowds above narrow this further: FUSE is ahead only when a minority block of weak raters shares errors, and on real crowds of non-experts every method lands within noise of the crowd mean. On RTE with a block of small LLMs, FUSE wins by not being hurt by the block, not by getting more out of it. The honest midterm result may be a negative one, with missing-aware FUSE as the methodological contribution. On the paper's own Best-of-N benchmarks the picture is the same from the other side: FUSE's lead over Dawid–Skene there comes from its threshold search, and Dawid–Skene given the same thresholds matches it. So FUSE's real contribution is a label-free way to pick thresholds for continuous scores, which has nothing to work on when raters give yes/no votes.
 
 ## Proposed scope change
 
@@ -188,7 +173,6 @@ Compared with the attached proposal, we would like to focus on binary tasks, as 
 - Done: missing-aware FUSE (see above). Still open: raters who share fewer than 20 items, as in a thinned crowd.
 - Stage 2: train a text model on FUSE labels and compare it with one trained on a single annotator's labels.
 - Done: the one regime where the simulation puts FUSE ahead, tested on real labels (see above). Next: repeat it on a second task with a natural correlated block, to see whether it holds beyond RTE. Multi-class stays an optional extension.
-- Done: tuning, small panels and demographic panels on DICES-350 (see above); the result is negative. For every comparison from now on: score methods at a shared cut-off as well as at their own rule, and give Dawid–Skene the same answer scale as FUSE (Unsure, score bins).
 - Done: what carries FUSE's lead on the paper's own benchmarks (see above). Next: give Dawid–Skene FUSE's thresholds on the crowds with continuous scores (deepfakes, fact-checking, DICES group shares, VIPER), and fix the tie bug in the clustering code before rerunning results that use it.
 
 ## Questions for you
@@ -200,3 +184,38 @@ Compared with the attached proposal, we would like to focus on binary tasks, as 
 - Is a careful negative result (FUSE ties Dawid–Skene on human annotators) plus missing-aware FUSE an acceptable outcome for the midterm?
 - Do you see a setting, beyond correlated weak raters, where FUSE should beat Dawid–Skene on human or mixed panels?
 - Is "FUSE's contribution is a label-free way to pick thresholds for continuous scores" a framing you would accept for the thesis, given that its estimator adds nothing over Dawid–Skene on the paper's benchmarks?
+
+## 22 November 2026: DICES-350 tuning and rater panels, FUSE and Dawid–Skene are level
+
+**What is new.** Three experiments on DICES-350 (see [First experiment: DICES](#first-experiment-dices)), all asking whether FUSE can be made to beat Dawid–Skene on human raters. An independent review of the first versions found that FUSE's small leads came from two unfair comparisons, so the numbers below are the corrected ones.
+
+1. **Tuning.** We tuned FUSE one setting at a time (how raters become verifiers, parts of the algorithm, numeric settings), choosing on a fixed dev half (174 conversations) and scoring once on the test half (176). Two changes were adopted: demographic groups (race × education) as verifiers, and a cut-off at FUSE's own estimated prevalence. Dev accuracy rose from 64.9% to 75.9%; on the test half the tuned FUSE reaches 69.9%, against 65.3% for majority vote (+4.5, 95% CI −3.4 to +12.5) and 71.0% for Dawid–Skene on the individual raters. Random groups of raters do about as well as demographic ones. Results: results/DICES_TUNING.md.
+2. **Small random panels.** 100 reshuffles of the 123 raters into disjoint panels of about 5, 10 and 20; inside each panel every method sees only that panel's raters. The idea was that good raters weigh more in a small panel, so a method that learns rater quality without labels should gain there. Results: results/DICES_SMALL_PANELS.md.
+3. **Inside each demographic group.** Yaniv's variant: the raters of each group of one attribute (gender, race, education, age: 13 groups of 7–75 raters) as separate verifiers, each group against 100 random panels of the same size. Results: results/DICES_DEMOGRAPHIC_PANELS.md.
+
+**What the review corrected.** (a) Each method had been cut at its own estimated prevalence. Both under-call (about 0.3 against the experts' 0.5), so whichever calls more conversations unsafe wins accuracy. The corrected runs also score every method calling the *same* number of conversations unsafe. (b) Dawid–Skene had been given less information than FUSE: only Yes votes in the panels (Unsure counted as safe), and one yes/no vote per group on grouped views. The corrected runs use a three-answer Dawid–Skene (Yes / Unsure / No) and, on groups, Dawid–Skene on the group shares cut into 5 bins.
+
+**Numbers** (FUSE minus three-answer Dawid–Skene, accuracy points, 95% intervals from a paired bootstrap over conversations):
+
+| **Panels** | **First version (own cut-offs, Yes-only Dawid–Skene)** | **Same cut-off, corrected** | **Each at its own rule, corrected** |
+|---|---|---|---|
+| About 5 raters (2,400 panels) | +0.9 [+0.5, +1.4] | +0.0 [−0.1, +0.1] | −1.3 [−1.9, −0.8] |
+| About 10 raters (1,200 panels) | +0.8 [+0.3, +1.3] | +0.1 [−0.1, +0.2] | −2.1 [−3.3, −1.0] |
+| About 20 raters (600 panels) | +0.6 [+0.1, +1.1] | +0.1 [−0.0, +0.3] | −2.8 [−4.5, −1.1] |
+| 13 demographic groups | (new) | −0.1 on average; no interval excludes 0 | −2.9 on average; Dawid–Skene ahead in all 13 |
+
+The same correction applies to random groups of raters, where each group is one verifier (1,000 groupings per size, test half, results/DICES_RANDOM_GROUPS.md): FUSE's lead over Dawid–Skene on group votes was +0.8 / +2.5 / +3.3 points for groups of about 5 / 10 / 20; at a shared cut-off it is −0.3 to +0.5, every interval including 0, and Dawid–Skene given the group shares ties FUSE (−0.1). Dawid–Skene on the individual raters beats tuned FUSE on the test half in 80–92% of groupings.
+
+**A correction to [Findings](#findings).** The first DICES finding reports that FUSE on 10 race × gender groups beats majority vote by 5.7 points (95% CI +0.6 to +10.9). That number is on all 350 conversations, and this configuration was one of several views we looked at. On the held-out test half the same configuration gives +3.4 (95% CI −4.0 to +10.8), and Dawid–Skene on the same groups reaches 71.0%, above FUSE's 68.8% (results/DICES_GROUP_METHODS.md).
+
+**What it changes.** The hypothesis that small or homogeneous panels let FUSE find the good raters is not supported. At a shared cut-off FUSE, Dawid–Skene and even majority vote make almost the same calls. FUSE's earlier AUC edge in small panels was the Unsure information Dawid–Skene had been denied: against Yes-only Dawid–Skene it was +1.1 / +0.6 / +0.3 AUC, about what Unsure adds to majority vote (+1.2 / +0.9 / +0.6), and against three-answer Dawid–Skene it is 0. Both methods rank raters by quality equally well (Spearman 0.70–0.85 each), and demographic panels behave like random panels of the same size (−0.2 points on average in the gap). On DICES the differences between methods come from how many conversations each calls unsafe, not from how they weigh raters. This adds to [Where this leaves FUSE](#where-this-leaves-fuse): on yes/no human votes FUSE ties Dawid–Skene, and small leads we saw earlier came from cut-off differences.
+
+**Next steps from this entry.**
+
+- In every comparison from now on, score methods at a shared cut-off as well as at their own rule, and give Dawid–Skene the same answer scale as FUSE (Unsure, score bins).
+- Recheck earlier results that compared methods at their own cut-offs (including the race × gender result in [Findings](#findings)) at a shared cut-off.
+
+**Question for you.**
+
+- Should accuracy at a shared cut-off (equal number called positive) be the main comparison in the midterm, with each method's own rule reported beside it?
+
