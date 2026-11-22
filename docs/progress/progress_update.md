@@ -257,3 +257,22 @@ DICES-350 raters do share errors, but mostly all together (the global mode, whic
 ### Question for you
 
 - Should we record "DICES human raters do not form shared-error blocks strong enough for FUSE to matter" as a finding in the thesis, and stop looking for FUSE gains on DICES?
+
+## 22 November 2026: DICES-350 without the conversations where raters and experts disagree
+
+**Why.** Yaniv's last attempt on DICES: in a sizeable share of conversations the expert label seems to say something different from the raters, whatever the aggregation. If those conversations hide a difference between methods, removing them should show it. Results: results/DICES_CLEAN_SUBSET.md (raw, incl. the removed conversation ids: results/dices_clean_subset.json; script: scripts/dices_clean_subset.py).
+
+**Which conversations.** With all raters, majority vote, both Dawid–Skene versions and FUSE all put **92 of 350 conversations (26%)** on the wrong side of the expert label when each calls 50% unsafe: 45 unsafe and 47 safe by the experts. On them a median of 27% of raters agree with the expert, against 71% on the rest. (At each method's own rule the count is similar, 94, but 81 of those are unsafe, because the methods under-call.) Removing them also removes much of the shared error found in [the previous entry](#22-november-2026-dices-350-groups-of-raters-who-share-errors). The mean residual correlation between raters falls from 0.22 to 0.15, and the global mode from 25% to 18% of the variance. The two group modes stay (4.9 and 3.5), but only the first is above the edge for the smaller sample (3.86).
+
+**Result on the remaining 258 (all methods refitted without labels).** The removal used the expert label, so every method looks better; only the comparison between methods counts.
+
+- All raters together: every method ranks almost perfectly (AUC 99.5–99.7). Every method still under-calls (FUSE estimates 35% unsafe, the experts say 50%). At a shared cut-off FUSE and three-answer Dawid–Skene make identical calls (difference 0.0). At their own rules FUSE is 10.9 points behind (75.2% against 86.0%; 95% CI −14.7 to −7.4) because it calls only 26% unsafe.
+- Small random panels (100 reshuffles into panels of about 5, 10, 20 raters): at a shared cut-off FUSE − three-answer Dawid–Skene is −0.10 / −0.09 / −0.08 points (95% CIs [−0.19, −0.01], [−0.21, +0.04], [−0.23, +0.08]). In AUC it is −0.06 / −0.12 / −0.14. On all 350 the same panels gave +0.01 / +0.05 / +0.14. At their own rules FUSE loses 2.7 / 4.7 / 6.9 points, more than on all 350. Both methods rank raters by quality equally well (Spearman 0.81–0.93 each).
+
+### What this changes
+
+The conversations where the crowd and the experts disagree are not where FUSE and Dawid–Skene differ. Removing them makes the task easy for every method, and FUSE stays tied with three-answer Dawid–Skene at a shared cut-off (marginally behind in the smallest panels) and further behind at its own rule. Together with [the shared-error groups](#22-november-2026-dices-350-groups-of-raters-who-share-errors), this leaves no setting on DICES-350 where FUSE gains.
+
+### Question for you
+
+- The 92 contested conversations are a quarter of DICES-350, balanced between the two expert labels. Should we treat them as label noise, as genuine disagreement between experts and crowd (the DICES paper's own framing), or leave that question out of the thesis?
