@@ -21,6 +21,11 @@ their data, and this repo runs on it directly.
 | LLM safety label for DICES: prompt development on DICES-350, held-out test, labels for all of DICES-990 | Write-up: [results/DICES_LLM_LABELS.md](results/DICES_LLM_LABELS.md) · labels and run metadata: [results/llm_labels/](results/llm_labels/) · prompts: [scripts/dices_prompts/](scripts/dices_prompts/) · script: [scripts/label_dices_llm.py](scripts/label_dices_llm.py) |
 | FUSE on DICES-990 against the LLM label (missing ratings) | Tables: [results/DICES990.md](results/DICES990.md) · raw: [results/dices990.json](results/dices990.json), [results/dices990.log](results/dices990.log) · script: [scripts/run_dices990.py](scripts/run_dices990.py) · write-up: [DICES-990](#dices-990-against-an-llm-safety-label) |
 | FUSE on DICES-990 block by block (conversations grouped by shared raters) | Tables: [results/DICES990_BLOCKS.md](results/DICES990_BLOCKS.md) · raw (incl. each conversation's block): [results/dices990_blocks.json](results/dices990_blocks.json) · script: [scripts/dices990_blocks.py](scripts/dices990_blocks.py) |
+| FUSE tuned on DICES-350: one change at a time, chosen on a dev half, scored once on a test half | Tables: [results/DICES_TUNING.md](results/DICES_TUNING.md) · raw: [results/dices_tuning.json](results/dices_tuning.json) · script: [scripts/tune_dices350.py](scripts/tune_dices350.py) · write-up: [Tuning FUSE on DICES-350](#tuning-fuse-on-dices-350) · live log: [claude.ai/artifact/THS4D4Qjrtd6UkbxGuUdbu](https://claude.ai/artifact/THS4D4Qjrtd6UkbxGuUdbu) (private until shared) |
+| Other methods (majority vote, Dawid–Skene) on the same grouped DICES-350 views | Tables: [results/DICES_GROUP_METHODS.md](results/DICES_GROUP_METHODS.md) · raw: [results/dices_group_methods.json](results/dices_group_methods.json) · script: [scripts/dices_group_methods.py](scripts/dices_group_methods.py) |
+| FUSE vs Dawid–Skene over 1000 random rater groupings per group size (DICES-350) | Tables: [results/DICES_RANDOM_GROUPS.md](results/DICES_RANDOM_GROUPS.md) · raw: [results/dices_random_groups.json](results/dices_random_groups.json) · script: [scripts/dices_random_groups.py](scripts/dices_random_groups.py) |
+| Small random rater panels: majority vote vs Dawid–Skene vs FUSE inside each panel, 100 reshuffles (DICES-350) | Tables: [results/DICES_SMALL_PANELS.md](results/DICES_SMALL_PANELS.md) · raw: [results/dices_small_panels.json](results/dices_small_panels.json) · script: [scripts/dices_small_panels.py](scripts/dices_small_panels.py) |
+| Inside each demographic group: majority vote vs Dawid–Skene vs FUSE on that group's raters, with size-matched random panels as control (DICES-350) | Tables: [results/DICES_DEMOGRAPHIC_PANELS.md](results/DICES_DEMOGRAPHIC_PANELS.md) · raw: [results/dices_demographic_panels.json](results/dices_demographic_panels.json) · script: [scripts/dices_demographic_panels.py](scripts/dices_demographic_panels.py) |
 | FUSE on VIPER (radiologists reading mammograms, gold = cancer at follow-up); missingness leaks the label, so dense blocks are the clean result | Tables: [results/VIPER.md](results/VIPER.md) · code: [src/fuse/viper.py](src/fuse/viper.py), [scripts/run_viper.py](scripts/run_viper.py) |
 | Stage 1 dataset survey and recommendation (RTE, TEMP, D_PosSent, D_Product, Bluebird, VIPER) | [docs/dataset_survey.md](docs/dataset_survey.md) |
 | Missing ratings in FUSE: problem, missing-aware FUSE (`FUSE(missing="skip")`), first results | Plan and results: [docs/missing_data_plan.md](docs/missing_data_plan.md) · code: [src/fuse/missing.py](src/fuse/missing.py), tests: [tests/test_missing.py](tests/test_missing.py) · simulation: [results/MISSING_SIM.md](results/MISSING_SIM.md), [scripts/sim_missing.py](scripts/sim_missing.py) · real data (RTE, D_PosSent, D_Product, Bluebird, DICES, VIPER): [results/MISSING_REAL.md](results/MISSING_REAL.md), [scripts/run_missing_real.py](scripts/run_missing_real.py), loader [src/fuse/crowd.py](src/fuse/crowd.py) |
@@ -338,6 +343,166 @@ block, majority vote included, sees the same raters; predictions are pooled over
 - The number of blocks barely matters: with 3 or 4 blocks FUSE posterior gains +5.3 and +4.9.
 - Density is what helps, not the split: the same blocks with all their raters (21–37% empty
   inside the block) give FUSE only +0.5 to +1.8.
+
+### Tuning FUSE on DICES-350
+
+`scripts/tune_dices350.py` searches FUSE's settings one change at a time, coarse to fine:
+stage 1 is the verifier view (17 options, including random rater groups as a control),
+stage 2 switches parts of the algorithm on and off (predictor, rater dropping, scale-free TCI,
+clustering, and a new label-free cut-off at FUSE's own estimated prevalence), and stage 3
+sweeps the numbers (threshold grid, sweeps, `logistic_C`, `tci_clip`). FUSE is always fitted on
+all 350 conversations without labels; settings are chosen on the dev half (174), and the
+winner is scored once on the test half (176). A change is adopted only if it gains at least
+2 points of dev accuracy without lowering dev AUC by more than 0.5. The stages repeat until a
+full pass adopts nothing. Every step: [results/DICES_TUNING.md](results/DICES_TUNING.md), raw
+state: [results/dices_tuning.json](results/dices_tuning.json).
+
+```bash
+.venv/bin/python scripts/tune_dices350.py reset && .venv/bin/python scripts/tune_dices350.py all
+.venv/bin/python scripts/tune_dices350.py final
+```
+
+| | Dev (choosing) | Test (scored once) | Test − majority vote (95% CI) |
+|---|---:|---:|---|
+| FUSE defaults, per rater | 64.9 | 65.3 | +0.0 [−1.7, +1.7] |
+| FUSE defaults, race × gender groups | 71.3 | 68.8 | +3.4 [−4.0, +10.8] |
+| **Tuned: race × education groups, cut-off at estimated prevalence** | **75.9** | **69.9** | +4.5 [−3.4, +12.5] |
+| Dawid–Skene | 66.1 | 71.0 | +5.7 [+0.6, +10.8] |
+| Majority vote | 64.9 | 65.3 | |
+
+- **Two changes were adopted, and the search converged after the second pass.** The view
+  (race × education groups, +8.1 on dev) and the cut-off (+2.9). No other switch or number
+  gained 2 points. The closest was `logistic_C=10` (+1.1).
+- **Most of the dev gain does not survive the test half, and the result is negative against
+  Dawid–Skene.** Dev 75.9 falls to 69.9 on test. The
+  tuned configuration is 1.1 points above the untuned race × gender view [−2.3, +4.5], and
+  Dawid–Skene is still ahead (tuned − Dawid–Skene: −1.1 [−7.4, +5.1]). Dawid–Skene is the
+  only method whose test gain over majority vote has an interval that excludes 0.
+- **The view is the only large lever, and part of it is plain averaging.** Random groups of 20
+  raters reach 69.0 on dev (mean of 5 random groupings, sd 0.8), against 64.9 per rater. The choice of demographic split is not stable:
+  dev accuracy runs from 58.6 (gender) to 73.0 (race × education).
+- **Accuracy here is mostly about how many conversations get called unsafe.** AUC barely moves
+  (77.5–80.4 across every working configuration), and the configurations that win are those whose
+  estimated prevalence lands near 0.5, the experts' share. The cut-off at estimated prevalence
+  helps for the same reason.
+- **Some settings behave like noise.** `n_quantiles` gives 70.1 / 65.5 / 75.9 / 70.1 for
+  5 / 9 / 19 / 39 with no trend. The default (19) happens to be the peak.
+- **No label-free selector found.** Within a step, a lower TCI statistic goes with *lower* dev
+  accuracy (Spearman −0.95 across `n_quantiles`), so minimising it cannot replace the labels.
+  With 15 verifiers every triplet is used, so the seed has no effect (5 seeds, sd 0).
+
+**A note on fair comparisons (added after review).** The first versions of the three
+experiments below gave FUSE a small lead over Dawid–Skene that came mostly from unfair
+comparisons. Two things were fixed. (1) *Same cut-off*: both methods under-call (FUSE and
+Dawid–Skene estimate the unsafe share at about 0.3 per rater; the experts say 0.5), so whichever
+calls more conversations unsafe wins accuracy. Cutting each method at its *own* estimate is not a
+shared cut-off. The corrected runs also score every method calling the *same* number of
+conversations unsafe, at FUSE's estimate and at Dawid–Skene's. (2) *Same information*: the first
+panel run gave Dawid–Skene only Yes votes (Unsure counted as safe), while FUSE saw Yes / Unsure /
+No; on groups it gave Dawid–Skene one yes/no vote per group, while FUSE saw the group's share.
+The corrected runs add a three-answer Dawid–Skene (`dices.dawid_skene_3class`) and, on groups,
+Dawid–Skene on the group shares cut into 5 bins (`fuse.ordinal`). Once both are fixed, the two
+methods are level everywhere below.
+
+**Do the grouped views help the other methods too?** ([results/DICES_GROUP_METHODS.md](results/DICES_GROUP_METHODS.md),
+`scripts/dices_group_methods.py`). Each method runs on the same group matrices; for majority vote
+and Dawid–Skene each group first casts one vote (unsafe when more than half its raters said so).
+
+| View (test half, 176) | Majority of group votes | Dawid–Skene on group votes | FUSE, tuned |
+|---|---:|---:|---:|
+| Per rater (reference) | 65.3 | 71.0 | 65.3 (defaults) |
+| Race × education (15 groups) | 65.9 | 68.2 | 69.9 |
+| Race × gender (10) | 63.6 | 71.0 (72.2 cut at its own prevalence) | 69.3 |
+| Race (5) | 68.8 | 68.8 | 68.8 |
+| Random groups of 20 (6 groups of 20–21, one split) | 64.8 | 66.5 | 69.3 |
+
+- On test every method lands at 64–72%, and the gaps between methods are inside the bootstrap
+  intervals. The best single test number is Dawid–Skene on race × gender (72.2), whose dev score
+  (65.5) would never have selected it.
+- Test AUC is 80–82 for FUSE and for the mean of group shares on every view; it drops when each
+  group is reduced to a yes/no vote (race × gender: 76.3 for majority of group votes and 76.5 for
+  Dawid–Skene; race alone: 73). What differs most is how many conversations each method calls
+  unsafe: FUSE estimates 0.43–0.52 on grouped views, majority vote and Dawid–Skene call 20–27%.
+  That is why FUSE leads on dev, where the view was chosen.
+- Grouping can help majority vote: on race groups, majority of group votes gains +3.4 [+0.6, +6.8]
+  over per-rater majority vote on test, and the mean of group shares +2.8 [+0.6, +5.7]. On the
+  other views the gain is smaller and its interval includes 0.
+- Of the 24 comparisons against per-rater majority vote in that file, 6 have intervals that
+  exclude 0 (all Dawid–Skene or majority vote on race and race × gender groups). With that many
+  comparisons a few would do so by chance.
+- The split alone moves results: per-rater Dawid–Skene scores 66.1 on dev and 71.0 on test.
+
+**FUSE vs Dawid–Skene over 1000 random groupings** ([results/DICES_RANDOM_GROUPS.md](results/DICES_RANDOM_GROUPS.md),
+`scripts/dices_random_groups.py`). For each group size, the 123 raters are shuffled 1000 times
+and cut into near-equal groups (123 // size groups). Test half, mean over splits:
+
+| Groups of about | FUSE vs DS on group votes, each at its own rule | Same cut-off, at FUSE's estimate | Same cut-off, at DS's estimate | FUSE vs DS on 5-bin group shares, same cut-off | Tuned FUSE vs DS per rater (no groups), % of splits DS wins |
+|---|---|---|---|---|---|
+| 5 (24 groups) | +0.8 [−2.2, +3.7] | −0.2 [−0.9, +0.6] | +0.1 [−0.7, +0.8] | −0.1 [−0.2, +0.1] | −0.9 (80%) |
+| 10 (12 groups) | +2.5 [−2.6, +7.7] | −0.3 [−1.7, +1.1] | +0.4 [−0.5, +1.3] | −0.1 [−0.3, +0.1] | −1.2 (86%) |
+| 20 (6 groups) | +3.3 [−2.5, +9.2] | +0.2 [−4.2, +4.5] | +0.5 [−0.5, +1.5] | −0.1 [−0.4, +0.2] | −1.4 (92%) |
+
+- **FUSE's lead on groups was a cut-off effect.** At each method's own rule FUSE wins most
+  splits (+0.8 to +3.3), because it calls 37–46% of conversations unsafe and Dawid–Skene on group
+  votes 24–28%. When both call the same number unsafe, the gap is −0.3 to +0.5 points and every
+  interval includes 0.
+- **Dawid–Skene on group votes also sees less.** Its AUC falls from 79 per rater to 71 with groups
+  of 20, while FUSE stays at 79. Given the group shares (5 bins), Dawid–Skene ties FUSE at the same
+  cut-off (−0.1, intervals within ±0.4) and at its own rule scores 70.2–70.5 on test, level with FUSE.
+- **The like-for-like baseline needs no groups.** Dawid–Skene on the individual raters (71.0 on
+  test) beats tuned FUSE on test in 80–92% of splits, by 0.9–1.4 points (intervals over
+  conversations include 0). On all 350 it is level with FUSE defaults (FUSE ahead by +0.1 to +1.0,
+  every interval includes 0).
+- The grouping itself matters little: FUSE's test accuracy varies by sd 0.7–1.0 points across
+  splits, so tuned FUSE on random groups of 20 scores 69.6 ± 0.8 on test.
+- That consistency is over groupings, not conversations: all splits score the same 350
+  conversations, so the intervals come from a bootstrap over conversations.
+
+**Small random panels: does FUSE find the good raters better when the crowd is small?**
+([results/DICES_SMALL_PANELS.md](results/DICES_SMALL_PANELS.md), `scripts/dices_small_panels.py`,
+methods in `scripts/panel_eval.py`). The idea: among 123 raters the few good ones are diluted, and
+in a small panel they weigh more, so a method that learns rater quality without labels should gain
+most there. Each of 100 reshuffles cuts the 123 raters into disjoint panels (24 of ~5, 12 of ~10 or
+6 of ~20). Inside each panel every method sees only that panel's raters, one verifier per rater, on
+all 350 conversations. FUSE minus three-answer Dawid–Skene, mean over panels, with intervals over
+conversations:
+
+| Panel size | Each at its own rule | Same cut-off, at FUSE's estimate | Same cut-off, at DS's estimate | AUC: vs DS 3 answers / vs DS Yes only | Rater-quality Spearman, FUSE / DS |
+|---|---|---|---|---|---|
+| ~5 (2400 panels) | −1.3 [−1.9, −0.8] | +0.0 [−0.1, +0.1] | +0.0 [−0.1, +0.1] | +0.1 / +1.1 | +0.70 / +0.71 |
+| ~10 (1200) | −2.1 [−3.3, −1.0] | +0.1 [−0.1, +0.2] | +0.0 [−0.1, +0.1] | −0.0 / +0.6 | +0.78 / +0.79 |
+| ~20 (600) | −2.8 [−4.5, −1.1] | +0.1 [−0.0, +0.3] | +0.1 [−0.1, +0.2] | −0.0 / +0.3 | +0.83 / +0.83 |
+
+- **The hypothesis is not supported.** At a shared cut-off FUSE and Dawid–Skene make almost the
+  same calls (differences of 0.0 to +0.1 points, all intervals include 0); test-half numbers agree.
+  At their own rules Dawid–Skene wins by 1.3–2.8 points, because FUSE's 0.5 cut-off calls only
+  23–26% unsafe. Even majority vote is level with both at a shared cut-off.
+- **FUSE's earlier AUC edge was Dawid–Skene losing Unsure.** Against the Yes-only Dawid–Skene,
+  FUSE's AUC edge was +1.1 / +0.6 / +0.3, the same size as what Unsure is worth to majority vote
+  (+1.2 / +0.9 / +0.6 AUC). Against three-answer Dawid–Skene it is 0.
+- **Neither method finds the good raters better**: the rank correlations of estimated with true
+  rater quality are the same to two decimals.
+- **Small panels are worse than the full crowd for every method.** The best rater in a panel,
+  picked with the labels, reaches 65.8–68.1; three-answer Dawid–Skene on all 123 raters reaches 68.9.
+
+**Inside each demographic group** ([results/DICES_DEMOGRAPHIC_PANELS.md](results/DICES_DEMOGRAPHIC_PANELS.md),
+`scripts/dices_demographic_panels.py`). The same question as the small panels, with panels that
+are homogeneous rather than random: for each group of one attribute (gender 2, race 5, education 3,
+age 3: 13 groups of 7–75 raters; intersections are too small), every rater stays a separate
+verifier and the methods see only that group's raters. Control: 100 random panels of the same
+size from all 123 raters.
+
+- **No group shows FUSE finding its raters better.** At a shared cut-off, FUSE minus three-answer
+  Dawid–Skene averages −0.09 points over the 13 groups (FUSE ahead in 3, Dawid–Skene in 4, tied in
+  6); no interval excludes 0. At each method's own rule Dawid–Skene wins in all 13 groups
+  (−2.9 on average; 4 intervals exclude 0).
+- **Homogeneity does not change the gap.** Demographic minus size-matched random in FUSE − DS-3
+  averages −0.24 points, every interval includes 0.
+- **Some groups are simply better raters,** for every method alike: millennials, the Asian group
+  and the 7 raters of education "Other" beat size-matched random panels by 1–5 points; gen X+ and
+  women do worse. That is a property of the raters, not of the aggregator.
+- Rater-quality correlation: FUSE +0.85, Dawid–Skene +0.84 on average; FUSE higher in 9 of 13
+  groups, by a few hundredths.
 
 ## Choices the paper leaves open
 

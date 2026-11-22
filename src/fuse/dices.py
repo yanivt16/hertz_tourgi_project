@@ -198,6 +198,31 @@ def dawid_skene(V: np.ndarray, n_iter: int = 200, tol: float = 1e-8) -> np.ndarr
     return q
 
 
+def dawid_skene_3class(V: np.ndarray, n_iter: int = 300, tol: float = 1e-8, return_params: bool = False):
+    """Dawid & Skene (1979) with a binary truth and three answers (No = -1, Unsure = 0, Yes = 1):
+    each rater gets a full answer distribution per class, so Unsure is used as its own signal
+    instead of being folded into Yes or No. Missing ratings (NaN) are skipped. Initialised at
+    the soft majority vote with Unsure as 1/2. With return_params, also returns the per-rater
+    distributions th1, th0 (raters x [No, Unsure, Yes])."""
+    obs = ~np.isnan(V)
+    A = np.stack([(V == v) & obs for v in (-1.0, 0.0, 1.0)], axis=-1).astype(float)
+    M = obs.astype(float)
+    share = np.where(obs, (np.nan_to_num(V) + 1) / 2, 0).sum(1) / np.maximum(M.sum(1), 1)
+    q = share.clip(1e-3, 1 - 1e-3)
+    for _ in range(n_iter):
+        prior = q.mean().clip(1e-3, 1 - 1e-3)
+        th1 = (np.einsum("i,ija->ja", q, A) + 0.5) / (np.einsum("i,ij->j", q, M)[:, None] + 1.5)
+        th0 = (np.einsum("i,ija->ja", 1 - q, A) + 0.5) / (np.einsum("i,ij->j", 1 - q, M)[:, None] + 1.5)
+        l1 = np.log(prior) + np.einsum("ija,ja->i", A, np.log(th1))
+        l0 = np.log(1 - prior) + np.einsum("ija,ja->i", A, np.log(th0))
+        q_new = 1 / (1 + np.exp(np.clip(l0 - l1, -500, 500)))
+        done = np.max(np.abs(q_new - q)) < tol
+        q = q_new
+        if done:
+            break
+    return (q, th1, th0) if return_params else q
+
+
 # ---- evaluation ------------------------------------------------------------------------
 
 

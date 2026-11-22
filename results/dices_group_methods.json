@@ -1,0 +1,332 @@
+{
+ "reference": [
+  {
+   "method": "Majority vote, per rater",
+   "dev_acc": 64.9,
+   "test_acc": 65.3,
+   "all_acc": 65.1,
+   "test_auc": 80.0,
+   "called_unsafe": 22.6,
+   "test_vs_mv": 0.0,
+   "test_vs_mv_lo": 0.0,
+   "test_vs_mv_hi": 0.0
+  },
+  {
+   "method": "Dawid\u2013Skene, per rater",
+   "dev_acc": 66.1,
+   "test_acc": 71.0,
+   "all_acc": 68.6,
+   "test_auc": 80.6,
+   "called_unsafe": 33.4,
+   "test_vs_mv": 5.7,
+   "test_vs_mv_lo": 0.6,
+   "test_vs_mv_hi": 10.8
+  }
+ ],
+ "views": [
+  {
+   "view": "groups: race\u00d7education",
+   "estimated_prevalence": {
+    "FUSE": 0.5129850464486708,
+    "Dawid\u2013Skene": 0.2555135642021537,
+    "n_groups": 15
+   },
+   "rows": [
+    {
+     "method": "Majority of group votes",
+     "dev_acc": 64.9,
+     "test_acc": 65.9,
+     "all_acc": 65.4,
+     "test_auc": 82.5,
+     "called_unsafe": 21.7,
+     "test_vs_mv": 0.6,
+     "test_vs_mv_lo": -2.3,
+     "test_vs_mv_hi": 3.4
+    },
+    {
+     "method": "Mean of group shares > 0.5",
+     "dev_acc": 64.4,
+     "test_acc": 67.0,
+     "all_acc": 65.7,
+     "test_auc": 82.3,
+     "called_unsafe": 22.6,
+     "test_vs_mv": 1.7,
+     "test_vs_mv_lo": -1.7,
+     "test_vs_mv_hi": 5.1
+    },
+    {
+     "method": "Dawid\u2013Skene on group votes",
+     "dev_acc": 64.9,
+     "test_acc": 68.2,
+     "all_acc": 66.6,
+     "test_auc": 82.5,
+     "called_unsafe": 25.1,
+     "test_vs_mv": 2.8,
+     "test_vs_mv_lo": 0.0,
+     "test_vs_mv_hi": 5.7
+    },
+    {
+     "method": "Dawid\u2013Skene, cut at its estimated prevalence",
+     "dev_acc": 65.5,
+     "test_acc": 68.2,
+     "all_acc": 66.9,
+     "test_auc": 82.5,
+     "called_unsafe": 25.4,
+     "test_vs_mv": 2.8,
+     "test_vs_mv_lo": 0.0,
+     "test_vs_mv_hi": 5.7
+    },
+    {
+     "method": "FUSE defaults",
+     "dev_acc": 73.0,
+     "test_acc": 69.9,
+     "all_acc": 71.4,
+     "test_auc": 81.6,
+     "called_unsafe": 47.1,
+     "test_vs_mv": 4.5,
+     "test_vs_mv_lo": -2.8,
+     "test_vs_mv_hi": 11.9
+    },
+    {
+     "method": "FUSE, cut at its estimated prevalence (tuned)",
+     "dev_acc": 75.9,
+     "test_acc": 69.9,
+     "all_acc": 72.9,
+     "test_auc": 81.6,
+     "called_unsafe": 51.4,
+     "test_vs_mv": 4.5,
+     "test_vs_mv_lo": -3.4,
+     "test_vs_mv_hi": 12.5
+    }
+   ]
+  },
+  {
+   "view": "groups: race\u00d7gender",
+   "estimated_prevalence": {
+    "FUSE": 0.4784896133855066,
+    "Dawid\u2013Skene": 0.2629325107226885,
+    "n_groups": 10
+   },
+   "rows": [
+    {
+     "method": "Majority of group votes",
+     "dev_acc": 64.4,
+     "test_acc": 63.6,
+     "all_acc": 64.0,
+     "test_auc": 76.3,
+     "called_unsafe": 20.3,
+     "test_vs_mv": -1.7,
+     "test_vs_mv_lo": -4.5,
+     "test_vs_mv_hi": 1.1
+    },
+    {
+     "method": "Mean of group shares > 0.5",
+     "dev_acc": 64.9,
+     "test_acc": 66.5,
+     "all_acc": 65.7,
+     "test_auc": 80.0,
+     "called_unsafe": 23.1,
+     "test_vs_mv": 1.1,
+     "test_vs_mv_lo": 0.0,
+     "test_vs_mv_hi": 2.8
+    },
+    {
+     "method": "Dawid\u2013Skene on group votes",
+     "dev_acc": 65.5,
+     "test_acc": 71.0,
+     "all_acc": 68.3,
+     "test_auc": 76.5,
+     "called_unsafe": 26.9,
+     "test_vs_mv": 5.7,
+     "test_vs_mv_lo": 2.3,
+     "test_vs_mv_hi": 9.7
+    },
+    {
+     "method": "Dawid\u2013Skene, cut at its estimated prevalence",
+     "dev_acc": 65.5,
+     "test_acc": 72.2,
+     "all_acc": 68.9,
+     "test_auc": 76.5,
+     "called_unsafe": 26.3,
+     "test_vs_mv": 6.8,
+     "test_vs_mv_lo": 3.4,
+     "test_vs_mv_hi": 10.8
+    },
+    {
+     "method": "FUSE defaults",
+     "dev_acc": 71.3,
+     "test_acc": 68.8,
+     "all_acc": 70.0,
+     "test_auc": 80.0,
+     "called_unsafe": 45.7,
+     "test_vs_mv": 3.4,
+     "test_vs_mv_lo": -4.0,
+     "test_vs_mv_hi": 10.8
+    },
+    {
+     "method": "FUSE, cut at its estimated prevalence (tuned)",
+     "dev_acc": 72.4,
+     "test_acc": 69.3,
+     "all_acc": 70.9,
+     "test_auc": 80.0,
+     "called_unsafe": 47.7,
+     "test_vs_mv": 4.0,
+     "test_vs_mv_lo": -3.4,
+     "test_vs_mv_hi": 11.4
+    }
+   ]
+  },
+  {
+   "view": "groups: race",
+   "estimated_prevalence": {
+    "FUSE": 0.5155350283212572,
+    "Dawid\u2013Skene": 0.2482029969388927,
+    "n_groups": 5
+   },
+   "rows": [
+    {
+     "method": "Majority of group votes",
+     "dev_acc": 64.9,
+     "test_acc": 68.8,
+     "all_acc": 66.9,
+     "test_auc": 73.3,
+     "called_unsafe": 23.7,
+     "test_vs_mv": 3.4,
+     "test_vs_mv_lo": 0.6,
+     "test_vs_mv_hi": 6.8
+    },
+    {
+     "method": "Mean of group shares > 0.5",
+     "dev_acc": 64.9,
+     "test_acc": 68.2,
+     "all_acc": 66.6,
+     "test_auc": 80.0,
+     "called_unsafe": 24.6,
+     "test_vs_mv": 2.8,
+     "test_vs_mv_lo": 0.6,
+     "test_vs_mv_hi": 5.7
+    },
+    {
+     "method": "Dawid\u2013Skene on group votes",
+     "dev_acc": 64.9,
+     "test_acc": 68.8,
+     "all_acc": 66.9,
+     "test_auc": 73.1,
+     "called_unsafe": 23.7,
+     "test_vs_mv": 3.4,
+     "test_vs_mv_lo": 0.6,
+     "test_vs_mv_hi": 6.8
+    },
+    {
+     "method": "Dawid\u2013Skene, cut at its estimated prevalence",
+     "dev_acc": 66.7,
+     "test_acc": 69.3,
+     "all_acc": 68.0,
+     "test_auc": 73.1,
+     "called_unsafe": 24.9,
+     "test_vs_mv": 4.0,
+     "test_vs_mv_lo": 1.1,
+     "test_vs_mv_hi": 7.4
+    },
+    {
+     "method": "FUSE defaults",
+     "dev_acc": 72.4,
+     "test_acc": 68.8,
+     "all_acc": 70.6,
+     "test_auc": 80.0,
+     "called_unsafe": 48.0,
+     "test_vs_mv": 3.4,
+     "test_vs_mv_lo": -4.0,
+     "test_vs_mv_hi": 10.8
+    },
+    {
+     "method": "FUSE, cut at its estimated prevalence (tuned)",
+     "dev_acc": 73.6,
+     "test_acc": 68.8,
+     "all_acc": 71.1,
+     "test_auc": 80.0,
+     "called_unsafe": 51.4,
+     "test_vs_mv": 3.4,
+     "test_vs_mv_lo": -4.5,
+     "test_vs_mv_hi": 11.4
+    }
+   ]
+  },
+  {
+   "view": "random groups of 20",
+   "estimated_prevalence": {
+    "FUSE": 0.47377330392493067,
+    "Dawid\u2013Skene": 0.2570683656347971,
+    "n_groups": 6
+   },
+   "rows": [
+    {
+     "method": "Majority of group votes",
+     "dev_acc": 63.8,
+     "test_acc": 64.8,
+     "all_acc": 64.3,
+     "test_auc": 72.3,
+     "called_unsafe": 20.6,
+     "test_vs_mv": -0.6,
+     "test_vs_mv_lo": -2.8,
+     "test_vs_mv_hi": 1.7
+    },
+    {
+     "method": "Mean of group shares > 0.5",
+     "dev_acc": 64.9,
+     "test_acc": 66.5,
+     "all_acc": 65.7,
+     "test_auc": 80.1,
+     "called_unsafe": 23.1,
+     "test_vs_mv": 1.1,
+     "test_vs_mv_lo": 0.0,
+     "test_vs_mv_hi": 2.8
+    },
+    {
+     "method": "Dawid\u2013Skene on group votes",
+     "dev_acc": 64.9,
+     "test_acc": 66.5,
+     "all_acc": 65.7,
+     "test_auc": 72.4,
+     "called_unsafe": 25.4,
+     "test_vs_mv": 1.1,
+     "test_vs_mv_lo": -1.7,
+     "test_vs_mv_hi": 4.5
+    },
+    {
+     "method": "Dawid\u2013Skene, cut at its estimated prevalence",
+     "dev_acc": 64.4,
+     "test_acc": 66.5,
+     "all_acc": 65.4,
+     "test_auc": 72.4,
+     "called_unsafe": 25.7,
+     "test_vs_mv": 1.1,
+     "test_vs_mv_lo": -1.7,
+     "test_vs_mv_hi": 4.5
+    },
+    {
+     "method": "FUSE defaults",
+     "dev_acc": 69.0,
+     "test_acc": 71.0,
+     "all_acc": 70.0,
+     "test_auc": 80.1,
+     "called_unsafe": 43.4,
+     "test_vs_mv": 5.7,
+     "test_vs_mv_lo": -1.1,
+     "test_vs_mv_hi": 12.5
+    },
+    {
+     "method": "FUSE, cut at its estimated prevalence (tuned)",
+     "dev_acc": 70.7,
+     "test_acc": 69.3,
+     "all_acc": 70.0,
+     "test_auc": 80.1,
+     "called_unsafe": 47.4,
+     "test_vs_mv": 4.0,
+     "test_vs_mv_lo": -3.4,
+     "test_vs_mv_hi": 11.4
+    }
+   ]
+  }
+ ]
+}
