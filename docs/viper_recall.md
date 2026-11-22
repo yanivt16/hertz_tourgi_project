@@ -24,13 +24,18 @@ and can a label-free method tell which radiologists are good at the recall decis
    matrix, +0.20 to +0.83 on dense blocks. Readers who recall more are less skilled (−0.53, −0.62).
 5. **Dawid–Skene overestimates every reader**: mean estimated sensitivity 0.81–0.82 against a true
    0.72–0.74, and specificity 0.65–0.68 against 0.50–0.51.
+6. **FUSE's moment estimator gives the same picture.** Run on the same ±1 recall decisions (the
+   threshold search has nothing to choose on binary data), it ranks skill somewhat better than
+   Dawid–Skene on the full matrix (+0.59 vs +0.53 FFDM, +0.77 vs +0.63 SFM, missing-aware version),
+   and about the same on dense blocks (mean over blocks +0.54 vs +0.55 FFDM, +0.49 vs +0.50 SFM).
+   It overestimates sensitivity more (0.88–0.89 against a true 0.72–0.74).
 
 ## What it means
 
 This is the first check in the project of whether a label-free method identifies the good raters,
-rather than only whether its final labels are accurate. On expert radiologists the answer is "partly":
-Dawid–Skene separates readers who recall a lot from readers who recall little, but ranks them only
-moderately on actual skill. The same check can be run for FUSE and for mixed human–LLM panels.
+rather than only whether its final labels are accurate. On expert radiologists the answer is "partly"
+for both methods: they separate readers who recall a lot from readers who recall little, but rank
+them only moderately on actual skill. The same check can be run on mixed human–LLM panels.
 
 ## Caveats
 

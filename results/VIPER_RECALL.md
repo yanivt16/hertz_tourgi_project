@@ -25,33 +25,32 @@ Each read has a recall decision (send for further work-up or not) and the gold l
 | No cancer, not recalled (BI-RADS 1-3) | 282 | 4805 | 38% | 35% [13%-86%] |
 | Cancer | 115 | 2590 | 73% | 73% [46%-96%] |
 
-### 3. Does Dawid-Skene, without labels, rank the readers correctly?
+### 3. Do Dawid-Skene and FUSE, without labels, rank the readers correctly?
 
-Spearman correlation across readers between the Dawid-Skene estimate (fitted on recall decisions only) and the true value. 'Recall rate' is shown because it drives both sensitivity and specificity.
+Spearman correlation across readers between each method's estimate (fitted on recall decisions only) and the true value. 'Recall rate' is shown because it drives both sensitivity and specificity.
 
-| | Full matrix (all readers) |
-|---|---:|
-| D&S sensitivity vs true sensitivity | +0.86 |
-| D&S specificity vs true specificity | +0.96 |
-| D&S skill (J) vs true skill | +0.53 |
-| Recall rate vs true sensitivity | +0.87 |
-| Recall rate vs true specificity | -0.96 |
-| Recall rate vs true skill | -0.53 |
-| D&S skill (J) vs recall rate | -0.46 |
+| Full matrix (all readers) | Dawid-Skene | FUSE (missing-aware MoM) | Recall rate alone |
+|---|---:|---:|---:|
+| Estimated vs true sensitivity | +0.86 | +0.85 | +0.87 |
+| Estimated vs true specificity | +0.96 | +0.97 | -0.96 |
+| Estimated vs true skill (J) | +0.53 | +0.59 | -0.53 |
+| Estimated skill vs recall rate | -0.46 | -0.55 | |
 
-Mean estimated vs true: sensitivity 0.81 vs 0.72, specificity 0.68 vs 0.51. D&S posterior AUC against cancer: 0.744. Readers read 17-79 cancer cases each.
+FUSE mean estimated sensitivity 0.88, specificity 0.67.
+
+Dawid-Skene mean estimated vs true: sensitivity 0.81 vs 0.72, specificity 0.68 vs 0.51. D&S posterior AUC against cancer: 0.744. Readers read 17-79 cancer cases each.
 
 Dense blocks (every reader read every case, so no missing reads and no assignment leak):
 
-| Block | D&S sensitivity | D&S specificity | D&S skill (J) |
-|---|---:|---:|---:|
-| 15 readers x 93 cases (19 cancers) | +0.93 | +0.98 | +0.72 |
-| 14 readers x 95 cases (19 cancers) | +0.92 | +0.96 | +0.59 |
-| 9 readers x 96 cases (20 cancers) | +0.95 | +0.97 | +0.55 |
-| 8 readers x 201 cases (47 cancers) | +0.98 | +0.98 | +0.69 |
-| 7 readers x 202 cases (47 cancers) | +1.00 | +1.00 | +0.43 |
-| 6 readers x 203 cases (47 cancers) | +0.94 | +1.00 | +0.60 |
-| 5 readers x 204 cases (47 cancers) | +0.90 | +1.00 | +0.30 |
+| Block | D&S sensitivity | D&S specificity | D&S skill (J) | FUSE sensitivity | FUSE specificity | FUSE skill (J) |
+|---|---:|---:|---:|---:|---:|---:|
+| 15 readers x 93 cases (19 cancers) | +0.93 | +0.98 | +0.72 | +0.92 | +0.99 | +0.63 |
+| 14 readers x 95 cases (19 cancers) | +0.92 | +0.96 | +0.59 | +0.92 | +0.98 | +0.53 |
+| 9 readers x 96 cases (20 cancers) | +0.95 | +0.97 | +0.55 | +0.95 | +0.98 | +0.56 |
+| 8 readers x 201 cases (47 cancers) | +0.98 | +0.98 | +0.69 | +0.93 | +1.00 | +0.64 |
+| 7 readers x 202 cases (47 cancers) | +1.00 | +1.00 | +0.43 | +0.96 | +1.00 | +0.32 |
+| 6 readers x 203 cases (47 cancers) | +0.94 | +1.00 | +0.60 | +0.94 | +1.00 | +0.60 |
+| 5 readers x 204 cases (47 cancers) | +0.90 | +1.00 | +0.30 | +0.80 | +1.00 | +0.50 |
 
 ## SFM
 
@@ -76,29 +75,28 @@ Dense blocks (every reader read every case, so no missing reads and no assignmen
 | No cancer, not recalled (BI-RADS 1-3) | 283 | 4815 | 40% | 40% [10%-79%] |
 | Cancer | 115 | 2595 | 75% | 76% [35%-100%] |
 
-### 3. Does Dawid-Skene, without labels, rank the readers correctly?
+### 3. Do Dawid-Skene and FUSE, without labels, rank the readers correctly?
 
-Spearman correlation across readers between the Dawid-Skene estimate (fitted on recall decisions only) and the true value. 'Recall rate' is shown because it drives both sensitivity and specificity.
+Spearman correlation across readers between each method's estimate (fitted on recall decisions only) and the true value. 'Recall rate' is shown because it drives both sensitivity and specificity.
 
-| | Full matrix (all readers) |
-|---|---:|
-| D&S sensitivity vs true sensitivity | +0.91 |
-| D&S specificity vs true specificity | +0.97 |
-| D&S skill (J) vs true skill | +0.63 |
-| Recall rate vs true sensitivity | +0.85 |
-| Recall rate vs true specificity | -0.97 |
-| Recall rate vs true skill | -0.62 |
-| D&S skill (J) vs recall rate | -0.57 |
+| Full matrix (all readers) | Dawid-Skene | FUSE (missing-aware MoM) | Recall rate alone |
+|---|---:|---:|---:|
+| Estimated vs true sensitivity | +0.91 | +0.82 | +0.85 |
+| Estimated vs true specificity | +0.97 | +0.97 | -0.97 |
+| Estimated vs true skill (J) | +0.63 | +0.77 | -0.62 |
+| Estimated skill vs recall rate | -0.57 | -0.63 | |
 
-Mean estimated vs true: sensitivity 0.82 vs 0.74, specificity 0.65 vs 0.50. D&S posterior AUC against cancer: 0.767. Readers read 17-79 cancer cases each.
+FUSE mean estimated sensitivity 0.89, specificity 0.65.
+
+Dawid-Skene mean estimated vs true: sensitivity 0.82 vs 0.74, specificity 0.65 vs 0.50. D&S posterior AUC against cancer: 0.767. Readers read 17-79 cancer cases each.
 
 Dense blocks (every reader read every case, so no missing reads and no assignment leak):
 
-| Block | D&S sensitivity | D&S specificity | D&S skill (J) |
-|---|---:|---:|---:|
-| 15 readers x 93 cases (20 cancers) | +0.82 | +0.83 | +0.58 |
-| 14 readers x 94 cases (20 cancers) | +0.78 | +0.79 | +0.53 |
-| 13 readers x 95 cases (20 cancers) | +0.74 | +0.84 | +0.48 |
-| 8 readers x 96 cases (20 cancers) | +0.96 | +0.97 | +0.83 |
-| 7 readers x 203 cases (47 cancers) | +0.95 | +0.96 | +0.39 |
-| 5 readers x 204 cases (47 cancers) | +0.67 | +0.90 | +0.20 |
+| Block | D&S sensitivity | D&S specificity | D&S skill (J) | FUSE sensitivity | FUSE specificity | FUSE skill (J) |
+|---|---:|---:|---:|---:|---:|---:|
+| 15 readers x 93 cases (20 cancers) | +0.82 | +0.83 | +0.58 | +0.82 | +0.90 | +0.57 |
+| 14 readers x 94 cases (20 cancers) | +0.78 | +0.79 | +0.53 | +0.78 | +0.87 | +0.60 |
+| 13 readers x 95 cases (20 cancers) | +0.74 | +0.84 | +0.48 | +0.80 | +0.92 | +0.51 |
+| 8 readers x 96 cases (20 cancers) | +0.96 | +0.97 | +0.83 | +0.92 | +0.96 | +0.71 |
+| 7 readers x 203 cases (47 cancers) | +0.95 | +0.96 | +0.39 | +0.98 | +0.96 | +0.36 |
+| 5 readers x 204 cases (47 cancers) | +0.67 | +0.90 | +0.20 | +0.67 | +0.90 | +0.20 |

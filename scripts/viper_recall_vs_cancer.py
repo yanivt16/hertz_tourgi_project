@@ -8,8 +8,11 @@ Three questions:
 1. How often is a cancer not recalled, per read and per case?
 2. How do recall rates differ by the case's original screening outcome (BI-RADS 0 = recalled in the
    original screening but no cancer; BI-RADS 1-3 = not recalled, no cancer; cancer)?
-3. Dawid-Skene, fitted on recall decisions only, estimates each reader's sensitivity and
-   specificity. How well do these rank the readers against their true values?
+3. Dawid-Skene and FUSE, fitted on recall decisions only, estimate each reader's sensitivity and
+   specificity. How well do these rank the readers against their true values? For FUSE we use its
+   method-of-moments estimator directly on the +/-1 recall decisions (the threshold search has
+   nothing to choose on binary data): the missing-aware version on the full matrix, the paper's on
+   dense blocks. No readers are dropped, so every reader gets an estimate.
 """
 
 from __future__ import annotations
@@ -26,6 +29,8 @@ from scipy.stats import spearmanr  # noqa: E402
 from sklearn.metrics import roc_auc_score  # noqa: E402
 
 from fuse import viper  # noqa: E402
+from fuse.missing import masked_mom_estimate  # noqa: E402
+from fuse.moments import mom_estimate  # noqa: E402
 
 np.seterr(all="ignore")  # spurious matmul warnings from macOS Accelerate; results unaffected
 
@@ -93,24 +98,24 @@ def main():
             out.append(f"| {labels.get(k, k)} | {d.caseID.nunique()} | {len(d)} | {d.rec.mean():.0%} | "
                        f"{per[k].median():.0%} [{per[k].min():.0%}-{per[k].max():.0%}] |")
         se, sp, q = ds_rates(B)
-        out += ["", "### 3. Does Dawid-Skene, without labels, rank the readers correctly?", "",
-                "Spearman correlation across readers between the Dawid-Skene estimate (fitted on recall decisions "
+        fe = masked_mom_estimate(np.where(np.isnan(B), np.nan, 2 * B - 1), min_overlap=20)
+        fse, fsp = np.clip(fe.psi, 0, 1), np.clip(fe.eta, 0, 1)
+        out += ["", "### 3. Do Dawid-Skene and FUSE, without labels, rank the readers correctly?", "",
+                "Spearman correlation across readers between each method's estimate (fitted on recall decisions "
                 "only) and the true value. 'Recall rate' is shown because it drives both sensitivity and specificity.", "",
-                "| | Full matrix (all readers) |", "|---|---:|",
-                f"| D&S sensitivity vs true sensitivity | {rho(se, tr.sens)} |",
-                f"| D&S specificity vs true specificity | {rho(sp, tr.spec)} |",
-                f"| D&S skill (J) vs true skill | {rho(se + sp - 1, tr.J)} |",
-                f"| Recall rate vs true sensitivity | {rho(tr.rate, tr.sens)} |",
-                f"| Recall rate vs true specificity | {rho(tr.rate, tr.spec)} |",
-                f"| Recall rate vs true skill | {rho(tr.rate, tr.J)} |",
-                f"| D&S skill (J) vs recall rate | {rho(se + sp - 1, tr.rate)} |", "",
-                f"Mean estimated vs true: sensitivity {se.mean():.2f} vs {tr.sens.mean():.2f}, specificity "
+                "| Full matrix (all readers) | Dawid-Skene | FUSE (missing-aware MoM) | Recall rate alone |", "|---|---:|---:|---:|",
+                f"| Estimated vs true sensitivity | {rho(se, tr.sens)} | {rho(fse, tr.sens)} | {rho(tr.rate, tr.sens)} |",
+                f"| Estimated vs true specificity | {rho(sp, tr.spec)} | {rho(fsp, tr.spec)} | {rho(tr.rate, tr.spec)} |",
+                f"| Estimated vs true skill (J) | {rho(se + sp - 1, tr.J)} | {rho(fse + fsp - 1, tr.J)} | {rho(tr.rate, tr.J)} |",
+                f"| Estimated skill vs recall rate | {rho(se + sp - 1, tr.rate)} | {rho(fse + fsp - 1, tr.rate)} | |", "",
+                f"FUSE mean estimated sensitivity {fse.mean():.2f}, specificity {fsp.mean():.2f}.", "",
+                f"Dawid-Skene mean estimated vs true: sensitivity {se.mean():.2f} vs {tr.sens.mean():.2f}, specificity "
                 f"{sp.mean():.2f} vs {tr.spec.mean():.2f}. D&S posterior AUC against cancer: {roc_auc_score(y, q):.3f}. "
                 f"Readers read {tr.cancers.min()}-{tr.cancers.max()} cancer cases each.", ""]
         blocks = viper.dense_blocks(R)
         if blocks:
             out += ["Dense blocks (every reader read every case, so no missing reads and no assignment leak):", "",
-                    "| Block | D&S sensitivity | D&S specificity | D&S skill (J) |", "|---|---:|---:|---:|"]
+                    "| Block | D&S sensitivity | D&S specificity | D&S skill (J) | FUSE sensitivity | FUSE specificity | FUSE skill (J) |", "|---|---:|---:|---:|---:|---:|---:|"]
             for n_cases, (rs, cs) in sorted(blocks.items()):
                 Rb = R[R.readerID.isin(rs) & R.caseID.isin(cs)]
                 yb = gold.reindex(sorted(Rb.caseID.unique())).to_numpy()
@@ -118,8 +123,11 @@ def main():
                 ts = np.array([Bb[yb == 1, j].mean() for j in range(len(rs))])
                 tp = np.array([1 - Bb[yb == 0, j].mean() for j in range(len(rs))])
                 bse, bsp, _ = ds_rates(Bb)
+                bf = mom_estimate(2 * Bb - 1)
+                fs, fp = np.clip(bf.psi, 0, 1), np.clip(bf.eta, 0, 1)
                 out.append(f"| {len(rs)} readers x {n_cases} cases ({int(yb.sum())} cancers) | {rho(bse, ts)} | "
-                           f"{rho(bsp, tp)} | {rho(bse + bsp - 1, ts + tp - 1)} |")
+                           f"{rho(bsp, tp)} | {rho(bse + bsp - 1, ts + tp - 1)} | {rho(fs, ts)} | {rho(fp, tp)} | "
+                           f"{rho(fs + fp - 1, ts + tp - 1)} |")
             out.append("")
     path = ROOT / "results" / "VIPER_RECALL.md"
     path.write_text("\n".join(out))
