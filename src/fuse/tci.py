@@ -44,19 +44,29 @@ def binarize(V: np.ndarray, tau: np.ndarray) -> np.ndarray:
     return np.where(V > tau[None, :], 1.0, -1.0)
 
 
-def candidate_thresholds(column: np.ndarray, n_quantiles: int = 19) -> np.ndarray:
+def candidate_thresholds(
+    column: np.ndarray, n_quantiles: int = 19, quantile_range: tuple[float, float] = (0.05, 0.95)
+) -> np.ndarray:
     """Thresholds for one verifier that leave both classes non-empty.
 
-    Real-valued verifiers get a quantile grid; discrete verifiers (few unique values) get
-    every midpoint between consecutive unique values.
+    Real-valued verifiers get a quantile grid over `quantile_range` (the paper: 5% to 95%);
+    discrete verifiers (few unique values) get every midpoint between consecutive unique
+    values. A narrower range keeps the search away from near-constant splits; for discrete
+    verifiers it keeps the midpoints whose share of +1 votes falls inside the range (all of
+    them if none does).
     """
     uniq = np.unique(column)
     if uniq.size < 2:
         return np.empty(0)
     midpoints = (uniq[:-1] + uniq[1:]) / 2.0
+    lo, hi = quantile_range
     if midpoints.size <= n_quantiles:
-        return midpoints
-    levels = np.linspace(0.05, 0.95, n_quantiles)
+        if (lo, hi) == (0.05, 0.95):
+            return midpoints
+        share = np.array([(column > t).mean() for t in midpoints])
+        keep = (share >= 1 - hi) & (share <= 1 - lo)
+        return midpoints[keep] if keep.any() else midpoints
+    levels = np.linspace(lo, hi, n_quantiles)
     qs = np.unique(np.quantile(column, levels))
     return qs[(qs >= uniq[0]) & (qs < uniq[-1])]
 
@@ -107,11 +117,12 @@ def minimize_tci(
     n_quantiles: int = 19,
     clip: float = 1e-3,
     standardize: bool = False,
+    quantile_range: tuple[float, float] = (0.05, 0.95),
 ) -> ThresholdResult:
     """Coordinate descent over per-verifier thresholds tau to minimise S-hat(g_tau(V))."""
     V = np.asarray(V, dtype=float)
     n, m = V.shape
-    candidates = [candidate_thresholds(V[:, j], n_quantiles) for j in range(m)]
+    candidates = [candidate_thresholds(V[:, j], n_quantiles, quantile_range) for j in range(m)]
     active = np.array([c.size > 0 for c in candidates])
     tau = np.full(m, np.inf)
     for j in np.flatnonzero(active):
