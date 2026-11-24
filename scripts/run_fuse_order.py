@@ -1,0 +1,158 @@
+"""FUSE's result depends on the order of the rater columns, and a label-free fix.
+
+    python scripts/run_fuse_order.py      # writes results/FUSE_ORDER.md
+
+FUSE's threshold search (coordinate descent on TCI) visits the raters one at a time, so the same
+panel with its columns in a different order can end with different thresholds and a different AUC.
+All earlier FUSE numbers used one fixed order (humans first, then LLMs).
+
+For every panel we run FUSE logistic (paper defaults) on the original order and on 8 random column
+orders, and report:
+  * original order: the number we reported before;
+  * random order: mean AUC of a single run with a random order (what a user would get);
+  * spread: max - min AUC over the 8 orders on the same panel (median over draws);
+  * order-averaged: FUSE scores averaged over the 8 orders, then one AUC (label-free fix).
+Baselines: binned Dawid-Skene (5 bins), mean z-score, D&S -> logistic (FUSE's last step fed with
+Dawid-Skene's posterior), and our detector followed by binned Dawid-Skene.
+
+Panels:
+  1. Simulation: h independent humans + 6 LLM raters whose noise shares a family factor (rho).
+  2. DICES-350, test half, k random humans + LLM raters (as in scripts/run_claude_raters.py).
+  3. RTE, human slots + small Qwen models (as in scripts/run_correlated_block_rte.py).
+"""
+
+from __future__ import annotations
+
+import sys
+import warnings
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+from sklearn.metrics import roc_auc_score
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from fuse import FUSE, crowd, dices  # noqa: E402
+from fuse.clustering import collapse_groups, residual_groups  # noqa: E402
+from fuse.ordinal import dawid_skene_ordinal  # noqa: E402
+from fuse.preprocess import minmax_to_unit_interval  # noqa: E402
+
+warnings.filterwarnings("ignore")
+np.seterr(all="ignore")
+ORDERS = 8
+
+
+def zs(V):
+    sd = V.std(0)
+    return (V - V.mean(0)) / np.where(sd > 0, sd, 1)
+
+
+def baselines(V):
+    ds = dawid_skene_ordinal(V, 5)
+    g, _, _ = residual_groups(V, threshold=0.4)
+    return {"D&S 5 bins": ds, "Mean z": zs(V).mean(1),
+            "D&S -> logistic": FUSE()._predict(minmax_to_unit_interval(V), ds),
+            "Detector + D&S": dawid_skene_ordinal(collapse_groups(V, g), 5)}
+
+
+def order_runs(V, y, seed):
+    """AUC on the original order, per random order, and of the order-averaged scores."""
+    auc = lambda s: 100 * roc_auc_score(y, s)  # noqa: E731
+    orig = auc(FUSE().fit_scores(V).scores)
+    scores = []
+    for p in range(ORDERS):
+        perm = np.random.default_rng(1000 * seed + p).permutation(V.shape[1])
+        scores.append(FUSE().fit_scores(V[:, perm]).scores)
+    per = [auc(s) for s in scores]
+    return orig, float(np.mean(per)), max(per) - min(per), auc(np.mean(scores, 0))
+
+
+def evaluate(panels):
+    """panels: name -> list of (V, y) draws. Returns markdown rows."""
+    rows = []
+    for name, draws in panels.items():
+        r = {k: [] for k in ["orig", "rand", "spread", "avg", "D&S 5 bins", "Mean z", "D&S -> logistic", "Detector + D&S"]}
+        for i, (V, y) in enumerate(draws):
+            o, rd, sp, av = order_runs(V, y, i)
+            r["orig"].append(o); r["rand"].append(rd); r["spread"].append(sp); r["avg"].append(av)
+            for k, s in baselines(V).items():
+                r[k].append(100 * roc_auc_score(y, s))
+        r = {k: np.array(v) for k, v in r.items()}
+        best = max(["D&S 5 bins", "Mean z", "D&S -> logistic", "Detector + D&S"], key=lambda k: r[k].mean())
+        d = r["avg"] - r[best]
+        rows.append(f"| {name} | {r['orig'].mean():.1f} | {r['rand'].mean():.1f} | {np.median(r['spread']):.1f} | "
+                    f"**{r['avg'].mean():.1f}** | {r['D&S 5 bins'].mean():.1f} | {r['Mean z'].mean():.1f} | "
+                    f"{r['D&S -> logistic'].mean():.1f} | {r['Detector + D&S'].mean():.1f} | "
+                    f"{d.mean():+.1f} ± {1.96 * d.std() / np.sqrt(len(d)):.1f} ({best}) |")
+        print(rows[-1], flush=True)
+    return rows
+
+
+HEAD = ["| Panel | FUSE, original order | FUSE, one random order (mean) | Spread over orders (median) | "
+        "FUSE, averaged over 8 orders | D&S 5 bins | Mean z | D&S -> logistic | Detector + D&S | "
+        "Averaged FUSE minus best baseline |", "|---|" + "---:|" * 10]
+
+
+def simulate(rng, n, h, L, d_llm, rho, prev=0.3):
+    """h humans (d ~ U(0.5, 1.5)), L LLM raters (d ~ d_llm), LLM noise shares one factor (rho)."""
+    y = (rng.random(n) < prev).astype(int)
+    m = h + L
+    d = np.r_[rng.uniform(0.5, 1.5, h), np.full(L, d_llm) * rng.uniform(0.8, 1.2, L)]
+    Sig = np.eye(m)
+    Sig[h:, h:] += rho
+    np.fill_diagonal(Sig, 1.0)
+    V = rng.normal(0, 1, m) + y[:, None] * d + rng.multivariate_normal(np.zeros(m), Sig, n)
+    return V, y
+
+
+def main():
+    md = ["# FUSE and the order of the rater columns (generated by scripts/run_fuse_order.py)", "",
+          f"FUSE logistic with paper defaults. 'Spread' = max - min AUC over {ORDERS} random column orders "
+          "of the same panel. 'Averaged' = FUSE scores averaged over the same orders (no labels used). "
+          "The last column compares averaged FUSE with the best of the four baselines (± 95% over draws).", ""]
+
+    md += ["## 1. Simulation (10 seeds, 1000 items, 30% positive)", ""] + HEAD
+    sims = {}
+    for h, d, rho in [(5, 0.3, 0.0), (5, 0.3, 0.15), (5, 0.5, 0.15), (5, 0.5, 0.2), (10, 0.3, 0.3), (10, 0.3, 0.6)]:
+        sims[f"{h} humans + 6 LLMs (d={d}), shared noise {rho}"] = [
+            simulate(np.random.default_rng(s), 1000, h, 6, d, rho) for s in range(10)]
+    md += evaluate(sims) + [""]
+
+    # 2. DICES
+    import label_dices_llm as L
+    from run_mixed_panel import load_llms
+    m = dices.build(dices.load("350"), "overall")
+    y = m.gold.astype(int)
+    test = np.isin(m.items, L.split_350(L.conversations("350"))["test"])
+    H, X = m.V, load_llms(m.items)[0]
+    C = np.column_stack([pd.read_csv(ROOT / "results" / "claude_scores" / f"350_{c}.csv").set_index("item_id")
+                         .p_unsafe.reindex(m.items).to_numpy(float) for c in ("sonnet", "haiku")])
+    A = np.c_[X, C]
+    md += ["## 2. DICES-350, test half (20 draws of humans; methods fitted on the test half)", ""] + HEAD
+    pan = {}
+    for k, name, extra in [(10, "8 LLMs", A), (10, "6 local LLMs", X), (5, "8 LLMs", A), (10, "Claude only", C)]:
+        pan[f"{k} humans + {name}"] = [(np.c_[H[:, np.random.default_rng(s).choice(H.shape[1], k, replace=False)], extra][test],
+                                        y[test]) for s in range(20)]
+    md += evaluate(pan) + [""]
+
+    # 3. RTE
+    import run_correlated_block_rte as R
+    Hr, gold = crowd.load("RTE")
+    yr = gold.astype(int)
+    Xr = {mm: np.column_stack([R.llm(mm, p) for p in ("short", "guide")]) for mm in R.SMALL}
+    md += ["## 3. RTE (20 shuffles of each pair's labels into human columns)", ""] + HEAD
+    pan = {}
+    for name, nh, models in [("10 humans + 4 tiny Qwen", 10, R.TINY), ("10 humans + 8 small Qwen", 10, R.SMALL),
+                             ("5 humans + 4 tiny Qwen", 5, R.TINY), ("3 humans + 4 tiny Qwen", 3, R.TINY)]:
+        pan[name] = [(np.c_[R.slots(Hr, np.random.default_rng(dd))[:, :nh], np.column_stack([Xr[mm] for mm in models])], yr)
+                     for dd in range(20)]
+    md += evaluate(pan) + [""]
+    (ROOT / "results" / "FUSE_ORDER.md").write_text("\n".join(md))
+    print("\n".join(md))
+
+
+if __name__ == "__main__":
+    main()
