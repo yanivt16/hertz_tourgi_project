@@ -15,7 +15,8 @@ import numpy as np
 from .moments import moment_tensors
 
 
-def tci_statistic(sigma: np.ndarray, T: np.ndarray, clip: float = 1e-3, standardize: bool = False) -> float:
+def tci_statistic(sigma: np.ndarray, T: np.ndarray, clip: float = 1e-3, standardize: bool = False,
+                  symmetric: bool = False) -> float:
     """Empirical S-hat of equation (4). The denominator is clipped to a small positive
     number for stability, as in the paper's footnote 1.
 
@@ -23,6 +24,12 @@ def tci_statistic(sigma: np.ndarray, T: np.ndarray, clip: float = 1e-3, standard
     every ratio is then divided by sd_j3, so the statistic is still zero under TCI but a
     threshold can no longer lower it just by making verifier j3 nearly constant, which
     the raw statistic rewards.
+
+    Equation (4) takes, for each j3, the variance over pairs j1 < j2 < j3 only, so verifiers
+    late in the column order enter many more terms than early ones and the statistic changes
+    when the columns are reordered. With symmetric=True (not in the paper) the variance for
+    each j3 is over every pair of the other verifiers; it is still zero under TCI and does not
+    depend on the column order.
     """
     m = sigma.shape[0]
     if standardize:
@@ -30,6 +37,15 @@ def tci_statistic(sigma: np.ndarray, T: np.ndarray, clip: float = 1e-3, standard
         sigma = sigma / np.outer(sd, sd)
         T = T / (sd[:, None, None] * sd[None, :, None] * sd[None, None, :])
     denom = np.maximum(sigma, clip)
+    if symmetric:
+        j1, j2 = np.triu_indices(m, k=1)
+        R = T[j1, j2, :] / denom[j1, j2][:, None]  # (pairs, m): ratio for each pair and each j3
+        M = (j1[:, None] != np.arange(m)) & (j2[:, None] != np.arange(m))
+        n = M.sum(0)
+        s1 = (R * M).sum(0)
+        s2 = (R ** 2 * M).sum(0)
+        var = (s2 - s1 ** 2 / np.maximum(n, 1)) / np.maximum(n - 1, 1)
+        return float(var[n > 1].sum())
     total = 0.0
     for j3 in range(2, m):
         j1, j2 = np.triu_indices(j3, k=1)
@@ -118,8 +134,17 @@ def minimize_tci(
     clip: float = 1e-3,
     standardize: bool = False,
     quantile_range: tuple[float, float] = (0.05, 0.95),
+    symmetric: bool = False,
+    search: str = "sequential",
 ) -> ThresholdResult:
-    """Coordinate descent over per-verifier thresholds tau to minimise S-hat(g_tau(V))."""
+    """Coordinate descent over per-verifier thresholds tau to minimise S-hat(g_tau(V)).
+
+    search="sequential" is the paper's coordinate descent: verifiers are visited in column
+    order and every improving threshold is accepted at once, so the result depends on the
+    order. search="greedy" (not in the paper) evaluates every verifier and candidate threshold
+    at each step and applies only the single best move, which does not depend on the order;
+    it stops when no move improves the statistic or after n_sweeps * m moves.
+    """
     V = np.asarray(V, dtype=float)
     n, m = V.shape
     candidates = [candidate_thresholds(V[:, j], n_quantiles, quantile_range) for j in range(m)]
@@ -137,7 +162,27 @@ def minimize_tci(
     cands = [candidates[j] for j in idx]
     tau_a = tau[idx].copy()
     state = _IncrementalMoments(binarize(Va, tau_a))
-    best = tci_statistic(state.sigma, state.T, clip, standardize)
+    best = tci_statistic(state.sigma, state.T, clip, standardize, symmetric)
+
+    if search == "greedy":
+        for _ in range(n_sweeps * idx.size):
+            move = None
+            for k in range(idx.size):
+                for t in cands[k]:
+                    if t == tau_a[k]:
+                        continue
+                    col = np.where(Va[:, k] > t, 1.0, -1.0)
+                    sigma, T, X, mu_k = state.column_update(k, col)
+                    stat = tci_statistic(sigma, T, clip, standardize, symmetric)
+                    if stat < best - 1e-12 and (move is None or stat < move[0]):
+                        move = (stat, k, t, col, sigma, T, X, mu_k)
+            if move is None:
+                break
+            best, k, t, col, sigma, T, X, mu_k = move
+            tau_a[k] = t
+            state.commit(k, col, sigma, T, X, mu_k)
+        tau[idx] = tau_a
+        return ThresholdResult(tau=tau, statistic=best, active=active)
 
     for _ in range(n_sweeps):
         improved = False
@@ -147,7 +192,7 @@ def minimize_tci(
                     continue
                 col = np.where(Va[:, k] > t, 1.0, -1.0)
                 sigma, T, X, mu_k = state.column_update(k, col)
-                stat = tci_statistic(sigma, T, clip, standardize)
+                stat = tci_statistic(sigma, T, clip, standardize, symmetric)
                 if stat < best - 1e-12:
                     best = stat
                     tau_a[k] = t

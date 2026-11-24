@@ -44,6 +44,9 @@ raters, which is the setting of this project. The robust results so far: FUSE be
 and mean z on DICES mixed panels in any order, and the detector followed by Dawid–Skene matches it
 with 10 humans.
 
+**Update.** An order-free version of FUSE (a symmetric statistic and a greedy search) is in
+[fuse_order_free.md](fuse_order_free.md). It removes the order dependence at no average cost in accuracy.
+
 ## Caveats
 
 - 8 orders per panel; the spread would grow with more.

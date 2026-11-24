@@ -58,6 +58,10 @@ class FUSE:
     n_quantiles: int = 19
     tci_clip: float = 1e-3
     tci_standardize: bool = False
+    # Not in the paper: an order-free TCI statistic (every pair of the other verifiers for each
+    # j3, instead of j1 < j2 < j3) and an order-free search (apply the single best move per step).
+    tci_symmetric: bool = False
+    tci_search: Literal["sequential", "greedy"] = "sequential"
     # Quantile range of the threshold search (paper: 5%-95%). Not in the paper when narrowed.
     quantile_range: tuple[float, float] = (0.05, 0.95)
     drop_below_random: bool = True
@@ -101,6 +105,8 @@ class FUSE:
             clip=self.tci_clip,
             standardize=self.tci_standardize,
             quantile_range=self.quantile_range,
+            symmetric=self.tci_symmetric,
+            search=self.tci_search,
         )
         active = np.flatnonzero(thr.active)
         if active.size < 3:

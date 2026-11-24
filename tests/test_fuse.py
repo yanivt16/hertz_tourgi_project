@@ -350,3 +350,19 @@ def test_jaffe_groups_recover_one_dependent_group_in_their_binary_model():
     F = np.where(rng.random((n, m)) < 0.85, A[:, c], -A[:, c]).astype(float)
     groups, _, _, _ = jaffe_groups(np.cov(F.T))
     assert any(set(g) == set(range(g1)) for g in groups)
+
+
+def test_symmetric_tci_and_greedy_search_do_not_depend_on_column_order():
+    rng = np.random.default_rng(7)
+    n, m = 600, 8
+    y = rng.random(n) < 0.4
+    d = np.r_[np.full(4, 1.0), np.full(4, 0.3)]
+    noise = rng.normal(size=(n, m))
+    noise[:, 4:] += 0.6 * rng.normal(size=(n, 1))  # the last four share part of their errors
+    V = y[:, None] * d + noise
+    B = np.where(V > np.median(V, 0), 1.0, -1.0)
+    perm = rng.permutation(m)
+    a, b = moment_tensors(B), moment_tensors(B[:, perm])
+    assert tci_statistic(a.sigma, a.T, symmetric=True) == pytest.approx(tci_statistic(b.sigma, b.T, symmetric=True), abs=1e-9)
+    f = FUSE(tci_symmetric=True, tci_search="greedy")
+    np.testing.assert_allclose(f.fit_scores(V).scores, f.fit_scores(V[:, perm]).scores, atol=1e-6)
